@@ -1,0 +1,4 @@
+1. MySQL
+- Tên lúc viết hoa, lúc viết thường ko theo quy tắc nào cả
+- Có bảng có ID, có bảng ko có ID
+- Có thể chuyển sang CSDL khác đc ko?
