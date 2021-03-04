@@ -1,4 +1,2 @@
-1. MySQL
-- Tên lúc viết hoa, lúc viết thường ko theo quy tắc nào cả
-- Có bảng có ID, có bảng ko có ID
-- Có thể chuyển sang CSDL khác đc ko?
+1. Vẫn truy cập được 1 số route (login, register)
+2. chưa xử lý được lỗi khác (invalid dât,...)

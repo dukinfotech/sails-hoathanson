@@ -162,17 +162,18 @@
         $("#registerForm").trigger("reset");
       })
       .error(function (res) {
-        let errors = res.responseJSON;
-        if (errors === undefined) {
-          toastr.error(res.responseText);
-        } else {
-          let errString = "";
-          errors.forEach(function (error) {
-            errString += `<li>${error.message}</li>`;
-            $("#reg-errors").append(errString);
-            toastr.error("Kiểm tra lại các trường dữ liệu");
-          });
-        }
+        console.log(res);
+        // let errors = res.responseJSON;
+        // if (errors === undefined) {
+        //   toastr.error(res.responseText);
+        // } else {
+        //   let errString = "";
+        //   errors.forEach(function (error) {
+        //     errString += `<li>${error.message}</li>`;
+        //     $("#reg-errors").append(errString);
+        //     toastr.error("Kiểm tra lại các trường dữ liệu");
+        //   });
+        // }
       });
     }
   });

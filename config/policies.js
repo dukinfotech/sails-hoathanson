@@ -14,13 +14,8 @@ module.exports.policies = {
 
   // Bypass the `is-logged-in` policy for:
   'auth/show-register': true,
-  'entrance/*': true,
-  'account/logout': true,
-  'view-homepage-or-redirect': true,
-  'view-faq': true,
-  'view-contact': true,
-  'legal/view-terms': true,
-  'legal/view-privacy': true,
-  'deliver-contact-form-message': true,
-
+  'auth/register': true,
+  'auth/show-login': true,
+  'auth/login': true,
+  'pages/home': true,
 };

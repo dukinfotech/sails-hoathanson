@@ -10,10 +10,13 @@
 
 module.exports.routes = {
   'GET /register': { action: 'auth/show-register' },
+  'POST /register': { action: 'auth/register' },
+  'GET /login': { action: 'auth/show-login' },
+  'POST /login': { action: 'auth/login' },
   // //  ╦ ╦╔═╗╔╗ ╔═╗╔═╗╔═╗╔═╗╔═╗
   // //  ║║║║╣ ╠╩╗╠═╝╠═╣║ ╦║╣ ╚═╗
   // //  ╚╩╝╚═╝╚═╝╩  ╩ ╩╚═╝╚═╝╚═╝
-  'GET /':                   { action: 'view-homepage-or-redirect' },
+  'GET /': { action: 'pages/home' },
   // 'GET /welcome/:unused?':   { action: 'dashboard/view-welcome' },
 
   // 'GET /faq':                { action:   'view-faq' },

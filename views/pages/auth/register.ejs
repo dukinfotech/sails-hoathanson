@@ -17,6 +17,7 @@
             <div class="p-3">
               <form class="form-horizontal mt-4" action="/register" method="POST" id="registerForm" enctype="multipart/form-data">
                 <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+                <div id="flash" data-error="<%= flash.get('error') %>"></div>
                 <div class="form-group">
                   <label for="name">Name<span class="text-danger"> *</span></label>
                   <input type="text" class="form-control" id="name" name="name" placeholder="Nhập họ và tên" required>
@@ -25,24 +26,17 @@
                   <label for="email">Email<span class="text-danger"> *</span></label>
                   <input type="email" class="form-control" id="email" name="email" placeholder="Nhập địa chỉ email" required>
                 </div>
-
-                <div class="form-group">
-                  <label for="username">Username<span class="text-danger"> *</span></label>
-                  <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên tài khoản" required>
-                </div>
-
                 <div class="form-group">
                   <label for="password">Password<span class="text-danger"> *</span></label>
                   <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu" required>
                 </div>
-
-                <div class="text-danger">
-                  <ul id="reg-errors"></ul>
+                <div class="form-group">
+                  <label for="password_confirm">Confirm Password<span class="text-danger"> *</span></label>
+                  <input type="password" class="form-control" id="password_confirm" name="password_confirm" placeholder="Nhập lại mật khẩu" required>
                 </div>
-
                 <div class="form-group row">
                   <div class="col-12 text-right">
-                    <button class="btn btn-primary w-md waves-effect waves-light" type="button" id="registerBtn">Register</button>
+                    <button class="btn btn-primary w-md waves-effect waves-light" type="submit" id="registerBtn">Register</button>
                   </div>
                 </div>
               </form>
@@ -60,3 +54,60 @@
 <div class="col-12">
   © <%= thisYear %> Stock Info - Crafted with <i class="mdi mdi-heart text-danger"></i> by HTS.
 </div>
+
+<%- contentFor('customScripts') %>
+<script>
+  var error = $('#flash').data('error');
+  if (error) { toastr.error(error); }
+  $.validator.addMethod(
+    "regex",
+    function(value, element, regexp) {
+        let re = new RegExp(regexp);
+        return this.optional(element) || (re.test(value) && value.trim() !== "");
+    },
+    "Không đúng định dạng"
+  );
+  let validator = $("#registerForm").validate({
+    rules: {
+      name: {
+        required: true,
+        maxlength: 120,
+        minlength: 6
+      },
+      email: {
+        required: true,
+        email: true,
+        maxlength: 200
+      },
+      password: {
+        required: true,
+        maxlength: 16,
+        minlength: 6
+      },
+      password_confirm: {
+        equalTo : "#password"
+      }
+    },
+    messages: {
+      name: {
+        required: "Nhập họ và tên",
+        maxlength: "Tối đa 200 ký tự",
+        minlength: "Tối thiểu 6 ký tự"
+      },
+      email: {
+        required: "Nhập email",
+        email: "Email không hợp lệ",
+        maxlength: "Tối đa 200 ký tự"
+      },
+      password: {
+        required: "Nhập mật khẩu",
+        maxlength: "Tối đa 16 ký tự",
+        minlength: "Tối thiểu 6 ký tự"
+      },
+      password_confirm: {
+        required: "Nhập lại mật khẩu",
+        equalTo : "Nhập lại mật khẩu không chính xác"
+      }
+    }
+  });
+</script>

@@ -9,6 +9,7 @@
  * https://sailsjs.com/config/http
  */
 const expressEjsLayout = require ('express-ejs-layouts');
+const connectFlash = require('connect-flash');
 module.exports.http = {
 
   /****************************************************************************
@@ -40,7 +41,7 @@ module.exports.http = {
       'www',
       'favicon',
     ],
-    'expressEjsLayout': expressEjsLayout
+    'expressEjsLayout': expressEjsLayout,
     /***************************************************************************
     *                                                                          *
     * The body parser that will handle incoming multipart HTTP requests.       *
