@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <%- title %> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      content="VN stock market information"
+      name="description"
+    />
+    <!--meta content="Themesbrand" name="author" /-->
+    <link rel="shortcut icon" href="public/images/htson.ico" />
+    
+    <meta property="og:title" content="Hoa Than Son"/>
+    <meta property="og:description" content="VN stock market information"/>
+    
+    <meta property="og:image" content="http://www.hoathanson.com/public/images/htson-lg.png"/>
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="560" />
+    
+    <meta property="og:url" content="http://www.hoathanson.com"/>
+    <meta property="og:site_name" content="Hoa Than Son"/>
+    <meta property="og:type" content="website"/>
+    <meta name="csrf-token" content="<%= csrfToken %>">
+
+  
+    <% include ../partials/HeaderStyle %>
+
+    <link rel="stylesheet" href="public/libs/toastr/toastr.min.css">
+
+
+    <body>
+      <!-- View's content -->
+      <%-content%> 
+    </body>
+
+  <script src="public/libs/jquery/dist/jquery.min.js"></script>
+  <script src="public/libs/jquery-validation/dist/jquery.validate.min.js"></script>
+  <script src="public/libs/toastr/toastr.min.js"></script>
+  <script src="public/js/configs.js"></script>
+  <%-scripts%>
+</body>
+</html>

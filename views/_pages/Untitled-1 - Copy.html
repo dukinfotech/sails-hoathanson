@@ -1,0 +1,936 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+      
+<title>Hoa Than Son</title>
+
+ 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      content="VN stock market information"
+      name="description"
+    />
+    <!--meta content="Themesbrand" name="author" /-->
+    <link rel="shortcut icon" href="public/images/htson.ico" />
+    
+    <meta property="og:title" content="Hoa Than Son"/>
+    <meta property="og:description" content="VN stock market information"/>
+    
+    <meta property="og:image" content="http://www.hoathanson.com/public/images/htson-lg.png"/>
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="560" />
+    
+    <meta property="og:url" content="http://www.hoathanson.com"/>
+    <meta property="og:site_name" content="Hoa Than Son"/>
+    <meta property="og:type" content="website"/>
+    
+    
+<!--Chartist Chart CSS -->
+<link rel="stylesheet" href="public/libs/chartist/chartist.min.css" />
+<!--Echart  -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.8.0/echarts-en.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<!--Datatables  -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.colVis.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" />
+
+<!-- perticular page css -->
+
+ 
+    <!-- Bootstrap Css -->
+<link
+  href="public/css/bootstrap.min.css"
+  id="bootstrap-style"
+  rel="stylesheet"
+  type="text/css"
+/>
+<!-- Icons Css -->
+<link href="public/css/icons.min.css" rel="stylesheet" type="text/css" />
+<!-- App Css-->
+<link
+  href="public/css/app.min.css"
+  id="app-style"
+  rel="stylesheet"
+  type="text/css"
+/>
+
+  </head>
+  <body data-sidebar="dark">
+    <div id="layout-wrapper">
+      <header id="page-topbar">
+  <div class="navbar-header">
+    <div class="d-flex">
+      <!-- LOGO -->
+      <div class="navbar-brand-box">
+        <a href="/" class="logo logo-dark">
+          <span class="logo-sm">
+            <img src="public/images/logo.svg" alt="" height="22" />
+          </span>
+          <span class="logo-lg">
+            <img src="public/images/htson-dark.png" alt="" height="38" />
+          </span>
+        </a>
+
+        <a href="/" class="logo logo-light">
+          <span class="logo-sm">
+            <img src="public/images/htson-sm.png" alt="" height="18" />
+          </span>
+          <span class="logo-lg">
+            <img src="public/images/htson-light.png" alt="" height="38" />
+          </span>
+        </a>
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-sm px-3 font-size-24 header-item waves-effect"
+        id="vertical-menu-btn"
+      >
+        <i class="mdi mdi-menu"></i>
+      </button>
+
+      <div class="d-none d-sm-block">
+        <div class="dropdown pt-3 d-inline-block">
+          <a
+            class="btn btn-secondary dropdown-toggle"
+            href="#"
+            role="button"
+            id="dropdownMenuLink"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Create <i class="mdi mdi-chevron-down"></i>
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex">
+      <!-- App Search-->
+      <form action="/summary" class="app-search d-none d-lg-block">
+        <div class="position-relative">
+          <input type="text" class="form-control" placeholder="Search..." id="ticker" name="ticker"/>
+          <span class="fa fa-search"></span>
+        </div>
+      </form>
+ 
+      <div class="dropdown d-inline-block d-lg-none ml-2">
+        <button
+          type="button"
+          class="btn header-item noti-icon waves-effect"
+          id="page-header-search-dropdown"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <i class="mdi mdi-magnify"></i>
+        </button>
+        <div
+          class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
+          aria-labelledby="page-header-search-dropdown"
+        >
+        <form action="/summary" class="p-3">
+          <div class="form-group m-0">
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Search ..."
+                  aria-label="Recipient's username"
+                  id="tickerx" name="ticker"
+
+                />
+                <div class="input-group-append">
+                  <button class="btn btn-primary" type="submit">
+                    <i class="mdi mdi-magnify"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="dropdown d-none d-md-block ml-2">
+        <button
+          type="button"
+          class="btn header-item waves-effect"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <img
+            class="mr-2"
+            src="public/images/flags/us_flag.jpg"
+            alt="Header Language"
+            height="16"
+          />
+          English <span class="mdi mdi-chevron-down"></span>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <!-- item-->
+          <a href="javascript:void(0);" class="dropdown-item notify-item">
+            <img
+              src="public/images/flags/germany_flag.jpg"
+              alt="user-image"
+              class="mr-1"
+              height="12"
+            />
+            <span class="align-middle"> German </span>
+          </a>
+
+          <!-- item-->
+          <a href="javascript:void(0);" class="dropdown-item notify-item">
+            <img
+              src="public/images/flags/italy_flag.jpg"
+              alt="user-image"
+              class="mr-1"
+              height="12"
+            />
+            <span class="align-middle"> Italian </span>
+          </a>
+
+          <!-- item-->
+          <a href="javascript:void(0);" class="dropdown-item notify-item">
+            <img
+              src="public/images/flags/french_flag.jpg"
+              alt="user-image"
+              class="mr-1"
+              height="12"
+            />
+            <span class="align-middle"> French </span>
+          </a>
+
+          <!-- item-->
+          <a href="javascript:void(0);" class="dropdown-item notify-item">
+            <img
+              src="public/images/flags/spain_flag.jpg"
+              alt="user-image"
+              class="mr-1"
+              height="12"
+            />
+            <span class="align-middle"> Spanish </span>
+          </a>
+
+          <!-- item-->
+          <a href="javascript:void(0);" class="dropdown-item notify-item">
+            <img
+              src="public/images/flags/russia_flag.jpg"
+              alt="user-image"
+              class="mr-1"
+              height="12"
+            />
+            <span class="align-middle"> Russian </span>
+          </a>
+        </div>
+      </div>
+
+      <div class="dropdown d-none d-lg-inline-block">
+        <button
+          type="button"
+          class="btn header-item noti-icon waves-effect"
+          data-toggle="fullscreen"
+        >
+          <i class="mdi mdi-fullscreen"></i>
+        </button>
+      </div>
+
+      <div class="dropdown d-inline-block">
+        <button
+          type="button"
+          class="btn header-item noti-icon waves-effect"
+          id="page-header-notifications-dropdown"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <i class="mdi mdi-bell-outline"></i>
+          <span class="badge badge-danger badge-pill">3</span>
+        </button>
+        <div
+          class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
+          aria-labelledby="page-header-notifications-dropdown"
+        >
+          <div class="p-3">
+            <div class="row align-items-center">
+              <div class="col">
+                <h5 class="m-0 font-size-16">Notifications (258)</h5>
+              </div>
+            </div>
+          </div>
+          <div data-simplebar style="max-height: 230px;">
+            <a href="" class="text-reset notification-item">
+              <div class="media">
+                <div class="avatar-xs mr-3">
+                  <span
+                    class="avatar-title bg-success rounded-circle font-size-16"
+                  >
+                    <i class="mdi mdi-cart-outline"></i>
+                  </span>
+                </div>
+                <div class="media-body">
+                  <h6 class="mt-0 mb-1">Your order is placed</h6>
+                  <div class="font-size-12 text-muted">
+                    <p class="mb-1">
+                      Dummy text of the printing and typesetting industry.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <a href="" class="text-reset notification-item">
+              <div class="media">
+                <div class="avatar-xs mr-3">
+                  <span
+                    class="avatar-title bg-warning rounded-circle font-size-16"
+                  >
+                    <i class="mdi mdi-message-text-outline"></i>
+                  </span>
+                </div>
+                <div class="media-body">
+                  <h6 class="mt-0 mb-1">New Message received</h6>
+                  <div class="font-size-12 text-muted">
+                    <p class="mb-1">You have 87 unread messages</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <a href="" class="text-reset notification-item">
+              <div class="media">
+                <div class="avatar-xs mr-3">
+                  <span
+                    class="avatar-title bg-info rounded-circle font-size-16"
+                  >
+                    <i class="mdi mdi-glass-cocktail"></i>
+                  </span>
+                </div>
+                <div class="media-body">
+                  <h6 class="mt-0 mb-1">Your item is shipped</h6>
+                  <div class="font-size-12 text-muted">
+                    <p class="mb-1">
+                      It is a long established fact that a reader will
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <a href="" class="text-reset notification-item">
+              <div class="media">
+                <div class="avatar-xs mr-3">
+                  <span
+                    class="avatar-title bg-primary rounded-circle font-size-16"
+                  >
+                    <i class="mdi mdi-cart-outline"></i>
+                  </span>
+                </div>
+                <div class="media-body">
+                  <h6 class="mt-0 mb-1">Your order is placed</h6>
+                  <div class="font-size-12 text-muted">
+                    <p class="mb-1">
+                      Dummy text of the printing and typesetting industry.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <a href="" class="text-reset notification-item">
+              <div class="media">
+                <div class="avatar-xs mr-3">
+                  <span
+                    class="avatar-title bg-danger rounded-circle font-size-16"
+                  >
+                    <i class="mdi mdi-message-text-outline"></i>
+                  </span>
+                </div>
+                <div class="media-body">
+                  <h6 class="mt-0 mb-1">New Message received</h6>
+                  <div class="font-size-12 text-muted">
+                    <p class="mb-1">You have 87 unread messages</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="p-2 border-top">
+            <a
+              class="btn btn-sm btn-link font-size-14 btn-block text-center"
+              href="javascript:void(0)"
+            >
+              View all
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="dropdown d-inline-block">
+        <button
+          type="button"
+          class="btn header-item waves-effect"
+          id="page-header-user-dropdown"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <img
+            class="rounded-circle header-profile-user"
+            src="public/images/users/user-4.jpg"
+            alt="Header Avatar"
+          />
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <!-- item-->
+          <a class="dropdown-item" href="#"
+            ><i
+              class="mdi mdi-account-circle font-size-17 align-middle mr-1"
+            ></i>
+            Profile</a
+          >
+          <a class="dropdown-item" href="#"
+            ><i class="mdi mdi-wallet font-size-17 align-middle mr-1"></i> My
+            Wallet</a
+          >
+          <a class="dropdown-item d-block" href="#"
+            ><span class="badge badge-success float-right">11</span
+            ><i class="mdi mdi-settings font-size-17 align-middle mr-1"></i>
+            Settings</a
+          >
+          <a class="dropdown-item" href="#"
+            ><i
+              class="mdi mdi-lock-open-outline font-size-17 align-middle mr-1"
+            ></i>
+            Lock screen</a
+          >
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item text-danger" href="#"
+            ><i
+              class="bx bx-power-off font-size-17 align-middle mr-1 text-danger"
+            ></i>
+            Logout</a
+          >
+        </div>
+      </div>
+
+      <div class="dropdown d-inline-block">
+        <button
+          type="button"
+          class="btn header-item noti-icon right-bar-toggle waves-effect"
+        >
+          <i class="mdi mdi-settings-outline"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <!-- ========== Left Sidebar Start ========== -->
+<div class="vertical-menu">
+  <div data-simplebar class="h-100">
+    <!--- Sidemenu -->
+    <div id="sidebar-menu">
+      <!-- Left Menu Start -->
+      <ul class="metismenu list-unstyled" id="side-menu">
+        <li class="menu-title">Main</li>
+
+        <li>
+          <a href="/" class="waves-effect">
+            <i class="ti-home"></i
+            ><span class="badge badge-pill badge-primary float-right">2</span>
+            <span>Dashboard</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-email"></i>
+            <span>Market</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="market10">M10</a></li>
+            <li><a href="market15">M15</a></li>
+            <li><a href="market16">M16</a></li>
+            <li><a href="market20">M20</a></li>
+            <li><a href="market25">M25</a></li>
+            <li><a href="market30">M30</a></li>
+            <li><a href="market31">M31</a></li>
+            <li><a href="market35">M35</a></li>
+            <li><a href="market50">M50</a></li>
+            <li><a href="market51">M51</a></li>
+            </ul>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-email"></i>
+            <span>M15 Extra</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="market15_list?list_id=1">M15_VN30</a></li>
+            <li><a href="market15_list?list_id=2">M15_BDS</a></li>
+            <li><a href="market15_list?list_id=3">M15_TC.NH</a></li>
+            <li><a href="market15_list?list_id=4">M15_DK</a></li>
+            <li><a href="market15_list?list_id=5">M15_5</a></li>
+            <li><a href="market15_list?list_id=6">M15_6</a></li>
+          </ul>
+        </li>
+
+        <li class="menu-title">Components</li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-package"></i>
+            <span>UI Elements</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="ui-alerts">Alerts</a></li>
+            <li><a href="ui-buttons">Buttons</a></li>
+            <li><a href="ui-cards">Cards</a></li>
+            <li><a href="ui-carousel">Carousel</a></li>
+            <li><a href="ui-dropdowns">Dropdowns</a></li>
+            <li><a href="ui-grid">Grid</a></li>
+            <li><a href="ui-images">Images</a></li>
+            <li><a href="ui-lightbox">Lightbox</a></li>
+            <li><a href="ui-modals">Modals</a></li>
+            <li><a href="ui-rangeslider">Range Slider</a></li>
+            <li><a href="ui-session-timeout">Session Timeout</a></li>
+            <li><a href="ui-progressbars">Progress Bars</a></li>
+            <li><a href="ui-sweet-alert">Sweet-Alert</a></li>
+            <li><a href="ui-tabs-accordions">Tabs &amp; Accordions</a></li>
+            <li><a href="ui-typography">Typography</a></li>
+            <li><a href="ui-video">Video</a></li>
+            <li><a href="ui-general">General</a></li>
+            <li><a href="ui-colors">Colors</a></li>
+            <li><a href="ui-rating">Rating</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="waves-effect">
+            <i class="ti-receipt"></i>
+            <span class="badge badge-pill badge-success float-right">6</span>
+            <span>Forms</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="form-elements">Form Elements</a></li>
+            <li><a href="form-validation">Form Validation</a></li>
+            <li><a href="form-advanced">Form Advanced</a></li>
+            <li><a href="form-editors">Form Editors</a></li>
+            <li><a href="form-uploads">Form File Upload</a></li>
+            <li><a href="form-xeditable">Form Xeditable</a></li>
+            <li><a href="form-repeater">Form Repeater</a></li>
+            <li><a href="form-wizard">Form Wizard</a></li>
+            <li><a href="form-mask">Form Mask</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-pie-chart"></i>
+            <span>Charts</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="charts-morris">Morris Chart</a></li>
+            <li><a href="charts-chartist">Chartist Chart</a></li>
+            <li><a href="charts-chartjs">Chartjs Chart</a></li>
+            <li><a href="charts-flot">Flot Chart</a></li>
+            <li><a href="charts-knob">Jquery Knob Chart</a></li>
+            <li><a href="charts-sparkline">Sparkline Chart</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-view-grid"></i>
+            <span>Tables</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="tables-basic">Basic Tables</a></li>
+            <li><a href="tables-datatable">Data Table</a></li>
+            <li><a href="tables-responsive">Responsive Table</a></li>
+            <li><a href="tables-editable">Editable Table</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-face-smile"></i>
+            <span>Icons</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="icons-material">Material Design</a></li>
+            <li><a href="icons-fontawesome">Font Awesome</a></li>
+            <li><a href="icons-ion">Ion Icons</a></li>
+            <li><a href="icons-themify">Themify Icons</a></li>
+            <li><a href="icons-dripicons">Dripicons</a></li>
+            <li><a href="icons-typicons">Typicons Icons</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="waves-effect">
+            <i class="ti-location-pin"></i>
+            <span class="badge badge-pill badge-danger float-right">2</span>
+            <span>Maps</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="maps-google"> Google Map</a></li>
+            <li><a href="maps-vector"> Vector Map</a></li>
+          </ul>
+        </li>
+
+        <li class="menu-title">Extras</li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-layout"></i>
+            <span> Layouts </span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="horizontal">Horizontal</a></li>
+            <li><a href="layouts-compact-sidebar">Compact Sidebar</a></li>
+            <li><a href="layouts-icon-sidebar">Icon Sidebar</a></li>
+            <li><a href="layouts-boxed">Boxed Layout</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-archive"></i>
+            <span> Authentication </span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="pages-login">Login 1</a></li>
+            <li><a href="pages-login-2">Login 2</a></li>
+            <li><a href="pages-register">Register 1</a></li>
+            <li><a href="pages-register-2">Register 2</a></li>
+            <li><a href="pages-recoverpw">Recover Password 1</a></li>
+            <li><a href="pages-recoverpw-2">Recover Password 2</a></li>
+            <li><a href="pages-lock-screen">Lock Screen 1</a></li>
+            <li><a href="pages-lock-screen-2">Lock Screen 2</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-support"></i>
+            <span> Extra Pages </span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="pages-timeline">Timeline</a></li>
+            <li><a href="pages-invoice">Invoice</a></li>
+            <li><a href="pages-directory">Directory</a></li>
+            <li><a href="pages-blank">Blank Page</a></li>
+            <li><a href="pages-404">Error 404</a></li>
+            <li><a href="pages-500">Error 500</a></li>
+            <li><a href="pages-pricing">Pricing</a></li>
+            <li><a href="pages-gallery">Gallery</a></li>
+            <li><a href="pages-maintenance">Maintenance</a></li>
+            <li><a href="pages-comingsoon">Coming Soon</a></li>
+            <li><a href="pages-faq">FAQs</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-bookmark-alt"></i>
+            <span> Email Templates </span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="email-template-basic">Basic Action Email</a></li>
+            <li><a href="email-template-Alert">Alert Email</a></li>
+            <li><a href="email-template-Billing">Billing Email</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-more"></i>
+            <span>Multi Level</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="true">
+            <li><a href="javascript: void(0);">Level 1.1</a></li>
+            <li>
+              <a href="javascript: void(0);" class="has-arrow">Level 1.2</a>
+              <ul class="sub-menu" aria-expanded="true">
+                <li><a href="javascript: void(0);">Level 2.1</a></li>
+                <li><a href="javascript: void(0);">Level 2.2</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!-- Sidebar -->
+  </div>
+</div>
+<!-- Left Sidebar End -->
+
+      <div class="main-content">
+        <div class="page-content">
+          <div class="container-fluid">
+            <div class="row align-items-center">
+              <div class="col-sm-6">
+                
+<div class="col-sm-6">
+    <div class="page-title-box">
+        <h4 class="font-size-18">Market Information</h4>
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item active">Welcome to HTS Market Information</li>
+        </ol>
+    </div>
+</div>
+
+
+              </div>
+            </div>
+            
+
+
+<div class="row" id="tables">
+    <div class="col-12 ">
+        <table class="table table-bordered table-sm mb-0 text-center table-striped" id="example" style="width:100%">
+
+            <thead>
+                <tr>
+                    <th rowspan="2">Date</th>
+                    <th colspan="2">ATV1</th>
+                    <th colspan="2">ATV5</th>
+                    <th colspan="2">Daily</th>
+                    <th colspan="4"> </th>
+                </tr>
+                <tr>
+                    <th>LPi</th>
+                    <th>SPi</th>
+                    <th>LPi</th>
+                    <th>SPi</th>
+                    <th>LPday</th>
+                    <th>SPday</th>                    
+                    <th>Red</th>
+                    <th>Yellow</th>
+                    <th>Green</th>
+                    <th>VIX</th>
+                </tr>
+            </thead>
+
+                   
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<script>
+      let data1 = [{"date":"2020-09-10","L5":"63.622273527","S5":"36.377726472","L1":"65.507636853","S1":"34.492363146","PC5":20.18385637482039,"LC5":26.11978026768272,"FC5":53.696363357496885,"VIX5":3.024782608695652,"LE":null,"SE":null},{"date":"2020-09-11","L5":"66.045347768","S5":"33.954652231","L1":"71.773789810","S1":"28.226210189","PC5":21.28797041500698,"LC5":26.912600347257687,"FC5":51.79942923773533,"VIX5":3.60938549007592,"LE":null,"SE":null},{"date":"2020-09-14","L5":"69.665914061","S5":"30.334085938","L1":"73.755736253","S1":"26.244263746","PC5":31.00986488393424,"LC5":20.56640778240316,"FC5":48.4237273336626,"VIX5":3.2513319339589364,"LE":null,"SE":null},{"date":"2020-09-15","L5":"74.014100210","S5":"25.985899789","L1":"75.809999685","S1":"24.190000314","PC5":26.372670634852565,"LC5":23.312627236392952,"FC5":50.31470212875448,"VIX5":2.912206974629912,"LE":null,"SE":null},{"date":"2020-09-16","L5":"73.619567130","S5":"26.380432869","L1":"79.870142343","S1":"20.129857656","PC5":26.478168045046633,"LC5":24.180897941228224,"FC5":49.34093401372514,"VIX5":3.2952806616223826,"LE":null,"SE":null},{"date":"2020-09-17","L5":"75.989791463","S5":"24.010208536","L1":"79.041566221","S1":"20.958433778","PC5":24.68373316766849,"LC5":26.69893448403237,"FC5":48.617332348299136,"VIX5":3.5534633466536825,"LE":null,"SE":null},{"date":"2020-09-18","L5":"76.912506493","S5":"23.087493506","L1":"78.738362514","S1":"21.261637485","PC5":36.32998441506209,"LC5":19.098893972148208,"FC5":44.5711216127897,"VIX5":3.329525916243527,"LE":null,"SE":null},{"date":"2020-09-21","L5":"77.814942218","S5":"22.185057781","L1":"79.552759729","S1":"20.447240270","PC5":32.88163007466354,"LC5":20.762650317835234,"FC5":46.35571960750123,"VIX5":3.073636478924591,"LE":"70.413189110","SE":"29.586810889"},{"date":"2020-09-22","L5":"79.280639842","S5":"20.719360157","L1":"80.523751857","S1":"19.476248142","PC5":33.9534542540568,"LC5":20.934382117705077,"FC5":45.11216362823812,"VIX5":3.721756638054584,"LE":"72.155932934","SE":"27.844067065"},{"date":"2020-09-23","L5":"82.234497505","S5":"17.765502494","L1":"82.627349178","S1":"17.372650821","PC5":38.955384147065814,"LC5":15.333179793300072,"FC5":45.71143605963411,"VIX5":2.6956260394392966,"LE":"71.800916247","SE":"28.199083752"},{"date":"2020-09-24","L5":"82.007310799","S5":"17.992689200","L1":"79.792907228","S1":"20.207092771","PC5":24.508781082178796,"LC5":25.571484874467863,"FC5":49.919734043353344,"VIX5":3.250085743941514,"LE":"71.358347614","SE":"28.641652385"},{"date":"2020-09-25","L5":"79.014348654","S5":"20.985651345","L1":"80.572482360","S1":"19.427517639","PC5":27.007893843772326,"LC5":25.873906584901167,"FC5":47.118199571326514,"VIX5":3.683018575851393,"LE":"75.604241964","SE":"24.395758035"},{"date":"2020-09-28","L5":"77.967212138","S5":"22.032787861","L1":"77.992721435","S1":"22.007278564","PC5":44.39047052517161,"LC5":19.244098929406334,"FC5":36.36543054542206,"VIX5":3.564697211096056,"LE":"75.199392893","SE":"24.800607106"},{"date":"2020-09-29","L5":"75.831097441","S5":"24.168902558","L1":"70.108819898","S1":"29.891180101","PC5":44.25946305870035,"LC5":21.643715234605065,"FC5":34.096821706694584,"VIX5":2.8598931679863884,"LE":"73.892803941","SE":"26.107196058"},{"date":"2020-09-30","L5":"64.905411413","S5":"35.094588586","L1":"67.215068772","S1":"32.784931227","PC5":24.08896017096224,"LC5":27.031968073662924,"FC5":48.87907175537484,"VIX5":4.502073060539564,"LE":"74.576538588","SE":"25.423461411"},{"date":"2020-10-01","L5":"69.976366029","S5":"30.023633970","L1":"75.668584115","S1":"24.331415884","PC5":36.85099092851785,"LC5":20.164682498124847,"FC5":42.9843265733573,"VIX5":3.3460178882268865,"LE":"75.560776099","SE":"24.439223900"},{"date":"2020-10-02","L5":"65.388058937","S5":"34.611941062","L1":"69.114540369","S1":"30.885459630","PC5":23.49787309423923,"LC5":24.835262969405505,"FC5":51.666863936355256,"VIX5":5.0675665097718205,"LE":"74.725007674","SE":"25.274992325"},{"date":"2020-10-05","L5":"71.020785336","S5":"28.979214663","L1":"76.387619171","S1":"23.612380828","PC5":36.35004000101268,"LC5":19.942132838806046,"FC5":43.707827160181274,"VIX5":3.323605027975392,"LE":"74.513278817","SE":"25.486721182"},{"date":"2020-10-06","L5":"74.764177964","S5":"25.235822035","L1":"75.332757539","S1":"24.667242460","PC5":39.18368200623767,"LC5":19.304012729934442,"FC5":41.51230526382789,"VIX5":3.1883493094010564,"LE":"75.282286296","SE":"24.717713703"},{"date":"2020-10-07","L5":"74.580484034","S5":"25.419515965","L1":"73.273702254","S1":"26.726297745","PC5":21.910750431111374,"LC5":29.198927513825296,"FC5":48.89032205506332,"VIX5":3.4550709401201165,"LE":"74.964619135","SE":"25.035380864"},{"date":"2020-10-08","L5":"73.069316038","S5":"26.930683961","L1":"70.911416005","S1":"29.088583994","PC5":19.450385676831793,"LC5":32.19532277724116,"FC5":48.354291545927055,"VIX5":4.211563520537234,"LE":"77.142068711","SE":"22.857931288"},{"date":"2020-10-09","L5":"72.063295066","S5":"27.936704933","L1":"68.313186567","S1":"31.686813432","PC5":24.71695290102389,"LC5":27.010560223394354,"FC5":48.27248687558175,"VIX5":4.374302451132485,"LE":"77.506825515","SE":"22.493174484"},{"date":"2020-10-12","L5":"67.600246910","S5":"32.399753089","L1":"69.741145041","S1":"30.258854958","PC5":18.01642560608078,"LC5":34.725902131419375,"FC5":47.25767226249985,"VIX5":4.459455465317534,"LE":"76.933689956","SE":"23.066310043"},{"date":"2020-10-13","L5":"65.153676565","S5":"34.846323434","L1":"67.524241656","S1":"32.475758343","PC5":21.108129203179132,"LC5":34.12008225725772,"FC5":44.77178853956315,"VIX5":5.610005743186913,"LE":"76.625748847","SE":"23.374251152"},{"date":"2020-10-14","L5":"61.844000823","S5":"38.155999176","L1":"66.786154489","S1":"33.213845510","PC5":28.167818995678125,"LC5":25.7068663819716,"FC5":46.125314622350274,"VIX5":5.000056981889278,"LE":"76.859950607","SE":"23.140049392"},{"date":"2020-10-15","L5":"61.726698848","S5":"38.273301151","L1":"64.850549383","S1":"35.149450616","PC5":28.568091347939102,"LC5":26.758907538061642,"FC5":44.67300111399926,"VIX5":4.376711597970046,"LE":"76.694306930","SE":"23.305693069"},{"date":"2020-10-16","L5":"62.9419","S5":"37.0581","L1":"64.3517","S1":"35.6483","PC5":26.703145860000003,"LC5":25.96368846,"FC5":47.33316567999999,"VIX5":4.94791984,"LE":"75.1489","SE":"24.8511"},{"date":"2020-10-19","L5":"63.9597","S5":"36.0403","L1":"66.6594","S1":"33.3406","PC5":35.9154257,"LC5":21.25801854,"FC5":42.826555760000005,"VIX5":3.6229013300000004,"LE":"75.9564","SE":"24.0436"}];
+
+$("#example").DataTable({
+  processing: true,
+  serverSide: false,
+  autoWidth: true,
+  lengthChange: false,
+  pageLength: 20,
+  order: [[ 0, "desc" ]],
+
+  dom: 'B<"clear">lfrtip',
+  buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],  
+  data: data1,
+    columns: [
+    { data: 'date' }, 
+    { data: 'L1',render: function (data){ return (+data).toFixed(2)+'%';}},
+    { data: 'S1',render: function (data){ return (+data).toFixed(2)+'%';}},
+    
+    { data: 'L5',render: function (data){ return (+data).toFixed(2)+'%';}},
+    { data: 'S5',render: function (data){ return (+data).toFixed(2)+'%';}}, 
+    { data: 'LE',render: function (data){ return (+data).toFixed(2)+'%';}},
+    { data: 'SE',render: function (data){ return (+data).toFixed(2)+'%';}}, 
+    { data: 'PC5',render: function (data){ return (+data).toFixed(2);}}, 
+    { data: 'FC5',render: function (data){ return (+data).toFixed(2);}},
+    { data: 'LC5',render: function (data){ return (+data).toFixed(2);}},     
+    { data: 'VIX5',render: function (data){ return (+data).toFixed(2);}},
+      ],
+  columnDefs: [
+    { className: "", "targets": [ 5 ] },
+    { className: "", "targets": [ 6 ] }
+
+  ]
+});
+
+
+</script>     
+
+    
+<!-- end row -->
+
+
+          </div>
+        </div>
+        <footer class="footer">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        © 2020 Stock Info <span
+          class="d-none d-sm-inline-block"
+        >
+          - Crafted with <i class="mdi mdi-heart text-danger"></i> by
+          HTS.</span
+        >
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- Default Statcounter code for Hoathanson.com
+http://hoathanson.com -->
+<script type="text/javascript">
+  var sc_project=12352930; 
+  var sc_invisible=1; 
+  var sc_security="1a537ae2"; 
+  </script>
+  <script type="text/javascript"
+  src="https://www.statcounter.com/counter/counter.js"
+  async></script>
+  <noscript><div class="statcounter"><a title="Web Analytics"
+  href="https://statcounter.com/" target="_blank"><img
+  class="statcounter"
+  src="https://c.statcounter.com/12352930/0/1a537ae2/1/"
+  alt="Web Analytics"></a></div></noscript>
+  <!-- End of Statcounter Code -->
+      </div>
+    </div>
+    <div class="right-bar">
+  <div data-simplebar class="h-100">
+    <div class="rightbar-title px-3 py-4">
+      <a href="javascript:void(0);" class="right-bar-toggle float-right">
+        <i class="mdi mdi-close noti-icon"></i>
+      </a>
+      <h5 class="m-0">Settings</h5>
+    </div>
+
+    <hr class="mt-0" />
+    <h6 class="text-center">Choose Layouts</h6>
+
+    <div class="p-4">
+      <div class="mb-2">
+        <img
+          src="public/images/layouts/layout-1.jpg"
+          class="img-fluid img-thumbnail"
+          alt=""
+        />
+      </div>
+      <div class="custom-control custom-switch mb-3">
+        <input
+          type="checkbox"
+          class="custom-control-input theme-choice"
+          id="light-mode-switch"
+        />
+        <label class="custom-control-label" for="light-mode-switch">
+          Light Mode
+        </label>
+      </div>
+
+      <div class="mb-2">
+        <img
+          src="public/images/layouts/layout-2.jpg"
+          class="img-fluid img-thumbnail"
+          alt=""
+        />
+      </div>
+      <div class="custom-control custom-switch mb-3">
+        <input
+          type="checkbox"
+          class="custom-control-input theme-choice"
+          id="dark-mode-switch"
+          data-bsStyle="public/css/bootstrap-dark.min.css"
+          data-appStyle="public/css/app-dark.min.css"
+        />
+        <label class="custom-control-label" for="dark-mode-switch">
+          Dark Mode
+        </label>
+      </div>
+
+      <div class="mb-2">
+        <img
+          src="public/images/layouts/layout-3.jpg"
+          class="img-fluid img-thumbnail"
+          alt=""
+        />
+      </div>
+      <div class="custom-control custom-switch mb-5">
+        <input
+          type="checkbox"
+          class="custom-control-input theme-choice"
+          id="rtl-mode-switch"
+          data-appStyle="public/css/app-rtl.min.css"
+        />
+        <label class="custom-control-label" for="rtl-mode-switch">
+          RTL Mode
+        </label>
+      </div>
+
+      <a
+        href="https://1.envato.market/grNDB"
+        class="btn btn-primary btn-block mt-3"
+        target="_blank"
+      >
+        <i class="mdi mdi-cart mr-1"></i> Purchase Now
+      </a>
+    </div>
+  </div>
+</div>
+<div class="rightbar-overlay"></div>
+ 
+    <!-- JAVASCRIPT -->
+<script src="public/libs/jquery/jquery.min.js"></script>
+<script src="public/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="public/libs/metismenu/metisMenu.min.js"></script>
+<script src="public/libs/simplebar/simplebar.min.js"></script>
+<script src="public/libs/node-waves/waves.min.js"></script>
+
+    
+    <!-- Peity chart-->
+    <script src="public/libs/peity/jquery.peity.min.js"></script>
+
+    <!-- Plugin Js-->
+    <script src="public/libs/chartist/chartist.min.js"></script>
+    <script src="public/libs/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js"></script>
+
+    <!--script src="public/js/pages/dashboard.init.js"></script-->
+    <script src="public/htson/market.init.js"></script>
+
+ 
+    <!-- App js -->
+    <script src="public/js/app.js"></script>
+    
+ <!-- nothing -->
+
+
+
+
+
+  </body>
+</html>

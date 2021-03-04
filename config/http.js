@@ -8,7 +8,7 @@
  * For more information on configuration, check out:
  * https://sailsjs.com/config/http
  */
-
+const expressEjsLayout = require ('express-ejs-layouts');
 module.exports.http = {
 
   /****************************************************************************
@@ -29,18 +29,18 @@ module.exports.http = {
     *                                                                          *
     ***************************************************************************/
 
-    // order: [
-    //   'cookieParser',
-    //   'session',
-    //   'bodyParser',
-    //   'compress',
-    //   'poweredBy',
-    //   'router',
-    //   'www',
-    //   'favicon',
-    // ],
-
-
+    order: [
+      'expressEjsLayout',
+      'cookieParser',
+      'session',
+      'bodyParser',
+      'compress',
+      'poweredBy',
+      'router',
+      'www',
+      'favicon',
+    ],
+    'expressEjsLayout': expressEjsLayout
     /***************************************************************************
     *                                                                          *
     * The body parser that will handle incoming multipart HTTP requests.       *

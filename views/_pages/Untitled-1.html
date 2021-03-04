@@ -1,0 +1,1140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+      
+<title>Trading on HTS</title>
+<meta property="og:title" content="Trading on HTS"/>
+ 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      content="VN stock market information"
+      name="description"
+    />
+    <!--meta content="Themesbrand" name="author" /-->
+    <link rel="shortcut icon" href="public/images/htson.ico" />
+    
+    <meta property="og:title" content="Hoa Than Son"/>
+    <meta property="og:description" content="VN stock market information"/>
+    
+    <meta property="og:image" content="http://www.hoathanson.com/public/images/htson-lg.png"/>
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="560" />
+    
+    <meta property="og:url" content="http://www.hoathanson.com"/>
+    <meta property="og:site_name" content="Hoa Than Son"/>
+    <meta property="og:type" content="website"/>
+    
+    <link
+  href="public/libs/ion-rangeslider/css/ion.rangeSlider.min.css"
+  rel="stylesheet"
+  type="text/css"
+/>
+    <!-- Bootstrap Css -->
+    <link
+      href="public/css/bootstrap.min.css"
+      id="bootstrap-style"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Icons Css -->
+    <link href="public/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link
+      href="public/css/app.min.css"
+      id="app-style"
+      rel="stylesheet"
+      type="text/css"
+    />
+<!-- perticular page css -->
+ 
+    <!-- Bootstrap Css -->
+<link
+  href="public/css/bootstrap.min.css"
+  id="bootstrap-style"
+  rel="stylesheet"
+  type="text/css"
+/>
+<!-- Icons Css -->
+<link href="public/css/icons.min.css" rel="stylesheet" type="text/css" />
+<!-- App Css-->
+<link
+  href="public/css/app.min.css"
+  id="app-style"
+  rel="stylesheet"
+  type="text/css"
+/>
+
+  </head>
+  <body data-sidebar="dark">
+    <div id="layout-wrapper">
+      <header id="page-topbar">
+  <div class="navbar-header">
+    <div class="d-flex">
+      <!-- LOGO -->
+      <div class="navbar-brand-box">
+        <a href="/" class="logo logo-dark">
+          <span class="logo-sm">
+            <img src="public/images/logo.svg" alt="" height="22" />
+          </span>
+          <span class="logo-lg">
+            <img src="public/images/htson-dark.png" alt="" height="38" />
+          </span>
+        </a>
+
+        <a href="/" class="logo logo-light">
+          <span class="logo-sm">
+            <img src="public/images/htson-sm.png" alt="" height="18" />
+          </span>
+          <span class="logo-lg">
+            <img src="public/images/htson-light.png" alt="" height="38" />
+          </span>
+        </a>
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-sm px-3 font-size-24 header-item waves-effect"
+        id="vertical-menu-btn"
+      >
+        <i class="mdi mdi-menu"></i>
+      </button>
+
+      <div class="d-none d-sm-block">
+        <div class="dropdown pt-3 d-inline-block">
+          <a
+            class="btn btn-secondary dropdown-toggle"
+            href="#"
+            role="button"
+            id="dropdownMenuLink"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Create <i class="mdi mdi-chevron-down"></i>
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex">
+      <!-- App Search-->
+      <form action="/summary" class="app-search d-none d-lg-block">
+        <div class="position-relative">
+          <input type="text" class="form-control" placeholder="Search..." id="ticker" name="ticker"/>
+          <span class="fa fa-search"></span>
+        </div>
+      </form>
+ 
+      <div class="dropdown d-inline-block d-lg-none ml-2">
+        <button
+          type="button"
+          class="btn header-item noti-icon waves-effect"
+          id="page-header-search-dropdown"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <i class="mdi mdi-magnify"></i>
+        </button>
+        <div
+          class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
+          aria-labelledby="page-header-search-dropdown"
+        >
+        <form action="/summary" class="p-3">
+          <div class="form-group m-0">
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Search ..."
+                  aria-label="Recipient's username"
+                  id="tickerx" name="ticker"
+
+                />
+                <div class="input-group-append">
+                  <button class="btn btn-primary" type="submit">
+                    <i class="mdi mdi-magnify"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="dropdown d-none d-md-block ml-2">
+        <button
+          type="button"
+          class="btn header-item waves-effect"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <img
+            class="mr-2"
+            src="public/images/flags/us_flag.jpg"
+            alt="Header Language"
+            height="16"
+          />
+          English <span class="mdi mdi-chevron-down"></span>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <!-- item-->
+          <a href="javascript:void(0);" class="dropdown-item notify-item">
+            <img
+              src="public/images/flags/germany_flag.jpg"
+              alt="user-image"
+              class="mr-1"
+              height="12"
+            />
+            <span class="align-middle"> German </span>
+          </a>
+
+          <!-- item-->
+          <a href="javascript:void(0);" class="dropdown-item notify-item">
+            <img
+              src="public/images/flags/italy_flag.jpg"
+              alt="user-image"
+              class="mr-1"
+              height="12"
+            />
+            <span class="align-middle"> Italian </span>
+          </a>
+
+          <!-- item-->
+          <a href="javascript:void(0);" class="dropdown-item notify-item">
+            <img
+              src="public/images/flags/french_flag.jpg"
+              alt="user-image"
+              class="mr-1"
+              height="12"
+            />
+            <span class="align-middle"> French </span>
+          </a>
+
+          <!-- item-->
+          <a href="javascript:void(0);" class="dropdown-item notify-item">
+            <img
+              src="public/images/flags/spain_flag.jpg"
+              alt="user-image"
+              class="mr-1"
+              height="12"
+            />
+            <span class="align-middle"> Spanish </span>
+          </a>
+
+          <!-- item-->
+          <a href="javascript:void(0);" class="dropdown-item notify-item">
+            <img
+              src="public/images/flags/russia_flag.jpg"
+              alt="user-image"
+              class="mr-1"
+              height="12"
+            />
+            <span class="align-middle"> Russian </span>
+          </a>
+        </div>
+      </div>
+
+      <div class="dropdown d-none d-lg-inline-block">
+        <button
+          type="button"
+          class="btn header-item noti-icon waves-effect"
+          data-toggle="fullscreen"
+        >
+          <i class="mdi mdi-fullscreen"></i>
+        </button>
+      </div>
+
+      <div class="dropdown d-inline-block">
+        <button
+          type="button"
+          class="btn header-item noti-icon waves-effect"
+          id="page-header-notifications-dropdown"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <i class="mdi mdi-bell-outline"></i>
+          <span class="badge badge-danger badge-pill">3</span>
+        </button>
+        <div
+          class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
+          aria-labelledby="page-header-notifications-dropdown"
+        >
+          <div class="p-3">
+            <div class="row align-items-center">
+              <div class="col">
+                <h5 class="m-0 font-size-16">Notifications (258)</h5>
+              </div>
+            </div>
+          </div>
+          <div data-simplebar style="max-height: 230px;">
+            <a href="" class="text-reset notification-item">
+              <div class="media">
+                <div class="avatar-xs mr-3">
+                  <span
+                    class="avatar-title bg-success rounded-circle font-size-16"
+                  >
+                    <i class="mdi mdi-cart-outline"></i>
+                  </span>
+                </div>
+                <div class="media-body">
+                  <h6 class="mt-0 mb-1">Your order is placed</h6>
+                  <div class="font-size-12 text-muted">
+                    <p class="mb-1">
+                      Dummy text of the printing and typesetting industry.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <a href="" class="text-reset notification-item">
+              <div class="media">
+                <div class="avatar-xs mr-3">
+                  <span
+                    class="avatar-title bg-warning rounded-circle font-size-16"
+                  >
+                    <i class="mdi mdi-message-text-outline"></i>
+                  </span>
+                </div>
+                <div class="media-body">
+                  <h6 class="mt-0 mb-1">New Message received</h6>
+                  <div class="font-size-12 text-muted">
+                    <p class="mb-1">You have 87 unread messages</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <a href="" class="text-reset notification-item">
+              <div class="media">
+                <div class="avatar-xs mr-3">
+                  <span
+                    class="avatar-title bg-info rounded-circle font-size-16"
+                  >
+                    <i class="mdi mdi-glass-cocktail"></i>
+                  </span>
+                </div>
+                <div class="media-body">
+                  <h6 class="mt-0 mb-1">Your item is shipped</h6>
+                  <div class="font-size-12 text-muted">
+                    <p class="mb-1">
+                      It is a long established fact that a reader will
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <a href="" class="text-reset notification-item">
+              <div class="media">
+                <div class="avatar-xs mr-3">
+                  <span
+                    class="avatar-title bg-primary rounded-circle font-size-16"
+                  >
+                    <i class="mdi mdi-cart-outline"></i>
+                  </span>
+                </div>
+                <div class="media-body">
+                  <h6 class="mt-0 mb-1">Your order is placed</h6>
+                  <div class="font-size-12 text-muted">
+                    <p class="mb-1">
+                      Dummy text of the printing and typesetting industry.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <a href="" class="text-reset notification-item">
+              <div class="media">
+                <div class="avatar-xs mr-3">
+                  <span
+                    class="avatar-title bg-danger rounded-circle font-size-16"
+                  >
+                    <i class="mdi mdi-message-text-outline"></i>
+                  </span>
+                </div>
+                <div class="media-body">
+                  <h6 class="mt-0 mb-1">New Message received</h6>
+                  <div class="font-size-12 text-muted">
+                    <p class="mb-1">You have 87 unread messages</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="p-2 border-top">
+            <a
+              class="btn btn-sm btn-link font-size-14 btn-block text-center"
+              href="javascript:void(0)"
+            >
+              View all
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="dropdown d-inline-block">
+        <button
+          type="button"
+          class="btn header-item waves-effect"
+          id="page-header-user-dropdown"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <img
+            class="rounded-circle header-profile-user"
+            src="public/images/users/user-4.jpg"
+            alt="Header Avatar"
+          />
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <!-- item-->
+          <a class="dropdown-item" href="#"
+            ><i
+              class="mdi mdi-account-circle font-size-17 align-middle mr-1"
+            ></i>
+            Profile</a
+          >
+          <a class="dropdown-item" href="#"
+            ><i class="mdi mdi-wallet font-size-17 align-middle mr-1"></i> My
+            Wallet</a
+          >
+          <a class="dropdown-item d-block" href="#"
+            ><span class="badge badge-success float-right">11</span
+            ><i class="mdi mdi-settings font-size-17 align-middle mr-1"></i>
+            Settings</a
+          >
+          <a class="dropdown-item" href="#"
+            ><i
+              class="mdi mdi-lock-open-outline font-size-17 align-middle mr-1"
+            ></i>
+            Lock screen</a
+          >
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item text-danger" href="#"
+            ><i
+              class="bx bx-power-off font-size-17 align-middle mr-1 text-danger"
+            ></i>
+            Logout</a
+          >
+        </div>
+      </div>
+
+      <div class="dropdown d-inline-block">
+        <button
+          type="button"
+          class="btn header-item noti-icon right-bar-toggle waves-effect"
+        >
+          <i class="mdi mdi-settings-outline"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <!-- ========== Left Sidebar Start ========== -->
+<div class="vertical-menu">
+  <div data-simplebar class="h-100">
+    <!--- Sidemenu -->
+    <div id="sidebar-menu">
+      <!-- Left Menu Start -->
+      <ul class="metismenu list-unstyled" id="side-menu">
+        <li class="menu-title">Main</li>
+
+        <li>
+          <a href="/" class="waves-effect">
+            <i class="ti-home"></i
+            ><span class="badge badge-pill badge-primary float-right">2</span>
+            <span>Dashboard</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-email"></i>
+            <span>YOUR BOT</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="hts?botname=100">B100</a></li>
+            <li><a href="hts?botname=101">B101</a></li>
+            <li><a href="hts?botname=102">B102</a></li>
+
+
+          </ul>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-email"></i>
+            <span>Email</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="email-inbox">Inbox</a></li>
+            <li><a href="email-read">Email Read</a></li>
+            <li><a href="email-compose">Email Compose</a></li>
+          </ul>
+        </li>
+
+        <li class="menu-title">Components</li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-package"></i>
+            <span>UI Elements</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="ui-alerts">Alerts</a></li>
+            <li><a href="ui-buttons">Buttons</a></li>
+            <li><a href="ui-cards">Cards</a></li>
+            <li><a href="ui-carousel">Carousel</a></li>
+            <li><a href="ui-dropdowns">Dropdowns</a></li>
+            <li><a href="ui-grid">Grid</a></li>
+            <li><a href="ui-images">Images</a></li>
+            <li><a href="ui-lightbox">Lightbox</a></li>
+            <li><a href="ui-modals">Modals</a></li>
+            <li><a href="ui-rangeslider">Range Slider</a></li>
+            <li><a href="ui-session-timeout">Session Timeout</a></li>
+            <li><a href="ui-progressbars">Progress Bars</a></li>
+            <li><a href="ui-sweet-alert">Sweet-Alert</a></li>
+            <li><a href="ui-tabs-accordions">Tabs &amp; Accordions</a></li>
+            <li><a href="ui-typography">Typography</a></li>
+            <li><a href="ui-video">Video</a></li>
+            <li><a href="ui-general">General</a></li>
+            <li><a href="ui-colors">Colors</a></li>
+            <li><a href="ui-rating">Rating</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="waves-effect">
+            <i class="ti-receipt"></i>
+            <span class="badge badge-pill badge-success float-right">6</span>
+            <span>Forms</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="form-elements">Form Elements</a></li>
+            <li><a href="form-validation">Form Validation</a></li>
+            <li><a href="form-advanced">Form Advanced</a></li>
+            <li><a href="form-editors">Form Editors</a></li>
+            <li><a href="form-uploads">Form File Upload</a></li>
+            <li><a href="form-xeditable">Form Xeditable</a></li>
+            <li><a href="form-repeater">Form Repeater</a></li>
+            <li><a href="form-wizard">Form Wizard</a></li>
+            <li><a href="form-mask">Form Mask</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-pie-chart"></i>
+            <span>Charts</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="charts-morris">Morris Chart</a></li>
+            <li><a href="charts-chartist">Chartist Chart</a></li>
+            <li><a href="charts-chartjs">Chartjs Chart</a></li>
+            <li><a href="charts-flot">Flot Chart</a></li>
+            <li><a href="charts-knob">Jquery Knob Chart</a></li>
+            <li><a href="charts-sparkline">Sparkline Chart</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-view-grid"></i>
+            <span>Tables</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="tables-basic">Basic Tables</a></li>
+            <li><a href="tables-datatable">Data Table</a></li>
+            <li><a href="tables-responsive">Responsive Table</a></li>
+            <li><a href="tables-editable">Editable Table</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-face-smile"></i>
+            <span>Icons</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="icons-material">Material Design</a></li>
+            <li><a href="icons-fontawesome">Font Awesome</a></li>
+            <li><a href="icons-ion">Ion Icons</a></li>
+            <li><a href="icons-themify">Themify Icons</a></li>
+            <li><a href="icons-dripicons">Dripicons</a></li>
+            <li><a href="icons-typicons">Typicons Icons</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="waves-effect">
+            <i class="ti-location-pin"></i>
+            <span class="badge badge-pill badge-danger float-right">2</span>
+            <span>Maps</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="maps-google"> Google Map</a></li>
+            <li><a href="maps-vector"> Vector Map</a></li>
+          </ul>
+        </li>
+
+        <li class="menu-title">Extras</li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-layout"></i>
+            <span> Layouts </span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="horizontal">Horizontal</a></li>
+            <li><a href="layouts-compact-sidebar">Compact Sidebar</a></li>
+            <li><a href="layouts-icon-sidebar">Icon Sidebar</a></li>
+            <li><a href="layouts-boxed">Boxed Layout</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-archive"></i>
+            <span> Authentication </span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="pages-login">Login 1</a></li>
+            <li><a href="pages-login-2">Login 2</a></li>
+            <li><a href="pages-register">Register 1</a></li>
+            <li><a href="pages-register-2">Register 2</a></li>
+            <li><a href="pages-recoverpw">Recover Password 1</a></li>
+            <li><a href="pages-recoverpw-2">Recover Password 2</a></li>
+            <li><a href="pages-lock-screen">Lock Screen 1</a></li>
+            <li><a href="pages-lock-screen-2">Lock Screen 2</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-support"></i>
+            <span> Extra Pages </span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="pages-timeline">Timeline</a></li>
+            <li><a href="pages-invoice">Invoice</a></li>
+            <li><a href="pages-directory">Directory</a></li>
+            <li><a href="pages-blank">Blank Page</a></li>
+            <li><a href="pages-404">Error 404</a></li>
+            <li><a href="pages-500">Error 500</a></li>
+            <li><a href="pages-pricing">Pricing</a></li>
+            <li><a href="pages-gallery">Gallery</a></li>
+            <li><a href="pages-maintenance">Maintenance</a></li>
+            <li><a href="pages-comingsoon">Coming Soon</a></li>
+            <li><a href="pages-faq">FAQs</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-bookmark-alt"></i>
+            <span> Email Templates </span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="email-template-basic">Basic Action Email</a></li>
+            <li><a href="email-template-Alert">Alert Email</a></li>
+            <li><a href="email-template-Billing">Billing Email</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="ti-more"></i>
+            <span>Multi Level</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="true">
+            <li><a href="javascript: void(0);">Level 1.1</a></li>
+            <li>
+              <a href="javascript: void(0);" class="has-arrow">Level 1.2</a>
+              <ul class="sub-menu" aria-expanded="true">
+                <li><a href="javascript: void(0);">Level 2.1</a></li>
+                <li><a href="javascript: void(0);">Level 2.2</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!-- Sidebar -->
+  </div>
+</div>
+<!-- Left Sidebar End -->
+
+      <div class="main-content">
+        <div class="page-content">
+          <div class="container-fluid">
+            <div class="row align-items-center">
+              <div class="col-sm-6">
+                
+<div class="col-sm-6">
+  <div class="page-title-box">
+      <h4 class="font-size-18">abc</h4>
+      <ol class="breadcrumb mb-0">
+          <li class="breadcrumb-item active">Welcome to HTS Trading System</li>
+      </ol>
+  </div>
+</div>
+
+              </div>
+            </div>
+            
+<div class="row">
+  <div class="col-lg-12">  
+    <div class="card">
+      <div class="card-body">
+        
+          <div>
+            <h1>Acc info </h1>
+
+            <h4>Bot_id: 3  - Margin (.6)</h4>
+
+            <h4>Cash balance: 569694 </h4>
+          
+            <h4>Min buy power: 1547994 </h4>
+            <h4>Max buy power: 3095988 </h4>
+          
+            <h1>Acc current setting </h1>
+            <h4>Buy power: 3095988 </h4>
+            <h4>Order value: 500000 </h4>
+          </div>
+          <div class="slidecontainer">
+            <h1>Acc setting </h1>
+            <form action="/hts/updatebp">
+              <input type="range" min="0" max="3095988" value="3095988" name="buy_power" id="buy_power">
+              <input type="hidden" value="3" name="bot_id" id="bot_id">
+              <button type="submit" >Submit</button>
+            </form>
+            <h4>Buy power: <span id="demo"></span> </h4>
+
+          </div>
+            
+      </div>  
+    </div>  
+  </div> 
+  <div class="col-lg-12">  
+    <!-- Simple card -->
+    <div class="card">
+      <div class="card-body">
+        
+          <div>
+            <h4 class="card-title  mt-0">Acc info</h4>
+            <p class="card-text">Bot_id: 3  - Margin (.6)</p>
+            <p class="card-text">Bot_id: Cash balance: 569694</p>
+            <p class="card-text">Min buy power: 1547994</p>
+            <p class="card-text">Max buy power: 3095988</p>
+            <h4 class="card-title  mt-0">Acc current setting</h4>
+            <p class="card-text">Buy power: 3095988 </p>
+            <p class="card-text">Bot_id: Cash balance: 569694</p>
+          </div>
+          <div class="p-3">
+            <h5 class="font-size-14 mb-3 mt-0">Default</h5>
+            <input type="text" id="range_01" />
+          </div>
+            
+
+      </div>
+    </div>
+  </div> 
+</div>  
+
+<div class="row">
+  <div class="col-lg-12">  
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Current portfolio</h4>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <th>Ticker</th>
+              <th>Volume</th>
+              <th>Bought price</th>
+              <th>Bought value</th>
+              <th>Current value</th>
+              <th>P/L</th>
+              <th>SELL</th>
+            </thead>
+            <tbody>
+                      
+              
+                <tr>
+                  <td>BIC</td>
+                  <td>10</td>
+                  <td>19900</td>
+                  <td>199000</td>
+                  <td>215000</td>
+                  <td>16000</td>
+                  <td><form action="/hts/sellone" id="sellone">
+                    <input type="hidden" value="3" name="bot_id" id="bot_id1">
+                    <input type="hidden" value="BIC" name="ticker" id="ticker">
+              
+                    <button type="submit" >SELL</button>
+                  </form></td>
+                </tr>
+              
+                <tr>
+                  <td>BTP</td>
+                  <td>30</td>
+                  <td>14400</td>
+                  <td>432000</td>
+                  <td>426000</td>
+                  <td>-6000</td>
+                  <td><form action="/hts/sellone" id="sellone">
+                    <input type="hidden" value="3" name="bot_id" id="bot_id1">
+                    <input type="hidden" value="BTP" name="ticker" id="ticker">
+              
+                    <button type="submit" >SELL</button>
+                  </form></td>
+                </tr>
+              
+                <tr>
+                  <td>CIG</td>
+                  <td>90</td>
+                  <td>2000</td>
+                  <td>180000</td>
+                  <td>168300</td>
+                  <td>-11700</td>
+                  <td><form action="/hts/sellone" id="sellone">
+                    <input type="hidden" value="3" name="bot_id" id="bot_id1">
+                    <input type="hidden" value="CIG" name="ticker" id="ticker">
+              
+                    <button type="submit" >SELL</button>
+                  </form></td>
+                </tr>
+              
+                <tr>
+                  <td>CRC</td>
+                  <td>10</td>
+                  <td>12450</td>
+                  <td>124500</td>
+                  <td>136500</td>
+                  <td>12000</td>
+                  <td><form action="/hts/sellone" id="sellone">
+                    <input type="hidden" value="3" name="bot_id" id="bot_id1">
+                    <input type="hidden" value="CRC" name="ticker" id="ticker">
+              
+                    <button type="submit" >SELL</button>
+                  </form></td>
+                </tr>
+              
+                <tr>
+                  <td>EIB</td>
+                  <td>20</td>
+                  <td>17500</td>
+                  <td>350000</td>
+                  <td>352000</td>
+                  <td>2000</td>
+                  <td><form action="/hts/sellone" id="sellone">
+                    <input type="hidden" value="3" name="bot_id" id="bot_id1">
+                    <input type="hidden" value="EIB" name="ticker" id="ticker">
+              
+                    <button type="submit" >SELL</button>
+                  </form></td>
+                </tr>
+              
+                <tr>
+                  <td>HNG</td>
+                  <td>40</td>
+                  <td>12300</td>
+                  <td>984000</td>
+                  <td>960000</td>
+                  <td>-24000</td>
+                  <td><form action="/hts/sellone" id="sellone">
+                    <input type="hidden" value="3" name="bot_id" id="bot_id1">
+                    <input type="hidden" value="HNG" name="ticker" id="ticker">
+              
+                    <button type="submit" >SELL</button>
+                  </form></td>
+                </tr>
+              
+                <tr>
+                  <td>ITA</td>
+                  <td>40</td>
+                  <td>4820</td>
+                  <td>192800</td>
+                  <td>198000</td>
+                  <td>5200</td>
+                  <td><form action="/hts/sellone" id="sellone">
+                    <input type="hidden" value="3" name="bot_id" id="bot_id1">
+                    <input type="hidden" value="ITA" name="ticker" id="ticker">
+              
+                    <button type="submit" >SELL</button>
+                  </form></td>
+                </tr>
+              
+                <tr>
+                  <td>NTL</td>
+                  <td>20</td>
+                  <td>18500</td>
+                  <td>370000</td>
+                  <td>358000</td>
+                  <td>-12000</td>
+                  <td><form action="/hts/sellone" id="sellone">
+                    <input type="hidden" value="3" name="bot_id" id="bot_id1">
+                    <input type="hidden" value="NTL" name="ticker" id="ticker">
+              
+                    <button type="submit" >SELL</button>
+                  </form></td>
+                </tr>
+              
+                <tr>
+                  <td>PAC</td>
+                  <td>10</td>
+                  <td>24150</td>
+                  <td>241500</td>
+                  <td>257000</td>
+                  <td>15500</td>
+                  <td><form action="/hts/sellone" id="sellone">
+                    <input type="hidden" value="3" name="bot_id" id="bot_id1">
+                    <input type="hidden" value="PAC" name="ticker" id="ticker">
+              
+                    <button type="submit" >SELL</button>
+                  </form></td>
+                </tr>
+              
+                <tr>
+                  <td>TCB</td>
+                  <td>20</td>
+                  <td>22550</td>
+                  <td>902000</td>
+                  <td>914000</td>
+                  <td>12000</td>
+                  <td><form action="/hts/sellone" id="sellone">
+                    <input type="hidden" value="3" name="bot_id" id="bot_id1">
+                    <input type="hidden" value="TCB" name="ticker" id="ticker">
+              
+                    <button type="submit" >SELL</button>
+                  </form></td>
+                </tr>
+              
+                <tr>
+                  <td>VPI</td>
+                  <td>10</td>
+                  <td>41450</td>
+                  <td>414500</td>
+                  <td>415000</td>
+                  <td>500</td>
+                  <td><form action="/hts/sellone" id="sellone">
+                    <input type="hidden" value="3" name="bot_id" id="bot_id1">
+                    <input type="hidden" value="VPI" name="ticker" id="ticker">
+              
+                    <button type="submit" >SELL</button>
+                  </form></td>
+                </tr>
+                          
+            </tbody>
+          </table>
+          <form action="/hts/sellall" id="sellall">
+            <input type="hidden" value="3" name="bot_id" id="bot_id1">
+
+            <button type="submit" >SELL ALL</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+</div>
+<div class="row">
+  <div class="col-lg-12">  
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Today oders</h4>
+        <div class="table-responsive">
+
+          <table class="table table-striped ">
+            <thead>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Buy/Sell</th>
+              <th>Ticker</th>
+              <th>Volume</th>
+              <th>Price</th>
+              <th>Status</th>
+              <th>SSI ID</th>
+            </thead>
+            <tbody>
+                      
+              
+                <tr>
+                  <td>2020-10-18T17:00:00.000Z</td>
+                  <td>09:15:00</td>
+                  <td>0</td>
+                  <td>ANV</td>
+                  <td>10</td>
+                  <td>19250</td>
+                  <td>FF</td>
+                  <td>46021010</td>
+      
+                </tr>
+                          
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+</div>
+ <!-- Range slider init js-->
+<script src="public/js/pages/range-sliders.init.js"></script>
+
+          </div>
+        </div>
+        <footer class="footer">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        © 2020 Stock Info <span
+          class="d-none d-sm-inline-block"
+        >
+          - Crafted with <i class="mdi mdi-heart text-danger"></i> by
+          HTS.</span
+        >
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- Default Statcounter code for Hoathanson.com
+http://hoathanson.com -->
+<script type="text/javascript">
+  var sc_project=12352930; 
+  var sc_invisible=1; 
+  var sc_security="1a537ae2"; 
+  </script>
+  <script type="text/javascript"
+  src="https://www.statcounter.com/counter/counter.js"
+  async></script>
+  <noscript><div class="statcounter"><a title="Web Analytics"
+  href="https://statcounter.com/" target="_blank"><img
+  class="statcounter"
+  src="https://c.statcounter.com/12352930/0/1a537ae2/1/"
+  alt="Web Analytics"></a></div></noscript>
+  <!-- End of Statcounter Code -->
+      </div>
+    </div>
+    <div class="right-bar">
+  <div data-simplebar class="h-100">
+    <div class="rightbar-title px-3 py-4">
+      <a href="javascript:void(0);" class="right-bar-toggle float-right">
+        <i class="mdi mdi-close noti-icon"></i>
+      </a>
+      <h5 class="m-0">Settings</h5>
+    </div>
+
+    <hr class="mt-0" />
+    <h6 class="text-center">Choose Layouts</h6>
+
+    <div class="p-4">
+      <div class="mb-2">
+        <img
+          src="public/images/layouts/layout-1.jpg"
+          class="img-fluid img-thumbnail"
+          alt=""
+        />
+      </div>
+      <div class="custom-control custom-switch mb-3">
+        <input
+          type="checkbox"
+          class="custom-control-input theme-choice"
+          id="light-mode-switch"
+        />
+        <label class="custom-control-label" for="light-mode-switch">
+          Light Mode
+        </label>
+      </div>
+
+      <div class="mb-2">
+        <img
+          src="public/images/layouts/layout-2.jpg"
+          class="img-fluid img-thumbnail"
+          alt=""
+        />
+      </div>
+      <div class="custom-control custom-switch mb-3">
+        <input
+          type="checkbox"
+          class="custom-control-input theme-choice"
+          id="dark-mode-switch"
+          data-bsStyle="public/css/bootstrap-dark.min.css"
+          data-appStyle="public/css/app-dark.min.css"
+        />
+        <label class="custom-control-label" for="dark-mode-switch">
+          Dark Mode
+        </label>
+      </div>
+
+      <div class="mb-2">
+        <img
+          src="public/images/layouts/layout-3.jpg"
+          class="img-fluid img-thumbnail"
+          alt=""
+        />
+      </div>
+      <div class="custom-control custom-switch mb-5">
+        <input
+          type="checkbox"
+          class="custom-control-input theme-choice"
+          id="rtl-mode-switch"
+          data-appStyle="public/css/app-rtl.min.css"
+        />
+        <label class="custom-control-label" for="rtl-mode-switch">
+          RTL Mode
+        </label>
+      </div>
+
+      <a
+        href="https://1.envato.market/grNDB"
+        class="btn btn-primary btn-block mt-3"
+        target="_blank"
+      >
+        <i class="mdi mdi-cart mr-1"></i> Purchase Now
+      </a>
+    </div>
+  </div>
+</div>
+<div class="rightbar-overlay"></div>
+ 
+    <!-- JAVASCRIPT -->
+<script src="public/libs/jquery/jquery.min.js"></script>
+<script src="public/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="public/libs/metismenu/metisMenu.min.js"></script>
+<script src="public/libs/simplebar/simplebar.min.js"></script>
+<script src="public/libs/node-waves/waves.min.js"></script>
+
+       
+<!-- Ion Range Slider-->
+<script src="public/libs/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
+
+
+
+
+<!--script src="public/js/pages/dashboard.init.js"></script-->
+<script src="public/htson/summary.init.js"></script>
+
+    <!-- App js -->
+    <script src="public/js/app.js"></script>
+    <!-- nothing -->
+
+  </body>
+</html>

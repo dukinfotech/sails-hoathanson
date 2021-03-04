@@ -1,0 +1,381 @@
+<%- contentFor('HeaderCss') %>
+<!--Echart  -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.8.0/echarts-en.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<!--Datatables  -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.colVis.min.js"></script>
+
+<!-- perticular page css -->
+
+<%- contentFor('title') %>  
+<title><%= result.title %> - Hoa Than Son</title>
+<meta property="og:title" content="<%= result.title %> - Hoa Than Son"/>
+
+<%- contentFor('breadcrumb') %>
+
+
+    <div class="row">
+
+      <div class="col-lg-9">
+        <h4 class="font-size-18"><%= result.title %> - CW based on <%= result.csticker %> </h4>
+    </div>
+
+    </div>
+
+
+
+<%- contentFor('body') %>
+
+<!-- row 1 -->
+<div class="row">
+  <!-- close -->
+  <div class="col-xl-3 col-md-6">
+    <div class="card mini-stat bg-primary text-white">
+      <div class="card-body">
+        <div id="refresh0">
+        <div class="mb-4">
+          <div class="float-left mini-stat-img mr-4">
+            <img src="../public/images/services-icon/01.png" alt="" />
+          </div>
+          <h5 class="font-size-16 text-uppercase mt-0 text-white-50"><%= result.csticker %> - Close          </h5>
+          <h5 class="font-weight-medium font-size-20">
+            <%= result.all.C/100 %> <i class="mdi mdi-arrow-<%= result.indicator[0].sig %> text-<%= result.indicator[0].color %> ml-2"></i>
+          </h5>
+          <p class="mb-0 float-right"></p>
+          <div class="mini-stat-label bg-<%= result.indicator[0].color %>">
+            <p class="mb-0"><%= result.indicator[0].value %></p>
+          </div>
+        </div>
+        <div class="pt-2">
+          <div class="float-right">
+            <a href="#price-chart" class="text-white-50"
+              ><i class="mdi mdi-arrow-right h5"></i
+            ></a>
+          </div>
+          <p class="text-white-50 mb-0 mt-1">52W H: <%= (+result.all.H52W/100).toFixed(2) %> - L: <%= (+result.all.L52W/100).toFixed(2) %></p>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- spt -->
+  <div class="col-xl-3 col-md-6">
+    <div class="card mini-stat bg-primary text-white">
+      <div class="card-body">
+        <div id="refresh1">
+        <div class="mb-4">
+          <div class="float-left mini-stat-img mr-4">
+            <img src="../public/images/services-icon/02.png" alt="" />
+          </div>
+          <h5 class="font-size-16 text-uppercase mt-0 text-white-50">
+            <%= result.csticker %> - <%= result.indicator[1].name %>
+          </h5>
+          <h5 class="font-weight-medium font-size-20">
+            TSL: <%= result.indicator[1].text %>
+            <!--i class="mdi mdi-arrow-<%= result.indicator[1].sig %> text-<%= result.indicator[1].color %> ml-2"></i-->
+          </h5>
+          <div class="mini-stat-label bg-<%= result.indicator[1].color %>">
+            <p class="mb-0">@ <%= result.indicator[1].sig %></p>
+          </div>
+        </div>
+        <div class="pt-2">
+          <div class="float-right">
+            <a href="/market15" class="text-white-50"
+              ><i class="mdi mdi-arrow-right h5"></i
+            ></a>
+          </div>
+          <p class="text-white-50 mb-0 mt-1">PL: <%= result.indicator[1].value %> (<%= (result.indicator[1].value/result.indicator[1].sig*100).toFixed(1) %>%) - Since <%= (result.sptday/24).toFixed(0) %> days ago</p>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- vnidex -->
+  <div class="col-xl-3 col-md-6">
+    <div class="card mini-stat bg-primary text-white">
+      <div class="card-body">
+        <div id="refresh2">
+        <div class="mb-4">
+          <div class="float-left mini-stat-img mr-4">
+            <img src="../public/images/services-icon/03.png" alt="" />
+          </div>
+          <h5 class="font-size-16 text-uppercase mt-0 text-white-50">
+            <%= result.indicator[2].name %>
+          </h5>
+          <h5 class="font-weight-medium font-size-20">
+            <%= result.indicator[2].text %> <i class="mdi mdi-arrow-<%= result.indicator[2].sig %> text-<%= result.indicator[2].color %> ml-2"></i>
+          </h5>
+          <div class="mini-stat-label bg-<%= result.indicator[2].color %>">
+            <p class="mb-0"><%= result.indicator[2].value %> %</p>
+          </div>
+        </div>
+        <div class="pt-2">
+          <div class="float-right">
+            <a href="/market30" class="text-white-50"
+              ><i class="mdi mdi-arrow-right h5"></i
+            ></a>
+          </div>
+          <p class="text-white-50 mb-0 mt-1">LP: <%= (+result.lsp.L).toFixed(2) %>% (<%= (+result.lspx.L) %>) - SP: <%= (+result.lsp.S).toFixed(2) %>% (<%= (+result.lspx.S) %>)</p>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- hnxindex -->
+  <div class="col-xl-3 col-md-6">
+    <div class="card mini-stat bg-primary text-white">
+      <div class="card-body">
+        <div id="refresh3">
+        <div class="mb-4">
+          <div class="float-left mini-stat-img mr-4">
+            <img src="../public/images/services-icon/04.png" alt="" />
+          </div>
+          <h5 class="font-size-16 text-uppercase mt-0 text-white-50">
+            <%= result.indicator[3].name %>
+          </h5>
+          <h5 class="font-weight-medium font-size-20">
+            TSL: <%= result.indicator[3].text %>
+            <!--i class="mdi mdi-arrow-<%= result.indicator[1].sig %> text-<%= result.indicator[1].color %> ml-2"></i-->
+          </h5>
+          <div class="mini-stat-label bg-<%= result.indicator[3].color %>">
+            <p class="mb-0">@ <%= result.indicator[3].sig %></p>
+          </div>
+        </div>
+        <div class="pt-2">
+          <div class="float-right">
+            <a href="/market15" class="text-white-50"
+              ><i class="mdi mdi-arrow-right h5"></i
+            ></a>
+          </div>
+          <p class="text-white-50 mb-0 mt-1">PL: <%= result.indicator[3].value %> (<%= (result.indicator[3].value/result.indicator[3].sig*100).toFixed(1) %>%) - Since <%= (result.vn30sptday/24).toFixed(0) %> days ago</p>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- end row -->
+<!-- row 2 -->
+<div class="row">
+  <!-- MCDX chart -->
+  <div class="col-lg-9">
+    <div class="card">
+      <div class="card-body" >
+        <h4 class="card-title mb-4"><%= result.csticker %> - MCDX</h4>
+        <div id="mcdx-chart" style="height:330px"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title mb-4"><%= result.csticker %> - HTS report</h4>
+        <div class="table-responsive">
+              <table id="example" class="table table-hover table-centered table-nowrap mb-0">
+                <tbody>
+                  <tr>
+                    <td><p class="mb-0"><%= (result.SPT[0].DATE).substr(5, 5) %></p></td>
+                    <%  if (result.SPT[0].STATUS=="LONG") {  %>
+                      <td><span class="badge badge-success">Lo</span> @<%= (+result.SPT[0].ENTRY/100).toFixed(2) %></td>
+                      <td class="mb-0 text-right"><%= ((result.all.C-result.SPT[0].ENTRY)/100).toFixed(2) %> (<%= ((result.all.C-result.SPT[0].ENTRY)/result.SPT[0].ENTRY*100).toFixed(1) %>%)</td>
+                      <% } else { %>
+                        <td><span class="badge badge-danger">So</span> @<%= (+result.SPT[0].ENTRY/100).toFixed(2) %></td>
+                        <td class="mb-0 text-right"><%= ((result.SPT[0].ENTRY-result.all.C)/100).toFixed(2) %> (<%= ((result.SPT[0].ENTRY-result.all.C)/result.SPT[0].ENTRY*100).toFixed(1) %>%)</td>
+                      <% } %>  
+                  </tr>                  
+                  <% for(let i=1; i<Math.min(7, result.SPT.length); i++) {%>
+                    <tr>
+                      <td><p class="mb-0 "><%= (result.SPT[i].DATE).substr(5, 5) %></p></td>
+                      <%  if (result.SPT[i].STATUS=="LONG") {  %>
+                        <td><span class="badge badge-success">Lo</span> @<%= (+result.SPT[i].ENTRY/100).toFixed(2) %></td>
+                        <td class="mb-0 text-right"><%= ((result.SPT[i-1].ENTRY-result.SPT[i].ENTRY)/100).toFixed(2) %> (<%= ((result.SPT[i-1].ENTRY-result.SPT[i].ENTRY)/result.SPT[i].ENTRY*100).toFixed(1) %>%)</td>
+                        <% } else { %>
+                          <td><span class="badge badge-danger">So</span> @<%= (+result.SPT[i].ENTRY/100).toFixed(2) %></td>
+                          <td class="mb-0 text-right"><%= ((result.SPT[i].ENTRY-result.SPT[i-1].ENTRY)/100).toFixed(2) %> (<%= ((result.SPT[i].ENTRY-result.SPT[i-1].ENTRY)/result.SPT[i].ENTRY*100).toFixed(1) %>%)</td>
+                        <% } %>  
+                    </tr>
+                  <% } %>            
+                </tbody>
+              </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+<!-- end row -->
+<div class="row">
+  <div class="col-lg-12" id="price-chart">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title mb-4">jshdjas</h4>
+        <div id="price-daily" style="height:480px; width: 100%;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- row 4 -->
+
+<div class="row">
+  <div class="col-lg-12">  
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">CW</h4>
+        <div class="table-responsive">
+          <table class="table table-striped ">
+            <thead class="text-center">
+              <th>Ticker</th>
+              <th>Day left</th>
+              <th>CW status</th>
+              <th>P/L</th>
+              <th>BS price</th>
+              <th>IV</th>
+              <th>IV ATM</th>
+            </thead>
+            <tbody>
+                      
+              <% for(let i=0; i< result.underlying.length; i++) {%>
+                <tr class="text-center">
+                  <td><%= result.underlying[i].TICKER %></td>
+                  <td><%= result.underlying[i].DAY_LEFT %></td>
+                  <td><%= result.underlying[i].CW_STATUS %></td>
+                  <td><%= result.underlying[i].PL %>(<%= result.underlying[i].PL_PER %>%)</td>
+                  <td><%= result.underlying[i].BS_CAL %></td>
+                  <td><%= result.underlying[i].IV %></td>
+                  <td><%= result.underlying[i].IV_ATM %></td>
+                  
+                </tr>
+              <% } %>   
+
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    
+</div>
+<div class="row">
+  <div class="col-lg-12">  
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">CW</h4>
+        <div class="table-responsive">
+          <table class="table table-striped ">
+            <thead class="text-center">
+              <th>Ticker</th>
+              <th>Day left</th>
+              <th>CW status</th>
+              <th>P/L</th>
+              <th>BS price</th>
+              <th>IV</th>
+              <th>IV ATM</th>
+            </thead>
+            <tbody>
+                      
+              <% for(let i=0; i< result.issuer.length; i++) {%>
+                <tr class="text-center">
+                  <td><%= result.issuer[i].TICKER %></td>
+                  <td><%= result.issuer[i].DAY_LEFT %></td>
+                  <td><%= result.issuer[i].CW_STATUS %></td>
+                  <td><%= result.issuer[i].PL %>(<%= result.issuer[i].PL_PER %>%)</td>
+                  <td><%= result.issuer[i].BS_CAL %></td>
+                  <td><%= result.issuer[i].IV %></td>
+                  <td><%= result.issuer[i].IV_ATM %></td>
+                  
+                </tr>
+              <% } %>   
+
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    
+</div>
+<div class="row">
+  <div class="col-lg-12">  
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">CW</h4>
+        <div class="table-responsive">
+          <table class="table table-striped ">
+            <thead class="text-center">
+              <th>Ticker</th>
+              <th>Day left</th>
+              <th>CW status</th>
+              <th>P/L</th>
+              <th>BS price</th>
+              <th>IV</th>
+              <th>IV ATM</th>
+            </thead>
+            <tbody>
+                      
+              <% for(let i=0; i< result.lastdate.length; i++) {%>
+                <tr class="text-center">
+                  <td><%= result.lastdate[i].TICKER %></td>
+                  <td><%= result.lastdate[i].DAY_LEFT %></td>
+                  <td><%= result.lastdate[i].CW_STATUS %></td>
+                  <td><%= result.lastdate[i].PL %>(<%= result.lastdate[i].PL_PER %>%)</td>
+                  <td><%= result.lastdate[i].BS_CAL %></td>
+                  <td><%= result.lastdate[i].IV %></td>
+                  <td><%= result.lastdate[i].IV_ATM %></td>
+                  
+                </tr>
+              <% } %>   
+
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+    
+</div>
+
+<!-- end row -->
+<script type="text/javascript">
+  let myChart = echarts.init(document.getElementById('mcdx-chart'));
+  let option = <%- JSON.stringify(result.data1 || null) %>;
+
+  myChart.setOption(option, true);  
+
+  let myChart1 = echarts.init(document.getElementById('price-daily'));
+  option = <%- JSON.stringify(result.data2 || null) %>;
+  myChart1.setOption(option, true);
+
+
+
+</script>
+<%- contentFor('FooterJs') %>
+<!-- Peity chart-->
+<script src="../public/libs/peity/jquery.peity.min.js"></script>
+
+<!-- Plugin Js-->
+<script src="../public/libs/chartist/chartist.min.js"></script>
+<script src="../public/libs/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js"></script>
+
+<!--script src="../public/js/pages/dashboard.init.js"></script-->
+<script src="../public/htson/summary.init.js"></script>
+
+<%- contentFor('BottomJs') %>
+<!-- nothing -->
