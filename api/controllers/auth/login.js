@@ -9,24 +9,31 @@ module.exports = {
       required: true
     }
   },
-  fn: async function ({email, password}) {
+  exits: {
+    redirect: {
+      responseType: 'redirect'
+    }
+  },
+  fn: async function (inputs, exits) {
     var userRecord = await User.findOne({
-      email: email.toLowerCase(),
+      email: inputs.email.toLowerCase(),
     });
 
     if(! userRecord) {
       this.req.addFlash('error', 'Email hoặc mật khẩu không đúng');
-      this.res.redirect('back');
+      this.req.addFlash('email', inputs.email);
+      return exits.redirect('back');
     }
 
-    await sails.helpers.passwords.checkPassword(password, userRecord.password)
+    await sails.helpers.passwords.checkPassword(inputs.password, userRecord.password)
     .intercept('incorrect', () => {
       this.req.addFlash('error', 'Email hoặc mật khẩu không đúng');
-      this.res.redirect('back');
+      this.req.addFlash('email', inputs.email);
+      return exits.redirect('back');
     });
 
     delete userRecord.password;
     this.req.session.me = userRecord;
-    this.res.redirect('/');
+    return exits.redirect('/');
   }
 };

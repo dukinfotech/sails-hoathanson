@@ -25,7 +25,6 @@
     <link rel="stylesheet" href="/libs/toastr/toastr.min.css">
     <% thisYear = (new Date).getFullYear() %>
     <body>
-      <div id="flash" data-error="<%= flash.get('error') %>" data-success="<%= flash.get('success') %>"></div>
       <%-body%>
     </body>
 
@@ -34,8 +33,8 @@
     <script src="/libs/toastr/toastr.min.js"></script>
     <%-customScripts%>
     <script>
-      var success = $('#flash').data('success');
-      var error = $('#flash').data('error');
+      var success = $('#flashSuccess').text();
+      var error = $('#flashError').text();
       if (success) { toastr.success(success); }
       if (error) { toastr.error(error); }
     </script>

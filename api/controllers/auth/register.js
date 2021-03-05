@@ -20,20 +20,30 @@ module.exports = {
       protect: true,
     },
   },
-  fn: async function ({email, password, name}) {
-    var newEmail = email.toLowerCase();
+  exits: {
+    redirect: {
+      responseType: 'redirect'
+    }
+  },
+  fn: async function (inputs, exits) {
+    var newEmail = inputs.email.toLowerCase();
     await User.create(_.extend({
-      name: name,
+      name: inputs.name,
       email: newEmail,
-      password: await sails.helpers.passwords.hashPassword(password)
+      password: await sails.helpers.passwords.hashPassword(inputs.password)
     }))
     .intercept('E_UNIQUE', () => {
       this.req.addFlash('error', 'Email đã có người sử dụng');
-      this.res.redirect('back');
+      this.req.addFlash('registerData', JSON.stringify({name: inputs.name, email: inputs.email}));
+      return exits.redirect('back');
+    })
+    .intercept({name:'UsageError'}, ()=> {
+      this.req.addFlash('error', 'Lỗi hệ thống');
+      return exits.redirect('back');
     })
     .fetch();
 
     this.req.addFlash('success', 'Đăng ký thành công');
-    this.res.redirect('login');
+    return exits.redirect('back');
   }
 };

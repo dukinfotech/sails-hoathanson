@@ -1,4 +1,0 @@
-1. Phan biet cach su dung action2 va class thong thuong
-2. chưa xử lý được lỗi khác (invalid dât,...)
-3. Sử dụng hook/helper để xử lý lưu session (req.me)
-4. default layout (Đã fix)
