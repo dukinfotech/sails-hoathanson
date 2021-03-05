@@ -13,6 +13,7 @@ module.exports.routes = {
   'POST /register': { action: 'auth/register' },
   'GET /login': { action: 'auth/show-login' },
   'POST /login': { action: 'auth/login' },
+  'POST /logout': { action: 'auth/logout' },
   // //  ╦ ╦╔═╗╔╗ ╔═╗╔═╗╔═╗╔═╗╔═╗
   // //  ║║║║╣ ╠╩╗╠═╝╠═╣║ ╦║╣ ╚═╗
   // //  ╚╩╝╚═╝╚═╝╩  ╩ ╩╚═╝╚═╝╚═╝
