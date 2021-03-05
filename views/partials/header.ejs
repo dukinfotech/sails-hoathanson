@@ -5,32 +5,54 @@
       <div class="navbar-brand-box">
         <a href="/" class="logo logo-dark">
           <span class="logo-sm">
-            <img src="../public/images/logo.svg" alt="" height="22" />
+            <img src="/images/htson-sm.png" alt="" height="22" />
           </span>
           <span class="logo-lg">
-            <img src="../public/images/htson-dark.png" alt="" height="38" />
+            <img src="/images/htson-dark.png" alt="" height="38" />
           </span>
         </a>
 
         <a href="/" class="logo logo-light">
           <span class="logo-sm">
-            <img src="../public/images/htson-sm.png" alt="" height="30" />
+            <img src="/images/htson-sm.png" alt="" height="18" />
           </span>
           <span class="logo-lg">
-            <img src="../public/images/htson-light.png" alt="" height="38" />
+            <img src="/images/htson-light.png" alt="" height="38" />
           </span>
         </a>
       </div>
 
-
       <button
         type="button"
-        class="btn btn-sm mr-2 font-size-24 d-lg-none header-item waves-effect waves-light"
-        data-toggle="collapse"
-        data-target="#topnav-menu-content"
+        class="btn btn-sm px-3 font-size-24 header-item waves-effect"
+        id="vertical-menu-btn"
       >
         <i class="mdi mdi-menu"></i>
       </button>
+
+      <div class="d-none d-sm-block">
+        <div class="dropdown pt-3 d-inline-block">
+          <a
+            class="btn btn-secondary dropdown-toggle"
+            href="#"
+            role="button"
+            id="dropdownMenuLink"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Create <i class="mdi mdi-chevron-down"></i>
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="d-flex">
@@ -40,9 +62,8 @@
           <input type="text" class="form-control" placeholder="Search..." id="ticker" name="ticker"/>
           <span class="fa fa-search"></span>
         </div>
-      </form>  
-
-
+      </form>
+ 
       <div class="dropdown d-inline-block d-lg-none ml-2">
         <button
           type="button"
@@ -58,8 +79,8 @@
           class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0"
           aria-labelledby="page-header-search-dropdown"
         >
-          <form action="/summary" class="p-3">
-            <div class="form-group m-0">
+        <form action="/summary" class="p-3">
+          <div class="form-group m-0">
               <div class="input-group">
                 <input
                   type="text"
@@ -67,6 +88,7 @@
                   placeholder="Search ..."
                   aria-label="Recipient's username"
                   id="tickerx" name="ticker"
+
                 />
                 <div class="input-group-append">
                   <button class="btn btn-primary" type="submit">
@@ -89,18 +111,17 @@
         >
           <img
             class="mr-2"
-            src="../public/images/flags/us_flag.jpg"
+            src="/images/flags/us_flag.jpg"
             alt="Header Language"
             height="16"
           />
-          English
-          <span class="mdi mdi-chevron-down"></span>
+          English <span class="mdi mdi-chevron-down"></span>
         </button>
         <div class="dropdown-menu dropdown-menu-right">
           <!-- item-->
           <a href="javascript:void(0);" class="dropdown-item notify-item">
             <img
-              src="../public/images/flags/germany_flag.jpg"
+              src="/images/flags/germany_flag.jpg"
               alt="user-image"
               class="mr-1"
               height="12"
@@ -111,7 +132,7 @@
           <!-- item-->
           <a href="javascript:void(0);" class="dropdown-item notify-item">
             <img
-              src="../public/images/flags/italy_flag.jpg"
+              src="/images/flags/italy_flag.jpg"
               alt="user-image"
               class="mr-1"
               height="12"
@@ -122,7 +143,7 @@
           <!-- item-->
           <a href="javascript:void(0);" class="dropdown-item notify-item">
             <img
-              src="../public/images/flags/french_flag.jpg"
+              src="/images/flags/french_flag.jpg"
               alt="user-image"
               class="mr-1"
               height="12"
@@ -133,7 +154,7 @@
           <!-- item-->
           <a href="javascript:void(0);" class="dropdown-item notify-item">
             <img
-              src="../public/images/flags/spain_flag.jpg"
+              src="/images/flags/spain_flag.jpg"
               alt="user-image"
               class="mr-1"
               height="12"
@@ -144,7 +165,7 @@
           <!-- item-->
           <a href="javascript:void(0);" class="dropdown-item notify-item">
             <img
-              src="../public/images/flags/russia_flag.jpg"
+              src="/images/flags/russia_flag.jpg"
               alt="user-image"
               class="mr-1"
               height="12"
@@ -306,7 +327,7 @@
         >
           <img
             class="rounded-circle header-profile-user"
-            src="../public/images/users/user-4.jpg"
+            src="/images/users/user-4.jpg"
             alt="Header Avatar"
           />
         </button>
@@ -334,7 +355,7 @@
             Lock screen</a
           >
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item text-danger" href="./logout"
+          <a class="dropdown-item text-danger" href="#"
             ><i
               class="bx bx-power-off font-size-17 align-middle mr-1 text-danger"
             ></i>
@@ -354,5 +375,3 @@
     </div>
   </div>
 </header>
-
-
