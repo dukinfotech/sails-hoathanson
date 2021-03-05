@@ -9,13 +9,12 @@
  */
 
 module.exports.policies = {
-
-  '*': 'is-logged-in',
-
-  // Bypass the `is-logged-in` policy for:
+  '*': ['is-logged-in', 'set-default-layout'],
+  // URLs below will not run middleware 'is-logged-in' and 'set-default-layout'
   'auth/show-register': true,
   'auth/register': true,
   'auth/show-login': true,
   'auth/login': true,
-  'pages/home': true,
+  // Because conflict between Sails and express-ejs-layout, so set default layout here
+  'pages/*': 'set-default-layout',
 };
