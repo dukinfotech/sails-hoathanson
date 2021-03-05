@@ -9,6 +9,13 @@ File: Main Js File
 
 (function($) {
   "use strict";
+  function hideSidebar() {
+    $("body").addClass("sidebar-enable vertical-collpsed");
+  }
+
+  function showSidebar() {
+    $("body").removeClass("sidebar-enable vertical-collpsed");
+  }
 
   function initMetisMenu() {
     //metis menu
@@ -103,6 +110,7 @@ File: Main Js File
         /* alternative standard method */ !document.mozFullScreenElement &&
         !document.webkitFullscreenElement
       ) {
+        hideSidebar();
         // current working methods
         if (document.documentElement.requestFullscreen) {
           document.documentElement.requestFullscreen();
@@ -114,6 +122,7 @@ File: Main Js File
           );
         }
       } else {
+        showSidebar();
         if (document.cancelFullScreen) {
           document.cancelFullScreen();
         } else if (document.mozCancelFullScreen) {
