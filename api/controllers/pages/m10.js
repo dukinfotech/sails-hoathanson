@@ -1,3 +1,3 @@
 module.exports = async function (req, res) {
-  return res.render('pages/home');
+  return res.render('pages/markets/m10');
 };

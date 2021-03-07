@@ -1,4 +1,5 @@
 module.exports = {
+  tableName: 'users',
   attributes: {
     name: {
       type: 'string',
@@ -22,5 +23,7 @@ module.exports = {
       type: 'boolean',
       defaultsTo: false
     },
+    createdAt: { type: 'number', autoCreatedAt: true, },
+    updatedAt: { type: 'number', autoUpdatedAt: true, },
   },
 };

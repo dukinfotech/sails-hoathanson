@@ -229,8 +229,8 @@ File: Main Js File
     ) {
       $("#dark-mode-switch").prop("checked", false);
       $("#rtl-mode-switch").prop("checked", false);
-      $("#bootstrap-style").attr("href", "css/bootstrap.min.css");
-      $("#app-style").attr("href", "css/app.min.css");
+      $("#bootstrap-style").attr("href", "/css/bootstrap.min.css");
+      $("#app-style").attr("href", "/css/app.min.css");
       sessionStorage.setItem("is_visited", "light-mode-switch");
     } else if (
       $("#dark-mode-switch").prop("checked") == true &&
@@ -238,8 +238,8 @@ File: Main Js File
     ) {
       $("#light-mode-switch").prop("checked", false);
       $("#rtl-mode-switch").prop("checked", false);
-      $("#bootstrap-style").attr("href", "css/bootstrap-dark.min.css");
-      $("#app-style").attr("href", "css/app-dark.min.css");
+      $("#bootstrap-style").attr("href", "/css/bootstrap-dark.min.css");
+      $("#app-style").attr("href", "/css/app-dark.min.css");
       sessionStorage.setItem("is_visited", "dark-mode-switch");
     } else if (
       $("#rtl-mode-switch").prop("checked") == true &&
@@ -247,8 +247,8 @@ File: Main Js File
     ) {
       $("#light-mode-switch").prop("checked", false);
       $("#dark-mode-switch").prop("checked", false);
-      $("#bootstrap-style").attr("href", "css/bootstrap.min.css");
-      $("#app-style").attr("href", "css/app-rtl.min.css");
+      $("#bootstrap-style").attr("href", "/css/bootstrap.min.css");
+      $("#app-style").attr("href", "/css/app-rtl.min.css");
       sessionStorage.setItem("is_visited", "rtl-mode-switch");
     }
   }

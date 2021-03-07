@@ -18,6 +18,8 @@ module.exports.routes = {
   // //  ║║║║╣ ╠╩╗╠═╝╠═╣║ ╦║╣ ╚═╗
   // //  ╚╩╝╚═╝╚═╝╩  ╩ ╩╚═╝╚═╝╚═╝
   'GET /': { action: 'pages/home' },
+  'GET /markets/m10': { action: 'pages/m10' },
+  'GET /api/markets/m10-change': { action: 'markets/m10-change' },
   // 'GET /welcome/:unused?':   { action: 'dashboard/view-welcome' },
 
   // 'GET /faq':                { action:   'view-faq' },
