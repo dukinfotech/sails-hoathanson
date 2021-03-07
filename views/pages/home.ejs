@@ -1,3 +1,85 @@
-<h1>HOME</h1>
-
+<div class="row" id="tables">
+  <div class="col-12 ">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs nav-tabs-custom" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active m10-tab" data-toggle="tab" href="#m10-1-change" role="tab">
+              <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+              <span class="d-none d-sm-block">% change</span> 
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link m10-tab" data-toggle="tab" href="#m10-1-mcdx" role="tab">
+              <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+              <span class="d-none d-sm-block">% MCDX</span> 
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link m10-tab" data-toggle="tab" href="#m10-1-p2vn30" role="tab">
+              <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+              <span class="d-none d-sm-block">P to VN30</span>   
+            </a>
+          </li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content" >
+          <div class="tab-pane active p-3" id="m10-1-change" role="tabpanel">
+          </div>
+          <div class="tab-pane p-3" id="m10-1-mcdx" role="tabpanel" >
+              
+          </div>
+          <div class="tab-pane p-3" id="m10-1-p2vn30" role="tabpanel" >
+              
+          </div>
+      </div>
+  </div>
+  </div>
+</div>
 <%- contentFor('customScripts') %>
+<script>
+  renderTable('m10-1-change');
+  $('.m10-tab').on('click', function () {
+    var _this = $(this);
+    var href = _this.attr('href');
+    var tabName = href.substring(1);
+    if (! _this.hasClass('active')) {
+      renderTable(tabName);
+    }
+  })
+  function renderTable(tabName) {
+    $.ajax({
+      method: 'GET',
+      url: `/api/markets/${tabName}`
+    })
+    .done(function (res) {
+      var maxTableRow = Math.ceil(res.length / 6);
+      var html = '';
+      for (var i = 0; i < maxTableRow; i++) {
+        html += '<tr>';
+          for (var j = 0; j < 6; j++) {
+            if ((i+1) * (j+1) < res.length) {
+              let red = res[maxTableRow*i+j].red;
+              let green = res[maxTableRow*i+j].green;
+              let blue = res[maxTableRow*i+j].blue;
+              html += `<td style="background: rgb(${red}, ${green}, ${blue})">`;
+              html += `<p>${res[maxTableRow*i+j].code}</p><p>${(res[maxTableRow*i+j].criteria).toFixed(2)}%</p>`
+              html += '</td>';
+            }
+          }
+        html += '</tr>';
+      }
+      var tableHtml = `
+        <table class="table table-bordered table-sm mb-0 text-center">
+          <tbody>
+            ${html}
+          </tbody>
+        </table>
+      `;
+      // Timestamp
+      if (res.length > 0) {
+        tableHtml += `<p>${res[0].date} ${res[0].time}</p>`;
+      }
+      $(`#${tabName}`).html(tableHtml);
+    });
+  }
+</script>

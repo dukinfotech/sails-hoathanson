@@ -19,7 +19,9 @@ module.exports.routes = {
   // //  ╚╩╝╚═╝╚═╝╩  ╩ ╩╚═╝╚═╝╚═╝
   'GET /': { action: 'pages/home' },
   'GET /markets/m10': { action: 'pages/m10' },
-  'GET /api/markets/m10-change': { action: 'markets/m10-change' },
+  'GET /api/markets/m10-1-change': { action: 'markets/m10-1/change' },
+  'GET /api/markets/m10-1-mcdx': { action: 'markets/m10-1/mcdx' },
+  'GET /api/markets/m10-1-p2vn30': { action: 'markets/m10-1/p2vn30' },
   // 'GET /welcome/:unused?':   { action: 'dashboard/view-welcome' },
 
   // 'GET /faq':                { action:   'view-faq' },
