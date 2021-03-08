@@ -52,17 +52,18 @@
       url: `/api/markets/${tabName}`
     })
     .done(function (res) {
-      var maxTableRow = Math.ceil(res.length / 6);
+      var unit = tabName == 'm10-1-p2vn30' ? 'p' : '%';
+      var maxTableRow = res.length <= 30 ? Math.ceil(res.length / 6) : 5;
       var html = '';
       for (var i = 0; i < maxTableRow; i++) {
         html += '<tr>';
           for (var j = 0; j < 6; j++) {
-            if ((i+1) * (j+1) < res.length) {
-              let red = res[maxTableRow*i+j].red;
-              let green = res[maxTableRow*i+j].green;
-              let blue = res[maxTableRow*i+j].blue;
+            if (6*i+j < res.length) {
+              let red = res[6*i+j].red;
+              let green = res[6*i+j].green;
+              let blue = res[6*i+j].blue;
               html += `<td style="background: rgb(${red}, ${green}, ${blue})">`;
-              html += `<p>${res[maxTableRow*i+j].code}</p><p>${(res[maxTableRow*i+j].criteria).toFixed(2)}%</p>`
+              html += `<p>${res[6*i+j].code}</p><p>${(res[6*i+j].criteria).toFixed(2)}${unit}</p>`
               html += '</td>';
             }
           }
