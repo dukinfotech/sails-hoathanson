@@ -1,18 +1,6 @@
 module.exports = {
   fn: async function () {
-    // Get data of latest date
-    var sql = `SELECT MAX(date) as date, time, code, criteria1 as criteria, color1 as color
-              FROM index_heatmap GROUP BY date, code
-              ORDER BY criteria1 DESC`;
-    var data = await sails.sendNativeQuery(sql);
-    var dataRows = data.rows;
-
-    dataRows.forEach((row) => {
-      row.blue = (row.color % 65536 ) % 256;
-      row.green = (row.color - row.blue) % 65536 / 256;
-      row.red = (row.color- row.blue - 256 * row.green) / 65536;
-    });
-
+    var dataRows = await Heatmap.getData('criteria1', 'color1');
     return this.res.json(dataRows);
   }
 };
