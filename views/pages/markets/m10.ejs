@@ -1,2 +1,86 @@
-<h1>M10 - 2 Page</h1>
+<div class="row" id="tables">
+  <div class="col-12 ">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs nav-tabs-custom" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active m10-tab" data-toggle="tab" href="#m10-2-change" role="tab">
+              <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+              <span class="d-none d-sm-block">% change</span> 
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link m10-tab" data-toggle="tab" href="#m10-2-mcdx" role="tab">
+              <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+              <span class="d-none d-sm-block">% MCDX</span> 
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link m10-tab" data-toggle="tab" href="#m10-2-p2vn30" role="tab">
+              <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+              <span class="d-none d-sm-block">P to VN30</span>   
+            </a>
+          </li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content" >
+          <div class="tab-pane active p-3" id="m10-2-change" role="tabpanel">
+          </div>
+          <div class="tab-pane p-3" id="m10-2-mcdx" role="tabpanel" >
+              
+          </div>
+          <div class="tab-pane p-3" id="m10-2-p2vn30" role="tabpanel" >
+              
+          </div>
+      </div>
+  </div>
+  </div>
+</div>
 <%- contentFor('customScripts') %>
+<script>
+  renderTable('m10-2-change');
+  $('.m10-tab').on('click', function () {
+    var _this = $(this);
+    var href = _this.attr('href');
+    var tabName = href.substring(1);
+    if (! _this.hasClass('active')) {
+      renderTable(tabName);
+    }
+  })
+  function renderTable(tabName) {
+    $.ajax({
+      method: 'GET',
+      url: `/api/markets/${tabName}`
+    })
+    .done(function (res) {
+      var unit = tabName == 'm10-2-p2vn30' ? 'p' : '%';
+      var maxTableRow = res.length <= 30 ? Math.ceil(res.length / 6) : 5;
+      var html = '';
+      for (var i = 0; i < maxTableRow; i++) {
+        html += '<tr>';
+          for (var j = 0; j < 6; j++) {
+            if (6*i+j < res.length) {
+              let red = res[6*i+j].red;
+              let green = res[6*i+j].green;
+              let blue = res[6*i+j].blue;
+              html += `<td style="background: rgb(${red}, ${green}, ${blue})">`;
+              html += `<p>${res[6*i+j].ticker}</p><p>${res[6*i+j].main}% (${res[6*i+j].mainx})</p>`
+              html += '</td>';
+            }
+          }
+        html += '</tr>';
+      }
+      var tableHtml = `
+        <table class="table table-bordered table-sm mb-0 text-center">
+          <tbody>
+            ${html}
+          </tbody>
+        </table>
+      `;
+      // Timestamp
+      if (res.length > 0) {
+        tableHtml += `<p>${res[0].date} ${res[0].time}</p>`;
+      }
+      $(`#${tabName}`).html(tableHtml);
+    });
+  }
+</script>

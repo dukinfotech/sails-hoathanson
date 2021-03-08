@@ -22,6 +22,9 @@ module.exports.routes = {
   'GET /api/markets/m10-1-change': { action: 'markets/m10-1/change' },
   'GET /api/markets/m10-1-mcdx': { action: 'markets/m10-1/mcdx' },
   'GET /api/markets/m10-1-p2vn30': { action: 'markets/m10-1/p2vn30' },
+  'GET /api/markets/m10-2-change': { action: 'markets/m10-2/change' },
+  'GET /api/markets/m10-2-mcdx': { action: 'markets/m10-2/mcdx' },
+  'GET /api/markets/m10-2-p2vn30': { action: 'markets/m10-2/p2vn30' },
   // 'GET /welcome/:unused?':   { action: 'dashboard/view-welcome' },
 
   // 'GET /faq':                { action:   'view-faq' },
