@@ -45,7 +45,7 @@ module.exports = {
     return this.attachColor(vn30DailyData, isCompareWithMain);
   },
   async getVN30Daily() {
-    var sql = `SELECT mt1.date as date ,mt1.TImex as timex,mt1.TICKER AS ticker, mt1.ROC1 AS roc1, 
+    var sql = `SELECT mt1.date as date, mt1.timex as timex,mt1.TICKER AS ticker, mt1.ROC1 AS roc1, 
                 mt1.A10 AS a10, mt1.PC AS pc, mt1.LC AS lc, mt1.C AS c, 
                 vn30.indexvol, vn30.freefloat, vn30.adjcon, MAX(mt1.id)
               FROM (SELECT * FROM trend_scoreeod WHERE id IN (SELECT MAX(id) FROM trend_scoreeod GROUP BY a10) AND a10 IN (SELECT tickerid FROM vn30)) mt1
@@ -91,5 +91,12 @@ module.exports = {
       }    
     });
     return dataRows;
-  }
+  },
+  async getDateTime() {
+    var sql = `SELECT DATE as date, timex as timex FROM  trend_scoreeod WHERE DATE LIKE (SELECT MAX(DATE) FROM trend_scoreeod) ORDER BY id DESC LIMIT 1;`;
+
+    var data = await sails.sendNativeQuery(sql);
+    var dataRows = data.rows;
+    return dataRows[0];
+  },
 };

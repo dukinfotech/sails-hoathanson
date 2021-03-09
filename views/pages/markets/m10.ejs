@@ -38,6 +38,10 @@
 <%- contentFor('customScripts') %>
 <script>
   renderTable('m10-2-change');
+  var datetime = null;
+  $.get('/api/markets/m10-2-datetime').done(function (res) {
+    datetime = res;
+  });
   $('.m10-tab').on('click', function () {
     var _this = $(this);
     var href = _this.attr('href');
@@ -82,9 +86,9 @@
         </table>
       `;
       // Timestamp
-      if (res.length > 0) {
-        tableHtml += `<p>${res[0].date} ${res[0].timex}</p>`;
-      }
+      var date = new Date(datetime.date);
+      var dateString = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+      tableHtml += `<p>${dateString} ${datetime.timex}</p>`;
       $(`#${tabName}`).html(tableHtml);
     });
   }

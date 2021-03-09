@@ -78,7 +78,9 @@
       `;
       // Timestamp
       if (res.length > 0) {
-        tableHtml += `<p>${res[0].date} ${res[0].time}</p>`;
+        var date = new Date(res[0].date);
+        var dateString = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+        tableHtml += `<p>${dateString} ${res[0].time}</p>`;
       }
       $(`#${tabName}`).html(tableHtml);
     });
