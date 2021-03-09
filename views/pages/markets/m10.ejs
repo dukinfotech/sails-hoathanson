@@ -42,7 +42,7 @@
     var _this = $(this);
     var href = _this.attr('href');
     var tabName = href.substring(1);
-    if (! _this.hasClass('active')) {
+    if (! _this.hasClass('active') && $(`#${tabName}`).children().length == 0) {
       renderTable(tabName);
     }
   })
@@ -52,7 +52,6 @@
       url: `/api/markets/${tabName}`
     })
     .done(function (res) {
-      var unit = tabName == 'm10-2-p2vn30' ? 'p' : '%';
       var maxTableRow = res.length <= 30 ? Math.ceil(res.length / 6) : 5;
       var html = '';
       for (var i = 0; i < maxTableRow; i++) {
@@ -63,7 +62,13 @@
               let green = res[6*i+j].green;
               let blue = res[6*i+j].blue;
               html += `<td style="background: rgb(${red}, ${green}, ${blue})">`;
-              html += `<p>${res[6*i+j].ticker}</p><p>${res[6*i+j].main}% (${res[6*i+j].mainx})</p>`
+              if (tabName === 'm10-2-change') {
+                html += `<p>${res[6*i+j].ticker}</p><p>${res[6*i+j].main}% (${res[6*i+j].mainx}p)</p>`
+              } else if (tabName === 'm10-2-mcdx') {
+                html += `<p>${res[6*i+j].ticker}</p><p>R(${res[6*i+j].mainx}) - G(${res[6*i+j].mainx2})</p>`
+              } else {
+                html += `<p>${res[6*i+j].ticker}</p><p>${res[6*i+j].mainx}p (${res[6*i+j].main}%)</p>`
+              }
               html += '</td>';
             }
           }
@@ -78,7 +83,7 @@
       `;
       // Timestamp
       if (res.length > 0) {
-        tableHtml += `<p>${res[0].date} ${res[0].time}</p>`;
+        tableHtml += `<p>${res[0].date} ${res[0].timex}</p>`;
       }
       $(`#${tabName}`).html(tableHtml);
     });

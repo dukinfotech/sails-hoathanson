@@ -1,6 +1,6 @@
 module.exports = {
   fn: async function () {
-    var dataRows = await M10.getDataM10_1('criteria1', 'color1');
+    var dataRows = await M10.getChangeOrP2VN30Data(false);
     return this.res.json(dataRows);
   }
 };

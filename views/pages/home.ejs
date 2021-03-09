@@ -42,7 +42,7 @@
     var _this = $(this);
     var href = _this.attr('href');
     var tabName = href.substring(1);
-    if (! _this.hasClass('active')) {
+    if (! _this.hasClass('active') && $(`#${tabName}`).children().length == 0) {
       renderTable(tabName);
     }
   })
