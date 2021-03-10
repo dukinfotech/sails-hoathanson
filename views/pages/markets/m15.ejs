@@ -1,0 +1,110 @@
+<table border="0" cellspacing="5" cellpadding="5">
+  <tbody>
+    <tr>
+      <td>Minimum ATV(5):</td>
+      <td><input type="text" id="minAtv5" name="min"></td>
+
+      <td>Maximum ATV(5):</td>
+      <td><input type="text" id="maxAtv5" name="max"></td>
+    </tr>
+  </tbody>
+</table>
+<table class="table table-bordered table-sm mb-0 text-center table-striped" id="dataTable" style="width:100%">
+  <thead>
+    <th>Ticker</th>
+    <th>Signal</th>
+    <th>ATV(5)</th>
+    <th>Hold</th>
+    <th>Entry</th>
+    <th>C</th>
+    <th>ROC</th>
+    <th>ATV</th>
+    <th>TSL</th>
+    <th>GAP</th>
+    <th>P/L</th>
+    <th>S date</th>
+    <th>All</th>
+  </thead>
+  <tbody></tbody>
+</table>
+<%- contentFor('customScripts') %>
+<script src="/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script>
+  var minAtv5 = '';
+  var maxAtv5 = '';
+  var datatable = 
+  $('#dataTable').DataTable({
+    "processing": true,
+    "serverSide": true,
+    "aaSorting": [],
+    "ajax": {
+      url: `/api/markets/m15?minAtv5=${minAtv5}&maxAtv5=${maxAtv5}`
+    },
+    bFilter: false,
+    columns: [ 
+      { data : "ticker" },
+      { 
+        data : "_signal", 
+        render: function (data, type) {
+          switch (data) {
+              case 'LONG':
+              return '<span class="badge badge-success">LONG</span>' ;
+                  break;
+              case 'SHORT':
+              return '<span class="badge badge-danger">SHORT</span>' ;
+                  break;
+              case 'HOLDL':
+              return '<span class="badge badge-warning">HOLD</span> <span class="badge badge-success"> L </span>' ;
+                  break;
+              case 'HOLDS':
+              return '<span class="badge badge-warning">HOLD</span> <span class="badge badge-danger"> S </span>' ;
+                  break;
+          }
+        }
+      },
+      {
+        data: 'cv5',
+        render: function (data, type) {
+          return data/100;
+        }
+      },
+      { data: 'daynum' },
+      { data: 'ENTRY' , render: function (data){ return (+data/100).toFixed(2);}},
+      { data: 'C', render: function (data){ return (+data/100).toFixed(2);} },
+      { data: 'roc1' , render: function (data) {  
+          if (+data > 0) {
+            return '<p class="mb-0 text-success">'+(+data/100).toFixed(2)+'%</p>';
+          } 
+          else {
+            return '<p class="mb-0 text-danger">'+(+data/100).toFixed(2)+'%</p>';
+          }
+        }
+      },
+      { data: 'cv' , render: function ( data ) { return (data/10).toFixed(2);} },
+      { data: 'TSL' , render: function (data) { return (+data/100).toFixed(2);} },
+      { data: 'gap' , render: function (data) { return (+data/100).toFixed(2);} },
+      { data: 'pp_l' , render: function (data) { return (+data).toFixed(2) + '%';} },
+      { data: 'signaldate' },
+      { data: 'TOTALSIG' },
+    ]     
+  });
+
+  $('#minAtv5').on('change', function () {
+    minAtv5 = $(this).val();
+    minAtv5 = isNaN(minAtv5) ? '' : 100 * minAtv5;
+    filterDataWithAtv5(minAtv5, maxAtv5);
+  });
+
+  $('#maxAtv5').on('change', function () {
+    maxAtv5 = $(this).val();
+    maxAtv5 = isNaN(maxAtv5) ? '' : 100 * maxAtv5;
+    filterDataWithAtv5(minAtv5, maxAtv5);
+  });
+  function filterDataWithAtv5(minAtv5, maxAtv5) {
+    datatable.ajax.reload();
+  }
+  datatable.on('preXhr', function () {
+    datatable.ajax.url(`/api/markets/m15?minAtv5=${minAtv5}&maxAtv5=${maxAtv5}`);
+} );
+</script>

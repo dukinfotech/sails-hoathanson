@@ -19,4 +19,5 @@ module.exports.policies = {
   'pages/*': 'set-default-layout',
   'markets/m10-1/*': true,
   'markets/m10-2/*': true,
+  'markets/m15': true,
 };
