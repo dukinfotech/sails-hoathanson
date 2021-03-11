@@ -33,6 +33,8 @@ module.exports.routes = {
   'GET /api/markets/m16': { action: 'markets/m16' },
   'GET /markets/m20': { action: 'pages/m20' },
   'GET /api/markets/m20': { action: 'markets/m20' },
+  'GET /markets/m25': { action: 'pages/m25' },
+  'GET /api/markets/m25': { action: 'markets/m25' },
   // 'GET /welcome/:unused?':   { action: 'dashboard/view-welcome' },
 
   // 'GET /faq':                { action:   'view-faq' },
