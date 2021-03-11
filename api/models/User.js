@@ -1,5 +1,6 @@
 module.exports = {
   tableName: 'users',
+  migrate: 'alter',
   attributes: {
     name: {
       type: 'string',
@@ -22,6 +23,14 @@ module.exports = {
     isSuperAdmin: {
       type: 'boolean',
       defaultsTo: false
+    },
+    isActive: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+    watchlist: {
+      collection: 'watchlist',
+      via: 'user_id'
     },
     createdAt: { type: 'number', autoCreatedAt: true, },
     updatedAt: { type: 'number', autoUpdatedAt: true, },

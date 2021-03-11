@@ -1,6 +1,4 @@
 module.exports = {
-  tableName: 'heatmap',
-  migrate: 'safe',
   async getDataM10_1(criteria, color) {
     var sql = `SELECT heatdate AS date, heattime AS time, ticker AS code, ${criteria} AS criteria, ${color} AS color
                 FROM heatmap WHERE id IN (SELECT MAX(id) FROM heatmap WHERE heatdate LIKE ( SELECT MAX(heatdate) FROM heatmap) GROUP BY ticker)

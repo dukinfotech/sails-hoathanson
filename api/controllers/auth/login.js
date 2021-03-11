@@ -17,9 +17,15 @@ module.exports = {
   fn: async function (inputs, exits) {
     var userRecord = await User.findOne({
       email: inputs.email.toLowerCase(),
-    });
+    }).populate('watchlist');
 
     if(! userRecord) {
+      this.req.addFlash('error', 'Email hoặc mật khẩu không đúng');
+      this.req.addFlash('email', inputs.email);
+      return exits.redirect('back');
+    }
+
+    if(! userRecord.isActive) {
       this.req.addFlash('error', 'Email hoặc mật khẩu không đúng');
       this.req.addFlash('email', inputs.email);
       return exits.redirect('back');
