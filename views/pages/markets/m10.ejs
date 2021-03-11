@@ -43,7 +43,6 @@
     var tabName = href.substring(1);
     renderTable(tabName);
   }, 60000);
-  var datetime = null;
   $('.m10-tab').on('click', function () {
     var _this = $(this);
     var href = _this.attr('href');
@@ -54,7 +53,10 @@
   })
   function renderTable(tabName) {
     $.get('/api/markets/m10-2-datetime').done(function (res) {
-      datetime = res;
+      var date = new Date(res.date);
+      var dateString = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+      tableHtml += `<p>${dateString} ${res.timex}</p>`;
+      $(`#${tabName}`).html(tableHtml);
     });
     $.ajax({
       method: 'GET',
@@ -90,11 +92,6 @@
           </tbody>
         </table>
       `;
-      // Timestamp
-      var date = new Date(datetime.date);
-      var dateString = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
-      tableHtml += `<p>${dateString} ${datetime.timex}</p>`;
-      $(`#${tabName}`).html(tableHtml);
     });
   }
 </script>
