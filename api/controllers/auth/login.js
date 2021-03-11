@@ -7,6 +7,9 @@ module.exports = {
     password: {
       type: 'string',
       required: true
+    },
+    redirect: {
+      type: 'string'
     }
   },
   exits: {
@@ -40,6 +43,7 @@ module.exports = {
 
     delete userRecord.password;
     this.req.session.me = userRecord;
-    return exits.redirect('/');
+
+    return inputs.redirect ? exits.redirect(inputs.redirect) : exits.redirect('/');
   }
 };

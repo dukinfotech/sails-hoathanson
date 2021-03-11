@@ -18,8 +18,9 @@ module.exports = async function (req, res, proceed) {
     return proceed();
   }
 
+  var path = req.path;
   //--•
   // Otherwise, this request did not come from a logged-in user.
-  return res.redirect('/login');
+  return res.redirect(`/login?redirect=${path}`);
 
 };
