@@ -52,46 +52,48 @@
     }
   })
   function renderTable(tabName) {
+    var datetimeHTML = '';
     $.get('/api/markets/m10-2-datetime').done(function (res) {
       var date = new Date(res.date);
       var dateString = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
-      tableHtml += `<p>${dateString} ${res.timex}</p>`;
-      $(`#${tabName}`).html(tableHtml);
-    });
-    $.ajax({
-      method: 'GET',
-      url: `/api/markets/${tabName}`
-    })
-    .done(function (res) {
-      var maxTableRow = res.length <= 30 ? Math.ceil(res.length / 6) : 5;
-      var html = '';
-      for (var i = 0; i < maxTableRow; i++) {
-        html += '<tr>';
-          for (var j = 0; j < 6; j++) {
-            if (6*i+j < res.length) {
-              let red = res[6*i+j].red;
-              let green = res[6*i+j].green;
-              let blue = res[6*i+j].blue;
-              html += `<td style="background: rgb(${red}, ${green}, ${blue})">`;
-              if (tabName === 'm10-2-change') {
-                html += `<p>${res[6*i+j].ticker}</p><p>${res[6*i+j].main}% (${res[6*i+j].mainx}p)</p>`
-              } else if (tabName === 'm10-2-mcdx') {
-                html += `<p>${res[6*i+j].ticker}</p><p>R(${res[6*i+j].mainx}) - G(${res[6*i+j].mainx2})</p>`
-              } else {
-                html += `<p>${res[6*i+j].ticker}</p><p>${res[6*i+j].mainx}p (${res[6*i+j].main}%)</p>`
+      datetimeHTML += `<p>${dateString} ${res.timex}</p>`;
+      $.ajax({
+        method: 'GET',
+        url: `/api/markets/${tabName}`
+      })
+      .done(function (res) {
+        var maxTableRow = res.length <= 30 ? Math.ceil(res.length / 6) : 5;
+        var html = '';
+        for (var i = 0; i < maxTableRow; i++) {
+          html += '<tr>';
+            for (var j = 0; j < 6; j++) {
+              if (6*i+j < res.length) {
+                let red = res[6*i+j].red;
+                let green = res[6*i+j].green;
+                let blue = res[6*i+j].blue;
+                html += `<td style="background: rgb(${red}, ${green}, ${blue})">`;
+                if (tabName === 'm10-2-change') {
+                  html += `<p>${res[6*i+j].ticker}</p><p>${res[6*i+j].main}% (${res[6*i+j].mainx}p)</p>`
+                } else if (tabName === 'm10-2-mcdx') {
+                  html += `<p>${res[6*i+j].ticker}</p><p>R(${res[6*i+j].mainx}) - G(${res[6*i+j].mainx2})</p>`
+                } else {
+                  html += `<p>${res[6*i+j].ticker}</p><p>${res[6*i+j].mainx}p (${res[6*i+j].main}%)</p>`
+                }
+                html += '</td>';
               }
-              html += '</td>';
             }
-          }
-        html += '</tr>';
-      }
-      var tableHtml = `
-        <table class="table table-bordered table-sm mb-0 text-center">
-          <tbody>
-            ${html}
-          </tbody>
-        </table>
-      `;
+          html += '</tr>';
+        }
+        var tableHtml = `
+          <table class="table table-bordered table-sm mb-0 text-center">
+            <tbody>
+              ${html}
+            </tbody>
+          </table>
+          ${datetimeHTML}
+        `;
+        $(`#${tabName}`).html(tableHtml);
+      });
     });
   }
 </script>
