@@ -26,4 +26,5 @@ module.exports.policies = {
   'markets/m20': true,
   'markets/m30': true,
   'markets/m35': true,
+  'markets/m50': true,
 };
