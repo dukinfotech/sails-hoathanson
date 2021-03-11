@@ -38,11 +38,16 @@
 <%- contentFor('customScripts') %>
 <script>
   renderTable('m10-1-change');
+  setInterval(() => {
+    var href = $('.m10-tab.active').attr('href');
+    var tabName = href.substring(1);
+    renderTable(tabName);
+  }, 60000);
   $('.m10-tab').on('click', function () {
     var _this = $(this);
     var href = _this.attr('href');
     var tabName = href.substring(1);
-    if (! _this.hasClass('active') && $(`#${tabName}`).children().length == 0) {
+    if (! _this.hasClass('active')) {
       renderTable(tabName);
     }
   })

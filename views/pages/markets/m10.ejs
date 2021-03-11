@@ -38,19 +38,24 @@
 <%- contentFor('customScripts') %>
 <script>
   renderTable('m10-2-change');
+  setInterval(() => {
+    var href = $('.m10-tab.active').attr('href');
+    var tabName = href.substring(1);
+    renderTable(tabName);
+  }, 60000);
   var datetime = null;
-  $.get('/api/markets/m10-2-datetime').done(function (res) {
-    datetime = res;
-  });
   $('.m10-tab').on('click', function () {
     var _this = $(this);
     var href = _this.attr('href');
     var tabName = href.substring(1);
-    if (! _this.hasClass('active') && $(`#${tabName}`).children().length == 0) {
+    if (! _this.hasClass('active')) {
       renderTable(tabName);
     }
   })
   function renderTable(tabName) {
+    $.get('/api/markets/m10-2-datetime').done(function (res) {
+      datetime = res;
+    });
     $.ajax({
       method: 'GET',
       url: `/api/markets/${tabName}`
