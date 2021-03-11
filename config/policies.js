@@ -18,9 +18,10 @@ module.exports.policies = {
   // Because conflict between Sails and express-ejs-layout, so set default layout here
   'pages/*': 'set-default-layout',
   'pages/m16': ['is-logged-in', 'set-default-layout'],
-  'pages/m20': ['is-logged-in', 'set-default-layout'],
   'pages/m25': ['is-logged-in', 'set-default-layout'],
   'markets/m10-1/*': true,
   'markets/m10-2/*': true,
   'markets/m15': true,
+  'markets/m20': true,
+  'markets/m30': true,
 };
