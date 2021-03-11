@@ -1,0 +1,183 @@
+<table class="table table-bordered table-sm mb-0 text-center table-striped" id="dataTable" style="width:100%">
+  <thead>
+    <th>Date</th>
+    <th>Ticker</th>
+    <th>ATV(5)</th>
+    <th>LSignal</th>
+    <th>From</th>
+    <th>Entry</th>
+    <th>TSL</th>
+    <th>GAP</th>                                  
+    <th>C%</th>
+    <th>V%</th>
+    <th>Candlea</th>
+    <th>Candle</th>
+
+    <th>Patterna</th>
+    <th>Pattern</th>                                  
+    <th>wCandlea</th>
+    <th>wCandle</th>
+
+    <th>wPatterna</th>
+    <th>wPattern</th>
+    <th>SSignal</th>
+    <th>From</th>
+    <th>Entry</th>
+    <th>TSL</th>
+    <th>P/L</th>
+  </thead>
+  <tbody></tbody>
+</table>
+<%- contentFor('customScripts') %>
+<script src="/js/market.js"></script>
+<script>
+  var datatable = 
+  $('#dataTable').DataTable({
+    aaSorting: [],
+    ajax: `/api/markets/m51`,
+    pageLength: 15,
+    bLengthChange: false,
+    scrollX: true,
+    scrollCollapse: true,
+    dom: 'Bfrtip',
+    buttons: ['copy', 'excel', 'csv', 'pdf', 'print'],
+    columns: [
+      { data: 'DATE' },
+      { data: 'TICKER', render: function(data) {return '<a href="/summary?ticker='+data+'" target="_blank">'+data+'</a>'; }},
+      { data: 'CV5', render: function ( data ) { return (data/10).toFixed(2); }},
+      { data: 'STATUS',
+        render: function(data) {
+          switch (data) {
+            case 'LONG':
+            return '<span class="badge badge-success"> LONG </span>' ;
+                break;
+            case 'SHORT':
+            return '<span class="badge badge-danger">SHORT</span>' ;
+                break;
+            case 'HOLDL':
+            return '<span class="badge badge-warning">HOLD</span> <span class="badge badge-success"> L </span>' ;
+                break;
+            case 'HOLDS':
+            return '<span class="badge badge-warning">HOLD</span> <span class="badge badge-danger"> S </span>' ;
+                break;
+          }
+        }
+      },    
+      { data: 'SFROM', render: function ( data ) { return (data/24).toFixed(0); }},
+      { data: 'ENTRY', render: function (data) { return (+data/100).toFixed(2); }},
+      { data: 'TSL', render: function (data) { return (+data/100).toFixed(2); }},
+      { data: 'gap', render: function ( data, type, row ){ return (+data/row.TSL*100).toFixed(2)+'%'; }},
+      { data: 'ROC1', render: function (data) {
+        if (+data > 0) {
+          return '<p class="mb-0 text-success">'+(+data/100).toFixed(2)+'%</p>';
+        } else {
+          return '<p class="mb-0 text-danger">'+(+data/100).toFixed(2)+'%</p>';
+        }
+      }},
+      { data: 'ROCV1', render: function (data) { return (+data/100).toFixed(2)+'%'; }},
+      { data: 'CANDLE' },
+      { data: 'CDRANK' },
+      { data: 'PATTERN' },
+      { data: 'PDIRECTION' },
+      { data: 'wCANDLE' },
+      { data: 'wCDRANK' },
+      { data: 'wPATTERN' },
+      { data: 'wPD' },
+      { data: '_signal',
+        render: function(data) {
+          switch (data) {
+            case 'LONG':
+            return '<span class="badge badge-success"> LONG </span>' ;
+                break;
+            case 'SHORT':
+            return '<span class="badge badge-danger">SHORT</span>' ;
+                break;
+            case 'HOLDL':
+            return '<span class="badge badge-warning">HOLD</span> <span class="badge badge-success"> L </span>' ;
+                break;
+            case 'HOLDS':
+            return '<span class="badge badge-warning">HOLD</span> <span class="badge badge-danger"> S </span>' ;
+                break;
+          }
+        }
+      },
+      { data: 'daynum' },
+      { data: 'iENTRY', render: function (data) { return (+data/100).toFixed(2); }},
+      { data: 'iTSL', render: function (data){ return (+data/100).toFixed(2); }},
+      { data: 'pp_l', render: function (data){ return (+data).toFixed(2)+'%'; }},
+    ],
+    columnDefs: [
+    {
+      "render": function ( data, type, row ) {
+        if (+data > 0) {
+          return '<p class="mb-0 text-success data-toggle="tooltip" data-placement="top" title="'+row.CANDLE+'">'+(+data)+'</p>';
+        } else if (+data < 0) {
+          return '<p class="mb-0 text-danger data-toggle="tooltip" data-placement="top" title="'+row.CANDLE+'">'+(+data)+'</p>';
+        } else if (+data==0 && !!row.CANDLE) {
+          return '<p class="mb-0 text-warning">'+data+'</p>';
+        } else {
+          return '<p class="mb-0 text-warning"></p>';
+        }
+      },
+      "targets": [11]
+    },      
+    {
+      "targets":  [10],
+      "visible": false,
+    },
+    {
+      "render": function ( data, type, row ) {
+        if (+data > 0) {
+          return '<p class="mb-0 text-success data-toggle="tooltip" data-placement="top" title="'+row.PATTERN+'">'+(+data)+'</p>';
+        } else if (+data < 0) {
+          return '<p class="mb-0 text-danger data-toggle="tooltip" data-placement="top" title="'+row.PATTERN+'">'+(+data)+'</p>';
+        } else if (+data==0 && !!row.PATTERN) {
+          return '<p class="mb-0 text-warning data-toggle="tooltip" data-placement="top" title="'+row.PATTERN+'">'+(+data)+'</p>';
+        } else {
+          return '<p class="mb-0 text-warning"></p>';
+        }
+      },
+      "targets": [13]
+    },     
+    {
+      "targets":  [12],
+      "visible": false,
+    },
+    {
+      "render": function ( data, type, row ) {
+        if (+data > 0) {
+          return '<p class="mb-0 text-success data-toggle="tooltip" data-placement="top" title="'+row.wCANDLE+'">'+(+data)+'</p>';
+        } else if (+data < 0) {
+          return '<p class="mb-0 text-danger data-toggle="tooltip" data-placement="top" title="'+row.wCANDLE+'">'+(+data)+'</p>';
+        } else if (+data==0&& !! row.wCANDLE) {
+          return '<p class="mb-0 text-warning data-toggle="tooltip" data-placement="top" title="'+row.wCANDLE+'">'+(+data)+'</p>';
+        } else {
+          return '<p class="mb-0 text-warning"></p>';
+        }
+      },
+      "targets": [15]
+    },      
+    {
+      "targets":  [14],
+      "visible": false,
+    },
+    {
+      "render": function ( data, type, row ) {
+        if (+data > 0) {
+          return '<p class="mb-0 text-success data-toggle="tooltip" data-placement="top" title="'+row.wPATTERN+'">'+(+data)+'</p>';
+        } else if (+data < 0) {
+          return '<p class="mb-0 text-danger data-toggle="tooltip" data-placement="top" title="'+row.wPATTERN+'">'+(+data)+'</p>';
+        } else if (+data==0 && !!row.wPATTERN) {
+          return '<p class="mb-0 text-warning data-toggle="tooltip" data-placement="top" title="'+row.wPATTERN+'">'+(+data)+'</p>';
+        } else {
+          return '<p class="mb-0 text-warning"></p>';
+        }
+      },
+      "targets": [17]
+      },      
+    {
+      "targets":  [16],
+      "visible": false,
+    }]
+  });
+</script>

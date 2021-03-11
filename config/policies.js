@@ -20,6 +20,7 @@ module.exports.policies = {
   'pages/m16': ['is-logged-in', 'set-default-layout'],
   'pages/m25': ['is-logged-in', 'set-default-layout'],
   'pages/m31': ['is-logged-in', 'set-default-layout'],
+  'pages/m51': ['is-logged-in', 'set-default-layout'],
   'markets/m10-1/*': true,
   'markets/m10-2/*': true,
   'markets/m15': true,
