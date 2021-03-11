@@ -1,0 +1,56 @@
+<table class="table table-bordered table-sm mb-0 text-center table-striped" id="dataTable" style="width:100%">
+  <thead>
+    <tr>
+      <th rowspan="2">Date</th>
+      <th colspan="2">ATV1</th>
+      <th colspan="2">ATV5</th>
+      <th colspan="2">Daily</th>
+      <th colspan="4"> </th>
+    </tr>
+    <tr>
+        <th>LPi</th>
+        <th>SPi</th>
+        <th>LPi</th>
+        <th>SPi</th>
+        <th>LPday</th>
+        <th>SPday</th>                    
+        <th>Red</th>
+        <th>Yellow</th>
+        <th>Green</th>
+        <th>VIX</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+<%- contentFor('customScripts') %>
+<script src="/js/market.js"></script>
+<script>
+  var datatable = 
+  $('#dataTable').DataTable({
+    aaSorting: [],
+    ajax: `/api/markets/m31`,
+    pageLength: 15,
+    bLengthChange: false,
+    scrollX: true,
+    scrollCollapse: true,
+    dom: 'Bfrtip',
+    buttons: ['copy', 'excel', 'csv', 'pdf', 'print'],
+    columns: [ 
+      { data: 'date' }, 
+      { data: 'L1',render: function (data){ return (+data).toFixed(2)+'%';}},
+      { data: 'S1',render: function (data){ return (+data).toFixed(2)+'%';}},
+      { data: 'L5',render: function (data){ return (+data).toFixed(2)+'%';}},
+      { data: 'S5',render: function (data){ return (+data).toFixed(2)+'%';}}, 
+      { data: 'LE',render: function (data){ return (+data).toFixed(2)+'%';}},
+      { data: 'SE',render: function (data){ return (+data).toFixed(2)+'%';}}, 
+      { data: 'PC5',render: function (data){ return (+data).toFixed(2);}}, 
+      { data: 'FC5',render: function (data){ return (+data).toFixed(2);}},
+      { data: 'LC5',render: function (data){ return (+data).toFixed(2);}},     
+      { data: 'VIX5',render: function (data){ return (+data).toFixed(2);}},
+    ],
+    columnDefs: [
+      { className: "", "targets": [ 5 ] },
+      { className: "", "targets": [ 6 ] }
+    ]
+  });
+</script>
