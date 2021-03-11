@@ -1,0 +1,30 @@
+<table class="table table-bordered table-sm mb-0 text-center table-striped" id="dataTable" style="width:100%">
+  <thead>
+    <th>DATE</th>
+    <th>TICKER</th>
+    <th>SIGNAL</th>
+    <th>%</th>
+  </thead>
+  <tbody></tbody>
+</table>
+<%- contentFor('customScripts') %>
+<script src="/js/market.js"></script>
+<script>
+  var datatable = 
+  $('#dataTable').DataTable({
+    aaSorting: [],
+    ajax: `/api/markets/m35`,
+    pageLength: 15,
+    bLengthChange: false,
+    scrollX: true,
+    scrollCollapse: true,
+    dom: 'Bfrtip',
+    buttons: ['copy', 'excel', 'csv', 'pdf', 'print'],
+    columns: [ 
+    { data: 'DATE' },
+    { data: 'TICKER' },
+    { data: 'xstatus' },
+    { data: 'percentage' , render: function (data){ return (+data).toFixed(2)+'%';}},
+    ]
+  });
+</script>
