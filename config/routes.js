@@ -45,6 +45,10 @@ module.exports.routes = {
   'GET /api/markets/m50': { action: 'markets/m50' },
   'GET /markets/m51': { action: 'pages/m51' },
   'GET /api/markets/m51': { action: 'markets/m51' },
+  'GET /markets/m51': { action: 'pages/m51' },
+  'GET /api/markets/m51': { action: 'markets/m51' },
+  'GET /markets/m15-extra/:extra': { action: 'pages/m15-extra'},
+  'GET /api/markets/m15-extra/:extra': { action: 'markets/m15-extra'},
   // 'GET /welcome/:unused?':   { action: 'dashboard/view-welcome' },
 
   // 'GET /faq':                { action:   'view-faq' },

@@ -16,11 +16,14 @@ module.exports.policies = {
   'auth/show-login': true,
   'auth/login': true,
   // Because conflict between Sails and express-ejs-layout, so set default layout here
+  // ACL for pages require login
   'pages/*': 'set-default-layout',
   'pages/m16': ['is-logged-in', 'set-default-layout'],
   'pages/m25': ['is-logged-in', 'set-default-layout'],
   'pages/m31': ['is-logged-in', 'set-default-layout'],
   'pages/m51': ['is-logged-in', 'set-default-layout'],
+  'pages/m15-extra': ['is-logged-in', 'set-default-layout'],
+  // ACL for API not require login
   'markets/m10-1/*': true,
   'markets/m10-2/*': true,
   'markets/m15': true,

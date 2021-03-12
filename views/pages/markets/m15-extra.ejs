@@ -1,0 +1,91 @@
+<table border="0" cellspacing="5" cellpadding="5">
+  <tbody>
+    <tr>
+      <td>Minimum ATV(5):</td>
+      <td><input type="text" id="minAtv5" name="min"></td>
+
+      <td>Maximum ATV(5):</td>
+      <td><input type="text" id="maxAtv5" name="max"></td>
+    </tr>
+  </tbody>
+</table>
+<table class="table table-bordered table-sm mb-0 text-center table-striped" id="dataTable" style="width:100%">
+  <thead>
+    <th>Ticker</th>
+    <th>Signal</th>
+    <th>ATV(5)</th>
+    <th>Hold</th>
+    <th>Entry</th>
+    <th>C</th>
+    <th>ROC</th>
+    <th>ATV</th>
+    <th>TSL</th>
+    <th>GAP</th>
+    <th>P/L</th>
+    <th>S date</th>
+    <th>All</th>
+  </thead>
+  <tbody></tbody>
+</table>
+<%- contentFor('customScripts') %>
+<script src="/js/market.js"></script>
+<script>
+  var pathName = window.location.pathname;
+  var datatable = 
+  $('#dataTable').DataTable({
+    aaSorting: [],
+    ajax: `/api${pathName}`,
+    pageLength: 15,
+    bLengthChange: false,
+    scrollX: true,
+    scrollCollapse: true,
+    dom: 'Bfrtip',
+    buttons: ['copy', 'excel', 'csv', 'pdf', 'print'],
+    columns: [ 
+      { data : "ticker" },
+      { 
+        data : "_signal", 
+        render: function (data, type) {
+          switch (data) {
+              case 'LONG':
+              return '<span class="badge badge-success">LONG</span>' ;
+                  break;
+              case 'SHORT':
+              return '<span class="badge badge-danger">SHORT</span>' ;
+                  break;
+              case 'HOLDL':
+              return '<span class="badge badge-warning">HOLD</span> <span class="badge badge-success"> L </span>' ;
+                  break;
+              case 'HOLDS':
+              return '<span class="badge badge-warning">HOLD</span> <span class="badge badge-danger"> S </span>' ;
+                  break;
+          }
+        }
+      },
+      {
+        data: 'cv5',
+        render: function (data, type) {
+          return (data/10).toFixed(2);
+        }
+      },
+      { data: 'daynum' },
+      { data: 'ENTRY' , render: function (data){ return (+data/100).toFixed(2);}},
+      { data: 'C', render: function (data){ return (+data/100).toFixed(2);} },
+      { data: 'roc1' , render: function (data) {  
+          if (+data > 0) {
+            return '<p class="mb-0 text-success">'+(+data/100).toFixed(2)+'%</p>';
+          } 
+          else {
+            return '<p class="mb-0 text-danger">'+(+data/100).toFixed(2)+'%</p>';
+          }
+        }
+      },
+      { data: 'cv' , render: function ( data ) { return (data/10).toFixed(2);} },
+      { data: 'TSL' , render: function (data) { return (+data/100).toFixed(2);} },
+      { data: 'gap' , render: function (data) { return (+data/100).toFixed(2);} },
+      { data: 'pp_l' , render: function (data) { return (+data).toFixed(2) + '%';} },
+      { data: 'signaldate' },
+      { data: 'TOTALSIG' },
+    ]     
+  });
+</script>
