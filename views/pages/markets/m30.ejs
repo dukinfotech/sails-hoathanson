@@ -20,7 +20,11 @@
     dom: 'Bfrtip',
     buttons: ['copy', 'excel', 'csv', 'pdf', 'print'],
     columns: [ 
-      { data: 'date' },
+      { data: 'date', render (data) {
+        var date = new Date(data);
+        var dateString = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+        return dateString;
+      }},
       { data: 'L',render: function (data) { return (+data).toFixed(2)+'%';}},
       { data: 'S',render: function (data) { return (+data).toFixed(2)+'%';}},
     ]

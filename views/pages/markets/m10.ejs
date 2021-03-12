@@ -1,37 +1,33 @@
 <div class="row" id="tables">
   <div class="col-12 ">
-      <!-- Nav tabs -->
-      <ul class="nav nav-tabs nav-tabs-custom" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active m10-tab" data-toggle="tab" href="#m10-2-change" role="tab">
-              <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-              <span class="d-none d-sm-block">% change</span> 
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link m10-tab" data-toggle="tab" href="#m10-2-mcdx" role="tab">
-              <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-              <span class="d-none d-sm-block">% MCDX</span> 
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link m10-tab" data-toggle="tab" href="#m10-2-p2vn30" role="tab">
-              <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
-              <span class="d-none d-sm-block">P to VN30</span>   
-            </a>
-          </li>
-      </ul>
-      <!-- Tab panes -->
-      <div class="tab-content" >
-          <div class="tab-pane active p-3" id="m10-2-change" role="tabpanel">
-          </div>
-          <div class="tab-pane p-3" id="m10-2-mcdx" role="tabpanel" >
-              
-          </div>
-          <div class="tab-pane p-3" id="m10-2-p2vn30" role="tabpanel" >
-              
-          </div>
-      </div>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs nav-tabs-custom" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active m10-tab" data-toggle="tab" href="#m10-2-change" role="tab">
+            <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+            <span class="d-none d-sm-block">% change</span> 
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link m10-tab" data-toggle="tab" href="#m10-2-mcdx" role="tab">
+            <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+            <span class="d-none d-sm-block">% MCDX</span> 
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link m10-tab" data-toggle="tab" href="#m10-2-p2vn30" role="tab">
+            <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+            <span class="d-none d-sm-block">P to VN30</span>   
+          </a>
+        </li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content" >
+      <div class="tab-pane active p-3" id="m10-2-change" role="tabpanel"></div>
+      <div class="tab-pane p-3" id="m10-2-mcdx" role="tabpanel"></div>
+      <div class="tab-pane p-3" id="m10-2-p2vn30" role="tabpanel"></div>
+    </div>
+    <div id="datetime" style="margin-left:16px;"></div>
   </div>
   </div>
 </div>
@@ -52,12 +48,14 @@
     }
   })
   function renderTable(tabName) {
-    var datetimeHTML = '';
     $.get('/api/markets/m10-2-datetime').done(function (res) {
       var date = new Date(res.date);
       var dateString = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
-      datetimeHTML += `<p>${dateString} ${res.timex}</p>`;
-      $.ajax({
+      var datetimeHTML = `${dateString} ${res.timex}`;
+      $('#datetime').html(datetimeHTML);
+    });
+
+    $.ajax({
         method: 'GET',
         url: `/api/markets/${tabName}`
       })
@@ -90,10 +88,8 @@
               ${html}
             </tbody>
           </table>
-          ${datetimeHTML}
         `;
         $(`#${tabName}`).html(tableHtml);
       });
-    });
   }
 </script>

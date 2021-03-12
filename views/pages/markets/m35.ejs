@@ -21,10 +21,14 @@
     dom: 'Bfrtip',
     buttons: ['copy', 'excel', 'csv', 'pdf', 'print'],
     columns: [ 
-    { data: 'DATE' },
-    { data: 'TICKER' },
-    { data: 'xstatus' },
-    { data: 'percentage' , render: function (data){ return (+data).toFixed(2)+'%';}},
+      { data: 'DATE', render (data) {
+          var date = new Date(data);
+          var dateString = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+          return dateString;
+        }},
+      { data: 'TICKER' },
+      { data: 'xstatus' },
+      { data: 'percentage' , render: function (data){ return (+data).toFixed(2)+'%';}},
     ]
   });
 </script>

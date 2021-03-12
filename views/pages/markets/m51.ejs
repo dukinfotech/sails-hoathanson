@@ -42,7 +42,11 @@
     dom: 'Bfrtip',
     buttons: ['copy', 'excel', 'csv', 'pdf', 'print'],
     columns: [
-      { data: 'DATE' },
+      { data: 'DATE', render (data) {
+        var date = new Date(data);
+        var dateString = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+        return dateString;
+      }},
       { data: 'TICKER', render: function(data) {return '<a href="/summary?ticker='+data+'" target="_blank">'+data+'</a>'; }},
       { data: 'CV5', render: function ( data ) { return (data/10).toFixed(2); }},
       { data: 'STATUS',

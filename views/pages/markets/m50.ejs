@@ -52,10 +52,52 @@
     dom: 'Bfrtip',
     buttons: ['copy', 'excel', 'csv', 'pdf', 'print'],
     columns: [ 
-    { data: 'DATE' },
-    { data: 'TICKER' },
-    { data: 'CV5' , render: function ( data ) { return (data/10).toFixed(2); }},
-    { data: 'STATUS' ,
+      { data: 'DATE', width: '100%', render (data) {
+          var date = new Date(data);
+          var dateString = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+          return dateString;
+        }},
+      { data: 'TICKER' },
+      { data: 'CV5' , render: function ( data ) { return (data/10).toFixed(2); }},
+      { data: 'STATUS' ,
+          render: function(data) {
+            switch (data) {
+              case 'LONG':
+              return '<span class="badge badge-success"> LONG </span>' ;
+                  break;
+              case 'SHORT':
+              return '<span class="badge badge-danger">SHORT</span>' ;
+                  break;
+              case 'HOLDL':
+              return '<span class="badge badge-warning">HOLD</span> <span class="badge badge-success"> L </span>' ;
+                  break;
+              case 'HOLDS':
+              return '<span class="badge badge-warning">HOLD</span> <span class="badge badge-danger"> S </span>' ;
+                  break;
+            }
+          }
+      },    
+      { data: 'SFROM', render: function (data) { return (data/24).toFixed(0); }},
+      { data: 'ENTRY', render: function (data) { return (+data/100).toFixed(2); }},
+      { data: 'TSL', render: function (data) { return (+data/100).toFixed(2); }},
+      { data: 'gap', render: function (data) { return (+data/100).toFixed(2); }},
+      { data: 'ROC1', render: function (data) {  
+        if (+data > 0) {
+          return '<p class="mb-0 text-success">'+(+data/100).toFixed(2)+'%</p>';
+        } else {
+          return '<p class="mb-0 text-danger">'+(+data/100).toFixed(2)+'%</p>';
+        }
+      }},
+      { data: 'ROCV1', render: function (data) { return (+data/100).toFixed(2)+'%'; }},
+      { data: 'CANDLE' },
+      { data: 'CDRANK' },     
+      { data: 'PATTERN' },
+      { data: 'PDIRECTION' },   
+      { data: 'wCANDLE' },
+      { data: 'wCDRANK' },   
+      { data: 'wPATTERN' },
+      { data: 'wPD' },
+      { data: '_signal',
         render: function(data) {
           switch (data) {
             case 'LONG':
@@ -72,49 +114,11 @@
                 break;
           }
         }
-    },    
-    { data: 'SFROM', render: function (data) { return (data/24).toFixed(0); }},
-    { data: 'ENTRY', render: function (data) { return (+data/100).toFixed(2); }},
-    { data: 'TSL', render: function (data) { return (+data/100).toFixed(2); }},
-    { data: 'gap', render: function (data) { return (+data/100).toFixed(2); }},
-    { data: 'ROC1', render: function (data) {  
-      if (+data > 0) {
-        return '<p class="mb-0 text-success">'+(+data/100).toFixed(2)+'%</p>';
-      } else {
-        return '<p class="mb-0 text-danger">'+(+data/100).toFixed(2)+'%</p>';
-      }
-    }},
-    { data: 'ROCV1', render: function (data) { return (+data/100).toFixed(2)+'%'; }},
-    { data: 'CANDLE' },
-    { data: 'CDRANK' },     
-    { data: 'PATTERN' },
-    { data: 'PDIRECTION' },   
-    { data: 'wCANDLE' },
-    { data: 'wCDRANK' },   
-    { data: 'wPATTERN' },
-    { data: 'wPD' },
-    { data: '_signal',
-      render: function(data) {
-        switch (data) {
-          case 'LONG':
-          return '<span class="badge badge-success"> LONG </span>' ;
-              break;
-          case 'SHORT':
-          return '<span class="badge badge-danger">SHORT</span>' ;
-              break;
-          case 'HOLDL':
-          return '<span class="badge badge-warning">HOLD</span> <span class="badge badge-success"> L </span>' ;
-              break;
-          case 'HOLDS':
-          return '<span class="badge badge-warning">HOLD</span> <span class="badge badge-danger"> S </span>' ;
-              break;
-        }
-      }
-    },
-    { data: 'daynum' },
-    { data: 'iENTRY' , render: function (data){ return (+data/100).toFixed(2);}},
-    { data: 'iTSL' , render: function (data){ return (+data/100).toFixed(2);} },
-    { data: 'pp_l' , render: function (data){ return (+data).toFixed(2)+'%';} },
+      },
+      { data: 'daynum' },
+      { data: 'iENTRY' , render: function (data){ return (+data/100).toFixed(2);}},
+      { data: 'iTSL' , render: function (data){ return (+data/100).toFixed(2);} },
+      { data: 'pp_l' , render: function (data){ return (+data).toFixed(2)+'%';} },
     ],
     columnDefs: [
       {

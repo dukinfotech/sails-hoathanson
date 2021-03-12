@@ -36,7 +36,11 @@
     dom: 'Bfrtip',
     buttons: ['copy', 'excel', 'csv', 'pdf', 'print'],
     columns: [ 
-      { data: 'date' }, 
+      { data: 'date', render (data) {
+        var date = new Date(data);
+        var dateString = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+        return dateString;
+      }},
       { data: 'L1',render: function (data){ return (+data).toFixed(2)+'%';}},
       { data: 'S1',render: function (data){ return (+data).toFixed(2)+'%';}},
       { data: 'L5',render: function (data){ return (+data).toFixed(2)+'%';}},
