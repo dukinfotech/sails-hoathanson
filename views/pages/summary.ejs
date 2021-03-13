@@ -1,0 +1,496 @@
+<%- contentFor('breadcrumb') %>
+
+
+    <div class="row">
+
+      <div class="col-lg-9">
+            <h4 class="font-size-18"><%= result.title %> - <%= result.fa.FULLNAME %> </h4>
+        </div>
+      <div class="col-lg-3 ">
+        <%  if (result.flag=="-1") {  %>
+          <form method="POST" action="/addtowl?fl=1&ticker=<%= result.title %>">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" class="btn btn-outline-primary waves-effect waves-light float-right" formmethod="post">Favorite</button>
+          </form>
+          <% } else { %>
+          <form method="POST" action="/addtowl?fl=0&ticker=<%= result.title %>">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" class="btn btn-outline-success waves-effect float-right" formmethod="post">Unfavorite</button>
+          </form>
+          <% } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-9">
+
+    <a href="<%= u %>" target="_blank">Cafef</a>
+    
+  </div>
+</div>
+
+
+<%- contentFor('body') %>
+
+<!-- row 1 -->
+<div class="row">
+  <!-- close -->
+  <div class="col-xl-3 col-md-6">
+    <div class="card mini-stat bg-primary text-white">
+      <div class="card-body">
+        <div id="refresh0">
+        <div class="mb-4">
+          <div class="float-left mini-stat-img mr-4">
+            <img src="public/images/services-icon/01.png" alt="" />
+          </div>
+          <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Close          </h5>
+          <h5 class="font-weight-medium font-size-20">
+            <%= result.all.C/100 %> <i class="mdi mdi-arrow-<%= result.indicator[0].sig %> text-<%= result.indicator[0].color %> ml-2"></i>
+          </h5>
+          <p class="mb-0 float-right"></p>
+          <div class="mini-stat-label bg-<%= result.indicator[0].color %>">
+            <p class="mb-0"><%= result.indicator[0].value %></p>
+          </div>
+        </div>
+        <div class="pt-2">
+          <div class="float-right">
+            <a href="#price-chart" class="text-white-50"
+              ><i class="mdi mdi-arrow-right h5"></i
+            ></a>
+          </div>
+          <p class="text-white-50 mb-0 mt-1">52W H: <%= (+result.all.H52W/100).toFixed(2) %> - L: <%= (+result.all.L52W/100).toFixed(2) %></p>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- spt -->
+  <div class="col-xl-3 col-md-6">
+    <div class="card mini-stat bg-primary text-white">
+      <div class="card-body">
+        <div id="refresh1">
+        <div class="mb-4">
+          <div class="float-left mini-stat-img mr-4">
+            <img src="public/images/services-icon/02.png" alt="" />
+          </div>
+          <h5 class="font-size-16 text-uppercase mt-0 text-white-50">
+            <%= result.indicator[1].name %>
+          </h5>
+          <h5 class="font-weight-medium font-size-20">
+            TSL: <%= result.indicator[1].text %>
+            <!--i class="mdi mdi-arrow-<%= result.indicator[1].sig %> text-<%= result.indicator[1].color %> ml-2"></i-->
+          </h5>
+          <div class="mini-stat-label bg-<%= result.indicator[1].color %>">
+            <p class="mb-0">@ <%= result.indicator[1].sig %></p>
+          </div>
+        </div>
+        <div class="pt-2">
+          <div class="float-right">
+            <a href="/market15" class="text-white-50"
+              ><i class="mdi mdi-arrow-right h5"></i
+            ></a>
+          </div>
+          <p class="text-white-50 mb-0 mt-1">PL: <%= result.indicator[1].value %> (<%= (result.indicator[1].value/result.indicator[1].sig*100).toFixed(1) %>%) - Since <%= (result.sptday/24).toFixed(0) %> days ago</p>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- vnidex -->
+  <div class="col-xl-3 col-md-6">
+    <div class="card mini-stat bg-primary text-white">
+      <div class="card-body">
+        <div id="refresh2">
+        <div class="mb-4">
+          <div class="float-left mini-stat-img mr-4">
+            <img src="public/images/services-icon/03.png" alt="" />
+          </div>
+          <h5 class="font-size-16 text-uppercase mt-0 text-white-50">
+            <%= result.indicator[2].name %>
+          </h5>
+          <h5 class="font-weight-medium font-size-20">
+            <%= result.indicator[2].text %> <i class="mdi mdi-arrow-<%= result.indicator[2].sig %> text-<%= result.indicator[2].color %> ml-2"></i>
+          </h5>
+          <div class="mini-stat-label bg-<%= result.indicator[2].color %>">
+            <p class="mb-0"><%= result.indicator[2].value %> %</p>
+          </div>
+        </div>
+        <div class="pt-2">
+          <div class="float-right">
+            <a href="/market30" class="text-white-50"
+              ><i class="mdi mdi-arrow-right h5"></i
+            ></a>
+          </div>
+          <p class="text-white-50 mb-0 mt-1">LP: <%= (+result.lsp.L).toFixed(2) %>% (<%= (+result.lspx.L) %>) - SP: <%= (+result.lsp.S).toFixed(2) %>% (<%= (+result.lspx.S) %>)</p>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- hnxindex -->
+  <div class="col-xl-3 col-md-6">
+    <div class="card mini-stat bg-primary text-white">
+      <div class="card-body">
+        <div id="refresh3">
+        <div class="mb-4">
+          <div class="float-left mini-stat-img mr-4">
+            <img src="public/images/services-icon/04.png" alt="" />
+          </div>
+          <h5 class="font-size-16 text-uppercase mt-0 text-white-50">
+            <%= result.indicator[3].name %>
+          </h5>
+          <h5 class="font-weight-medium font-size-20">
+            TSL: <%= result.indicator[3].text %>
+            <!--i class="mdi mdi-arrow-<%= result.indicator[1].sig %> text-<%= result.indicator[1].color %> ml-2"></i-->
+          </h5>
+          <div class="mini-stat-label bg-<%= result.indicator[3].color %>">
+            <p class="mb-0">@ <%= result.indicator[3].sig %></p>
+          </div>
+        </div>
+        <div class="pt-2">
+          <div class="float-right">
+            <a href="/market15" class="text-white-50"
+              ><i class="mdi mdi-arrow-right h5"></i
+            ></a>
+          </div>
+          <p class="text-white-50 mb-0 mt-1">PL: <%= result.indicator[3].value %> (<%= (result.indicator[3].value/result.indicator[3].sig*100).toFixed(1) %>%) - Since <%= (result.vn30sptday/24).toFixed(0) %> days ago</p>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- end row -->
+<!-- row 2 -->
+<div class="row">
+  <!-- MCDX chart -->
+  <div class="col-lg-9">
+    <div class="card">
+      <div class="card-body" >
+        <h4 class="card-title mb-4">MCDX</h4>
+        <div id="mcdx-chart" style="height:330px"></div>
+      </div>
+    </div>
+  </div>
+  <!-- FA table -->
+  <div class="col-xl-3">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title mb-4">FA information</h4>
+        <div class="table-responsive">
+          <table id="fa-info" class="table table-hover table-centered table-nowrap mb-0">
+            <tbody>
+              <tr>
+                <td>P/E:</td>
+                <td><%= (result.all.C/100/result.fa.EPS).toFixed(2) %></td>
+                  <% if (result.all.C/result.fa.EPS<0.9*result.farange.ape) { %>
+                    <td><span class="badge badge-danger">Lo</span></td>
+                    <% } else { if (result.all.C/result.fa.EPS>1.1*result.farange.ape) {  %>
+                      <td><span class="badge badge-success">Hi</span></td>
+                      <% } else { %>
+                        <td><span class="badge badge-warning">No</span></td>
+                      <% } %>  
+                  <% } %>  
+              </tr>
+              <tr>
+                <td>P/BV:</td>
+                <td><%= (result.all.C/100/result.fa.BookValuePerShare).toFixed(2) %></td>
+                <% if (+result.all.C/result.fa.BookValuePerShare<0.9*result.farange.apbv) { %>
+                  <td><span class="badge badge-danger">Lo</span></td>
+                  <% } else { if (+result.all.C/result.fa.BookValuePerShare>1.1*result.farange.apbv) {  %>
+                    <td><span class="badge badge-success">Hi</span></td>
+                    <% } else { %>
+                      <td><span class="badge badge-warning">No</span></td>
+                    <% } %>  
+                <% } %>
+              </tr>
+              <tr>
+                <td>P/S:</td>
+                <td><%= (+result.all.C/100/result.fa.SalesPerShare).toFixed(2) %></td>
+                <% if (+result.all.C/result.fa.SalesPerShare<0.9*result.farange.aps) { %>
+                  <td><span class="badge badge-danger">Lo</span></td>
+                  <% } else { if (+result.all.C/result.fa.SalesPerShare>1.1*result.farange.aps) {  %>
+                    <td><span class="badge badge-success">Hi</span></td>
+                    <% } else { %>
+                      <td><span class="badge badge-warning">No</span></td>
+                    <% } %>  
+                <% } %>
+              </tr>
+              <tr>
+                <td>ROE:</td>
+                <td><%= (+result.fa.ReturnOnEquity).toFixed(2) %></td>
+                <% if (+result.fa.ReturnOnEquity<0.9*result.farange.aroe) { %>
+                  <td><span class="badge badge-danger">Lo</span></td>
+                  <% } else { if (+result.fa.ReturnOnEquity>1.1*result.farange.aroe) {  %>
+                    <td><span class="badge badge-success">Hi</span></td>
+                    <% } else { %>
+                      <td><span class="badge badge-warning">No</span></td>
+                    <% } %>  
+                <% } %>
+              </tr>
+              <tr>
+                <td>ROA:</td>
+                <td><%= (+result.fa.ReturnOnAssets).toFixed(2) %></td>
+                <% if (+result.fa.ReturnOnAssets<0.9*result.farange.aroa) { %>
+                  <td><span class="badge badge-danger">Lo</span></td>
+                  <% } else { if (+result.fa.ReturnOnAssets>1.1*result.farange.aroa) {  %>
+                    <td><span class="badge badge-success">Hi</span></td>
+                    <% } else { %>
+                      <td><span class="badge badge-warning">No</span></td>
+                    <% } %>  
+                <% } %>
+              </tr>
+              <tr>
+                <td>EPS:</td>
+                <td><%= (+result.fa.EPS).toFixed(2) %></td>
+                <% if (+result.fa.EPS<0.9*result.farange.aeps) { %>
+                  <td><span class="badge badge-danger">Lo</span></td>
+                  <% } else { if (+result.fa.EPS>1.1*result.farange.aeps) {  %>
+                    <td><span class="badge badge-success">Hi</span></td>
+                    <% } else { %>
+                      <td><span class="badge badge-warning">No</span></td>
+                    <% } %>  
+                <% } %>
+              </tr>
+              <tr>
+                <td>Beta:</td>
+                <td><%= (+result.fa.BETA).toFixed(2) %></td>
+                <% if (+result.fa.BETA<0.9*result.farange.abeta) { %>
+                  <td><span class="badge badge-danger">Lo</span></td>
+                  <% } else { if (+result.fa.BETA>1.1*result.farange.abeta) {  %>
+                    <td><span class="badge badge-success">Hi</span></td>
+                    <% } else { %>
+                      <td><span class="badge badge-warning">No</span></td>
+                    <% } %>  
+                <% } %>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end row -->
+<!-- row 3 -->
+<div class="row">
+  <!-- SPT -->
+  <div class="col-xl-3">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title mb-4">HTS report</h4>
+        <div class="table-responsive">
+              <table id="example" class="table table-hover table-centered table-nowrap mb-0">
+                <tbody>
+                  <tr>
+                    <td><p class="mb-0"><%= (result.SPT[0].DATE).substr(5, 5) %></p></td>
+                    <%  if (result.SPT[0].STATUS=="LONG") {  %>
+                      <td><span class="badge badge-success">Lo</span> @<%= (+result.SPT[0].ENTRY/100).toFixed(2) %></td>
+                      <td class="mb-0 text-right"><%= ((result.all.C-result.SPT[0].ENTRY)/100).toFixed(2) %> (<%= ((result.all.C-result.SPT[0].ENTRY)/result.SPT[0].ENTRY*100).toFixed(1) %>%)</td>
+                      <% } else { %>
+                        <td><span class="badge badge-danger">So</span> @<%= (+result.SPT[0].ENTRY/100).toFixed(2) %></td>
+                        <td class="mb-0 text-right"><%= ((result.SPT[0].ENTRY-result.all.C)/100).toFixed(2) %> (<%= ((result.SPT[0].ENTRY-result.all.C)/result.SPT[0].ENTRY*100).toFixed(1) %>%)</td>
+                      <% } %>  
+                  </tr>                  
+                  <% for(let i=1; i<Math.min(12, result.SPT.length); i++) {%>
+                    <tr>
+                      <td><p class="mb-0 "><%= (result.SPT[i].DATE).substr(5, 5) %></p></td>
+                      <%  if (result.SPT[i].STATUS=="LONG") {  %>
+                        <td><span class="badge badge-success">Lo</span> @<%= (+result.SPT[i].ENTRY/100).toFixed(2) %></td>
+                        <td class="mb-0 text-right"><%= ((result.SPT[i-1].ENTRY-result.SPT[i].ENTRY)/100).toFixed(2) %> (<%= ((result.SPT[i-1].ENTRY-result.SPT[i].ENTRY)/result.SPT[i].ENTRY*100).toFixed(1) %>%)</td>
+                        <% } else { %>
+                          <td><span class="badge badge-danger">So</span> @<%= (+result.SPT[i].ENTRY/100).toFixed(2) %></td>
+                          <td class="mb-0 text-right"><%= ((result.SPT[i].ENTRY-result.SPT[i-1].ENTRY)/100).toFixed(2) %> (<%= ((result.SPT[i].ENTRY-result.SPT[i-1].ENTRY)/result.SPT[i].ENTRY*100).toFixed(1) %>%)</td>
+                        <% } %>  
+                    </tr>
+                  <% } %>            
+                </tbody>
+              </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- TA table -->
+  <div class="col-xl-4">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title mb-4">TA information</h4>
+        <div class="table-responsive">
+          <table id="example" class="table table-hover table-centered table-nowrap mb-0">
+            <tbody>
+              <% for(let i=4; i<16; i++) {%>
+                <tr>
+                  <td><i class="mdi mdi-arrow-<%= result.indicator[i].sig %> text-<%= result.indicator[i].color %> ml-2"></i><%= result.indicator[i].name %></td>
+                  <td><%= result.indicator[i].value %></td>
+                  <td><p class="mb-0 text-<%= result.indicator[i].color %>"><%= result.indicator[i].text %></p></td>
+                </tr>
+              <% } %>            
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- TA charts-->
+  <div class="col-xl-5">
+    <div class="row">
+      <!-- TA sum-->
+      <div class="col-md-12">
+        <div class="card ">
+          <div class="card-body" >
+            <div class="row">
+              <div class="col-md-6">
+                <div id="indicator-chart" style="height:220px"  ></div>
+              </div>            
+              <div class="col-md-6">
+                <h4 class="card-title">BS score</h4>
+                <div class="mt-4">
+                  <table class="table mb-0">
+                    <tbody>
+                      <tr>
+                        <td><span class="badge badge-danger">Dn</span></td>
+                        <td>Down trend</td>
+                        <td class="text-right"><%= result.data4 %></td>
+                      </tr>
+                      <tr>
+                        <td><span class="badge badge-success">Up</span></td>
+                        <td>Up trend</td>
+                        <td class="text-right"><%= result.data3 %></td>
+                      </tr>
+                      <tr>
+                        <td><span class="badge badge-warning">No</span></td>
+                        <td>No trend</td>
+                        <td class="text-right"><%= result.data5 %></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <!-- TA details-->
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <div>
+              <h4 class="card-title mb-4"> </h4>
+            </div>
+            
+            <div class="wid-peity mb-4">
+              <div class="row">
+                <div class="col-md-4">
+                  <div>
+                    <p class="text-muted">VIX</p>
+                    <h5 class="mb-4"><%= result.data6[19] %></h5>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="mb-4">
+                    <span
+                      class="peity-line"
+                      data-width="100%"
+                      data-peity='{ "fill": ["rgba(2, 164, 153,0.3)"],"stroke": ["rgba(2, 164, 153,0.8)"]}'
+                      data-height="60"
+                      ><%= result.data6 %></span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wid-peity mb-4">
+              <div class="row">
+                <div class="col-md-4">
+                  <div>
+                    <p class="text-muted">RSI(14)</p>
+                    <h5><%= result.data7[19] %></h5>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="mb-4">
+                    <span
+                      class="peity-line"
+                      data-width="100%"
+                      data-peity='{ "fill": ["rgba(2, 164, 153,0.3)"],"stroke": ["rgba(2, 164, 153,0.8)"]}'
+                      data-height="60"
+                      ><%= result.data7 %></span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="">
+              <div class="row">
+                <div class="col-md-4">
+                  <div>
+                    <p class="text-muted">ATV(10)</p>
+                    <h5><%= result.data8[19] %>B</h5>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="mb-4">
+                    <span
+                      class="peity-line"
+                      data-width="100%"
+                      data-peity='{ "fill": ["rgba(2, 164, 153,0.3)"],"stroke": ["rgba(2, 164, 153,0.8)"]}'
+                      data-height="60"
+                      ><%= result.data8 %></span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>            
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+</div>
+<!-- end row -->    
+<div class="row">
+  <div class="col-lg-12" id="price-chart">
+    <div class="card">
+      <div class="card-body">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-tabs-custom" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#daily" role="tab">
+              <span class="d-block d-sm-none"><i class="fas fa-calendar-day"></i></span>
+              <span class="d-none d-sm-block">Daily</span> 
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#weekly" role="tab">
+              <span class="d-block d-sm-none"><i class="fab fa-vk"></i></span>
+              <span class="d-none d-sm-block">Weekly</span> 
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#intra15" role="tab">
+              <span class="d-block d-sm-none"><i class="fas fa-info"></i></span>
+              <span class="d-none d-sm-block">15m</span>   
+            </a>
+          </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content" >
+          <div class="tab-pane active p-3" id="daily" role="tabpanel"  >
+            <div id="price-daily" style="height:480px; width: 100%;"></div>
+          </div>
+          <div class="tab-pane p-3" id="weekly" role="tabpanel" >
+            <div id="price-weekly" style="height:480px; width: 100%;"></div>
+          </div>
+          <div class="tab-pane p-3" id="intra15" role="tabpanel" >
+            <div id="price-intra15" style="height:480px; width: 100%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- contentFor('customScripts') %>

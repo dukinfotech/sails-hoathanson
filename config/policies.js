@@ -31,4 +31,5 @@ module.exports.policies = {
   'markets/m30': true,
   'markets/m35': true,
   'markets/m50': true,
+  'summary': true,
 };
