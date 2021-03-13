@@ -1,35 +1,26 @@
-<%- contentFor('breadcrumb') %>
-
-
-    <div class="row">
-
-      <div class="col-lg-9">
-            <h4 class="font-size-18"><%= result.title %> - <%= result.fa.FULLNAME %> </h4>
-        </div>
-      <div class="col-lg-3 ">
-        <%  if (result.flag=="-1") {  %>
-          <form method="POST" action="/addtowl?fl=1&ticker=<%= result.title %>">
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <button type="submit" class="btn btn-outline-primary waves-effect waves-light float-right" formmethod="post">Favorite</button>
-          </form>
-          <% } else { %>
-          <form method="POST" action="/addtowl?fl=0&ticker=<%= result.title %>">
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <button type="submit" class="btn btn-outline-success waves-effect float-right" formmethod="post">Unfavorite</button>
-          </form>
-          <% } %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-9">
-
-    <a href="<%= u %>" target="_blank">Cafef</a>
-    
+<div class="row">
+  <div class="col-lg-9">
+    <h4 class="font-size-18"><%= result.title %> - <%= result.fa.FULLNAME %> </h4>
+  </div>
+  <div class="col-lg-3 ">
+    <%  if (result.flag=="-1") {  %>
+      <form method="POST" action="/addtowl?fl=1&ticker=<%= result.title %>">
+        <input type="hidden" name="_csrf" value="">
+        <button type="submit" class="btn btn-outline-primary waves-effect waves-light float-right" formmethod="post">Favorite</button>
+      </form>
+      <% } else { %>
+      <form method="POST" action="/addtowl?fl=0&ticker=<%= result.title %>">
+        <input type="hidden" name="_csrf" value="">
+        <button type="submit" class="btn btn-outline-success waves-effect float-right" formmethod="post">Unfavorite</button>
+      </form>
+      <% } %>
   </div>
 </div>
-
-
-<%- contentFor('body') %>
+<div class="row">
+  <div class="col-lg-9">
+    <a href="<%= result.cafeFURL %>" target="_blank">Cafef</a>
+  </div>
+</div>
 
 <!-- row 1 -->
 <div class="row">
@@ -40,7 +31,7 @@
         <div id="refresh0">
         <div class="mb-4">
           <div class="float-left mini-stat-img mr-4">
-            <img src="public/images/services-icon/01.png" alt="" />
+            <img src="/images/services-icon/01.png" alt="" />
           </div>
           <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Close          </h5>
           <h5 class="font-weight-medium font-size-20">
@@ -70,7 +61,7 @@
         <div id="refresh1">
         <div class="mb-4">
           <div class="float-left mini-stat-img mr-4">
-            <img src="public/images/services-icon/02.png" alt="" />
+            <img src="/images/services-icon/02.png" alt="" />
           </div>
           <h5 class="font-size-16 text-uppercase mt-0 text-white-50">
             <%= result.indicator[1].name %>
@@ -85,7 +76,7 @@
         </div>
         <div class="pt-2">
           <div class="float-right">
-            <a href="/market15" class="text-white-50"
+            <a href="/markets/m15" class="text-white-50"
               ><i class="mdi mdi-arrow-right h5"></i
             ></a>
           </div>
@@ -102,7 +93,7 @@
         <div id="refresh2">
         <div class="mb-4">
           <div class="float-left mini-stat-img mr-4">
-            <img src="public/images/services-icon/03.png" alt="" />
+            <img src="/images/services-icon/03.png" alt="" />
           </div>
           <h5 class="font-size-16 text-uppercase mt-0 text-white-50">
             <%= result.indicator[2].name %>
@@ -116,7 +107,7 @@
         </div>
         <div class="pt-2">
           <div class="float-right">
-            <a href="/market30" class="text-white-50"
+            <a href="/markets/m30" class="text-white-50"
               ><i class="mdi mdi-arrow-right h5"></i
             ></a>
           </div>
@@ -133,7 +124,7 @@
         <div id="refresh3">
         <div class="mb-4">
           <div class="float-left mini-stat-img mr-4">
-            <img src="public/images/services-icon/04.png" alt="" />
+            <img src="/images/services-icon/04.png" alt="" />
           </div>
           <h5 class="font-size-16 text-uppercase mt-0 text-white-50">
             <%= result.indicator[3].name %>
@@ -148,7 +139,7 @@
         </div>
         <div class="pt-2">
           <div class="float-right">
-            <a href="/market15" class="text-white-50"
+            <a href="/markets/m15" class="text-white-50"
               ><i class="mdi mdi-arrow-right h5"></i
             ></a>
           </div>
@@ -158,9 +149,8 @@
       </div>
     </div>
   </div>
-
 </div>
-<!-- end row -->
+
 <!-- row 2 -->
 <div class="row">
   <!-- MCDX chart -->
@@ -272,7 +262,7 @@
     </div>
   </div>
 </div>
-<!-- end row -->
+
 <!-- row 3 -->
 <div class="row">
   <!-- SPT -->
@@ -284,7 +274,8 @@
               <table id="example" class="table table-hover table-centered table-nowrap mb-0">
                 <tbody>
                   <tr>
-                    <td><p class="mb-0"><%= (result.SPT[0].DATE).substr(5, 5) %></p></td>
+                    <% dateSPT0 = new Date(result.SPT[0].DATE) %>
+                    <td><p class="mb-0"><%= (dateSPT0.getMonth() + 1) + '-' + dateSPT0.getDate() %></p></td>
                     <%  if (result.SPT[0].STATUS=="LONG") {  %>
                       <td><span class="badge badge-success">Lo</span> @<%= (+result.SPT[0].ENTRY/100).toFixed(2) %></td>
                       <td class="mb-0 text-right"><%= ((result.all.C-result.SPT[0].ENTRY)/100).toFixed(2) %> (<%= ((result.all.C-result.SPT[0].ENTRY)/result.SPT[0].ENTRY*100).toFixed(1) %>%)</td>
@@ -295,7 +286,8 @@
                   </tr>                  
                   <% for(let i=1; i<Math.min(12, result.SPT.length); i++) {%>
                     <tr>
-                      <td><p class="mb-0 "><%= (result.SPT[i].DATE).substr(5, 5) %></p></td>
+                      <% dateSPTI = result.SPT[i].DATE %>
+                      <td><p class="mb-0 "><%= (dateSPTI.getMonth() + 1) + '-' + dateSPTI.getDate() %></p></td>
                       <%  if (result.SPT[i].STATUS=="LONG") {  %>
                         <td><span class="badge badge-success">Lo</span> @<%= (+result.SPT[i].ENTRY/100).toFixed(2) %></td>
                         <td class="mb-0 text-right"><%= ((result.SPT[i-1].ENTRY-result.SPT[i].ENTRY)/100).toFixed(2) %> (<%= ((result.SPT[i-1].ENTRY-result.SPT[i].ENTRY)/result.SPT[i].ENTRY*100).toFixed(1) %>%)</td>
@@ -424,7 +416,7 @@
                 </div>
               </div>
             </div>
-            <div class="">
+            <div class="wid-peity mb-4">
               <div class="row">
                 <div class="col-md-4">
                   <div>
@@ -451,7 +443,8 @@
     </div>
   </div>
 </div>
-<!-- end row -->    
+
+<!-- Row 4 -->
 <div class="row">
   <div class="col-lg-12" id="price-chart">
     <div class="card">
@@ -494,3 +487,93 @@
   </div>
 </div>
 <%- contentFor('customScripts') %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.8.0/echarts-en.min.js"></script>
+<script src="/libs/peity/jquery.peity.min.js"></script>
+<!-- Plugin Js-->
+<script src="/libs/chartist/chartist.min.js"></script>
+<script src="/libs/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js"></script>
+<script>
+  let myChart = echarts.init(document.getElementById('mcdx-chart'));
+  let option = <%- JSON.stringify(result.data1 || null) %>;
+  myChart.setOption(option, true);
+
+  let myChart1 = echarts.init(document.getElementById('price-daily'));
+  option = <%- JSON.stringify(result.data2 || null) %>;
+  myChart1.setOption(option, true);
+
+  let myChart2 = echarts.init(document.getElementById('price-weekly'));
+  option = <%- JSON.stringify(result.wdata2 || null) %>;
+  myChart2.setOption(option,true);
+
+  let myChart3 = echarts.init(document.getElementById('price-intra15'));
+  option = <%- JSON.stringify(result.idata2 || null) %>;
+  myChart3.setOption(option, true);
+</script>
+
+<!-- BS Score Chart -->
+<script>
+  myChart = echarts.init(document.getElementById('indicator-chart'));
+  option = {
+    tooltip: {
+      trigger: 'item',
+      formatter: '{b}: {c} ({d}%)'
+    },
+    grid: {
+      left: '8%',
+      right: '8%',
+      top: '3%',
+      height: '94%'
+    },
+    series: [
+      {
+        type: 'pie',
+        radius: ['50%', '70%'],
+        color:['#ec4561','#02a499', '#f8b425', '#d48265', '#91c7ae','#749f83',  '#ca8622', '#bda29a','#6e7074', '#546570', '#c4ccd3'],
+        avoidLabelOverlap: false,
+        label: {
+          show: false,
+          position: 'center'
+        },
+        emphasis: {
+          label: {
+            show: false,
+            fontSize: '30',
+            fontWeight: 'bold'
+          }
+        },
+        labelLine: {
+          show: false
+        },
+        data: [
+          {value: <%= result.data4 %>, name: 'Dn trend'},
+          {value: <%= result.data3 %>, name: 'Up trend'},
+          {value: <%= result.data5 %>, name: 'No trend'}
+        ]
+      }
+    ]
+  };
+  myChart.setOption(option, true);
+</script>
+
+<script>
+  $(document).ready(function() {
+    $('.nav-tabs a[href="#daily"]').on('shown.bs.tab', function () {
+      myChart1.resize();   
+    });  
+    $('.nav-tabs a[href="#weekly"]').on('shown.bs.tab', function () {
+      myChart2.resize();
+    });
+    $('.nav-tabs a[href="#intra15"]').on('shown.bs.tab', function () {
+      myChart3.resize();
+    });
+  });
+</script>
+
+<script>
+  $('.peity-donut').each(function () {
+    $(this).peity("donut", $(this).data());
+  });
+  $('.peity-line').each(function() {
+    $(this).peity("line", $(this).data());
+  });
+</script>
