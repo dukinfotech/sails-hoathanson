@@ -4,6 +4,8 @@ module.exports = {
     let rsi14 = []; 
     let atv10 = [];
     var data1 = await this.getData1(ticker, limit);
+    data1 = this.convertDateToString(data1, 'DATE');
+
     for (let i = 0; i < limit; i++) {
       vix.push((+data1[limit-1-i].VIX/100).toFixed(2));
       rsi14.push((+data1[limit-1-i].RSI14/100).toFixed(2)); 
@@ -43,6 +45,7 @@ module.exports = {
     indicator.push(indicator1[3]);
 
     var data4 = await this.getData4(ticker, limit);
+    data4 = this.convertDateToString(data4, 'DATE');
     var data4_0 = data4[0];
     if (data4_0.CDRANK > 0) {
       indicator.push({name:"W Candlestick",sig:"up",text:"Up trend", color:"success", value:data4_0.CANDLE });
@@ -85,6 +88,8 @@ module.exports = {
     var data8 = await this.getData8();
     var data9 = await this.getData9();
     var data10 = await this.getData10(ticker);
+    date10 = this.convertDateToString(data10, 'DATE');
+
     var summaryall = {
       title: ticker,
       flag: flag,
@@ -246,7 +251,7 @@ module.exports = {
     var sql10 = `SELECT TICKER, DATE, _SHOW, STATUS, ENTRY 
               FROM trend_score15ms WHERE _SHOW=1 AND ticker LIKE '${ticker}' ORDER BY id DESC LIMIT 0, 1000
               `;
-    var data10 = await sails.sendNativeQuery(sql10);
+    var data10 = await sails.sendNativeQuery(sql10, ['DATE']);
     var dataRows = data10.rows;
     if (dataRows.length == 0) throw 404;
     return dataRows;
@@ -853,5 +858,13 @@ module.exports = {
       cafeFURL = '#';
     }
     return cafeFURL;
+  },
+  convertDateToString(dataRows = [], col) {
+    dataRows.forEach((row) => {
+      let date = new Date(row[col]);
+      let dateString = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+      row[col] = dateString;
+    });
+    return dataRows;
   }
 }

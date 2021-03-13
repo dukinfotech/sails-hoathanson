@@ -274,8 +274,7 @@
               <table id="example" class="table table-hover table-centered table-nowrap mb-0">
                 <tbody>
                   <tr>
-                    <% dateSPT0 = new Date(result.SPT[0].DATE) %>
-                    <td><p class="mb-0"><%= (dateSPT0.getMonth() + 1) + '-' + dateSPT0.getDate() %></p></td>
+                    <td><p class="mb-0"><%= result.SPT[0].DATE %></p></td>
                     <%  if (result.SPT[0].STATUS=="LONG") {  %>
                       <td><span class="badge badge-success">Lo</span> @<%= (+result.SPT[0].ENTRY/100).toFixed(2) %></td>
                       <td class="mb-0 text-right"><%= ((result.all.C-result.SPT[0].ENTRY)/100).toFixed(2) %> (<%= ((result.all.C-result.SPT[0].ENTRY)/result.SPT[0].ENTRY*100).toFixed(1) %>%)</td>
@@ -286,8 +285,7 @@
                   </tr>                  
                   <% for(let i=1; i<Math.min(12, result.SPT.length); i++) {%>
                     <tr>
-                      <% dateSPTI = result.SPT[i].DATE %>
-                      <td><p class="mb-0 "><%= (dateSPTI.getMonth() + 1) + '-' + dateSPTI.getDate() %></p></td>
+                      <td><p class="mb-0 "><%= result.SPT[i].DATE %></p></td>
                       <%  if (result.SPT[i].STATUS=="LONG") {  %>
                         <td><span class="badge badge-success">Lo</span> @<%= (+result.SPT[i].ENTRY/100).toFixed(2) %></td>
                         <td class="mb-0 text-right"><%= ((result.SPT[i-1].ENTRY-result.SPT[i].ENTRY)/100).toFixed(2) %> (<%= ((result.SPT[i-1].ENTRY-result.SPT[i].ENTRY)/result.SPT[i].ENTRY*100).toFixed(1) %>%)</td>
