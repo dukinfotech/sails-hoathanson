@@ -29,27 +29,27 @@
     <div class="card mini-stat bg-primary text-white">
       <div class="card-body">
         <div id="refresh0">
-        <div class="mb-4">
-          <div class="float-left mini-stat-img mr-4">
-            <img src="/images/services-icon/01.png" alt="" />
+          <div class="mb-4">
+            <div class="float-left mini-stat-img mr-4">
+              <img src="/images/services-icon/01.png" alt="" />
+            </div>
+            <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Close          </h5>
+            <h5 class="font-weight-medium font-size-20">
+              <%= result.all.C/100 %> <i class="mdi mdi-arrow-<%= result.indicator[0].sig %> text-<%= result.indicator[0].color %> ml-2"></i>
+            </h5>
+            <p class="mb-0 float-right"></p>
+            <div class="mini-stat-label bg-<%= result.indicator[0].color %>">
+              <p class="mb-0"><%= result.indicator[0].value %></p>
+            </div>
           </div>
-          <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Close          </h5>
-          <h5 class="font-weight-medium font-size-20">
-            <%= result.all.C/100 %> <i class="mdi mdi-arrow-<%= result.indicator[0].sig %> text-<%= result.indicator[0].color %> ml-2"></i>
-          </h5>
-          <p class="mb-0 float-right"></p>
-          <div class="mini-stat-label bg-<%= result.indicator[0].color %>">
-            <p class="mb-0"><%= result.indicator[0].value %></p>
+          <div class="pt-2">
+            <div class="float-right">
+              <a href="#price-chart" class="text-white-50"
+                ><i class="mdi mdi-arrow-right h5"></i
+              ></a>
+            </div>
+            <p class="text-white-50 mb-0 mt-1">52W H: <%= (+result.all.H52W/100).toFixed(2) %> - L: <%= (+result.all.L52W/100).toFixed(2) %></p>
           </div>
-        </div>
-        <div class="pt-2">
-          <div class="float-right">
-            <a href="#price-chart" class="text-white-50"
-              ><i class="mdi mdi-arrow-right h5"></i
-            ></a>
-          </div>
-          <p class="text-white-50 mb-0 mt-1">52W H: <%= (+result.all.H52W/100).toFixed(2) %> - L: <%= (+result.all.L52W/100).toFixed(2) %></p>
-        </div>
         </div>
       </div>
     </div>
@@ -59,29 +59,29 @@
     <div class="card mini-stat bg-primary text-white">
       <div class="card-body">
         <div id="refresh1">
-        <div class="mb-4">
-          <div class="float-left mini-stat-img mr-4">
-            <img src="/images/services-icon/02.png" alt="" />
+          <div class="mb-4">
+            <div class="float-left mini-stat-img mr-4">
+              <img src="/images/services-icon/02.png" alt="" />
+            </div>
+            <h5 class="font-size-16 text-uppercase mt-0 text-white-50">
+              <%= result.indicator[1].name %>
+            </h5>
+            <h5 class="font-weight-medium font-size-20">
+              TSL: <%= result.indicator[1].text %>
+              <!--i class="mdi mdi-arrow-<%= result.indicator[1].sig %> text-<%= result.indicator[1].color %> ml-2"></i-->
+            </h5>
+            <div class="mini-stat-label bg-<%= result.indicator[1].color %>">
+              <p class="mb-0">@ <%= result.indicator[1].sig %></p>
+            </div>
           </div>
-          <h5 class="font-size-16 text-uppercase mt-0 text-white-50">
-            <%= result.indicator[1].name %>
-          </h5>
-          <h5 class="font-weight-medium font-size-20">
-            TSL: <%= result.indicator[1].text %>
-            <!--i class="mdi mdi-arrow-<%= result.indicator[1].sig %> text-<%= result.indicator[1].color %> ml-2"></i-->
-          </h5>
-          <div class="mini-stat-label bg-<%= result.indicator[1].color %>">
-            <p class="mb-0">@ <%= result.indicator[1].sig %></p>
+          <div class="pt-2">
+            <div class="float-right">
+              <a href="/markets/m15" class="text-white-50"
+                ><i class="mdi mdi-arrow-right h5"></i
+              ></a>
+            </div>
+            <p class="text-white-50 mb-0 mt-1">PL: <%= result.indicator[1].value %> (<%= (result.indicator[1].value/result.indicator[1].sig*100).toFixed(1) %>%) - Since <%= (result.sptday/24).toFixed(0) %> days ago</p>
           </div>
-        </div>
-        <div class="pt-2">
-          <div class="float-right">
-            <a href="/markets/m15" class="text-white-50"
-              ><i class="mdi mdi-arrow-right h5"></i
-            ></a>
-          </div>
-          <p class="text-white-50 mb-0 mt-1">PL: <%= result.indicator[1].value %> (<%= (result.indicator[1].value/result.indicator[1].sig*100).toFixed(1) %>%) - Since <%= (result.sptday/24).toFixed(0) %> days ago</p>
-        </div>
         </div>
       </div>
     </div>
@@ -91,28 +91,28 @@
     <div class="card mini-stat bg-primary text-white">
       <div class="card-body">
         <div id="refresh2">
-        <div class="mb-4">
-          <div class="float-left mini-stat-img mr-4">
-            <img src="/images/services-icon/03.png" alt="" />
+          <div class="mb-4">
+            <div class="float-left mini-stat-img mr-4">
+              <img src="/images/services-icon/03.png" alt="" />
+            </div>
+            <h5 class="font-size-16 text-uppercase mt-0 text-white-50">
+              <%= result.indicator[2].name %>
+            </h5>
+            <h5 class="font-weight-medium font-size-20">
+              <%= result.indicator[2].text %> <i class="mdi mdi-arrow-<%= result.indicator[2].sig %> text-<%= result.indicator[2].color %> ml-2"></i>
+            </h5>
+            <div class="mini-stat-label bg-<%= result.indicator[2].color %>">
+              <p class="mb-0"><%= result.indicator[2].value %> %</p>
+            </div>
           </div>
-          <h5 class="font-size-16 text-uppercase mt-0 text-white-50">
-            <%= result.indicator[2].name %>
-          </h5>
-          <h5 class="font-weight-medium font-size-20">
-            <%= result.indicator[2].text %> <i class="mdi mdi-arrow-<%= result.indicator[2].sig %> text-<%= result.indicator[2].color %> ml-2"></i>
-          </h5>
-          <div class="mini-stat-label bg-<%= result.indicator[2].color %>">
-            <p class="mb-0"><%= result.indicator[2].value %> %</p>
+          <div class="pt-2">
+            <div class="float-right">
+              <a href="/markets/m30" class="text-white-50"
+                ><i class="mdi mdi-arrow-right h5"></i
+              ></a>
+            </div>
+            <p class="text-white-50 mb-0 mt-1">LP: <%= (+result.lsp.L).toFixed(2) %>% (<%= (+result.lspx.L) %>) - SP: <%= (+result.lsp.S).toFixed(2) %>% (<%= (+result.lspx.S) %>)</p>
           </div>
-        </div>
-        <div class="pt-2">
-          <div class="float-right">
-            <a href="/markets/m30" class="text-white-50"
-              ><i class="mdi mdi-arrow-right h5"></i
-            ></a>
-          </div>
-          <p class="text-white-50 mb-0 mt-1">LP: <%= (+result.lsp.L).toFixed(2) %>% (<%= (+result.lspx.L) %>) - SP: <%= (+result.lsp.S).toFixed(2) %>% (<%= (+result.lspx.S) %>)</p>
-        </div>
         </div>
       </div>
     </div>
@@ -122,29 +122,29 @@
     <div class="card mini-stat bg-primary text-white">
       <div class="card-body">
         <div id="refresh3">
-        <div class="mb-4">
-          <div class="float-left mini-stat-img mr-4">
-            <img src="/images/services-icon/04.png" alt="" />
+          <div class="mb-4">
+            <div class="float-left mini-stat-img mr-4">
+              <img src="/images/services-icon/04.png" alt="" />
+            </div>
+            <h5 class="font-size-16 text-uppercase mt-0 text-white-50">
+              <%= result.indicator[3].name %>
+            </h5>
+            <h5 class="font-weight-medium font-size-20">
+              TSL: <%= result.indicator[3].text %>
+              <!--i class="mdi mdi-arrow-<%= result.indicator[1].sig %> text-<%= result.indicator[1].color %> ml-2"></i-->
+            </h5>
+            <div class="mini-stat-label bg-<%= result.indicator[3].color %>">
+              <p class="mb-0">@ <%= result.indicator[3].sig %></p>
+            </div>
           </div>
-          <h5 class="font-size-16 text-uppercase mt-0 text-white-50">
-            <%= result.indicator[3].name %>
-          </h5>
-          <h5 class="font-weight-medium font-size-20">
-            TSL: <%= result.indicator[3].text %>
-            <!--i class="mdi mdi-arrow-<%= result.indicator[1].sig %> text-<%= result.indicator[1].color %> ml-2"></i-->
-          </h5>
-          <div class="mini-stat-label bg-<%= result.indicator[3].color %>">
-            <p class="mb-0">@ <%= result.indicator[3].sig %></p>
+          <div class="pt-2">
+            <div class="float-right">
+              <a href="/markets/m15" class="text-white-50"
+                ><i class="mdi mdi-arrow-right h5"></i
+              ></a>
+            </div>
+            <p class="text-white-50 mb-0 mt-1">PL: <%= result.indicator[3].value %> (<%= (result.indicator[3].value/result.indicator[3].sig*100).toFixed(1) %>%) - Since <%= (result.vn30sptday/24).toFixed(0) %> days ago</p>
           </div>
-        </div>
-        <div class="pt-2">
-          <div class="float-right">
-            <a href="/markets/m15" class="text-white-50"
-              ><i class="mdi mdi-arrow-right h5"></i
-            ></a>
-          </div>
-          <p class="text-white-50 mb-0 mt-1">PL: <%= result.indicator[3].value %> (<%= (result.indicator[3].value/result.indicator[3].sig*100).toFixed(1) %>%) - Since <%= (result.vn30sptday/24).toFixed(0) %> days ago</p>
-        </div>
         </div>
       </div>
     </div>
@@ -594,4 +594,115 @@
       $('#btnWrapper').html(html);
     });
   });
+
+  setInterval(fetchdata, 300000);
+  var ticker = '<%= result.title %>';
+  function fetchdata() {
+    $.get('/api/summary/' + ticker, function(data, status) {
+      myChart.setOption(data.data1, true);
+      myChart1.setOption(data.data2, true);
+      myChart3.setOption(data.idata2, true);
+      var htmlRefresh0 = `
+        <div class="mb-4">
+          <div class="float-left mini-stat-img mr-4">
+            <img src="/images/services-icon/01.png" alt="" />
+          </div>
+          <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Close          </h5>
+          <h5 class="font-weight-medium font-size-20">
+            ${data.all.C/100} <i class="mdi mdi-arrow-${data.indicator[0].sig} text-${data.indicator[0].color} ml-2"></i>
+          </h5>
+          <p class="mb-0 float-right"></p>
+          <div class="mini-stat-label bg-${data.indicator[0].color}">
+            <p class="mb-0">${data.indicator[0].value}</p>
+          </div>
+        </div>
+        <div class="pt-2">
+          <div class="float-right">
+            <a href="#price-chart" class="text-white-50"
+              ><i class="mdi mdi-arrow-right h5"></i
+            ></a>
+          </div>
+          <p class="text-white-50 mb-0 mt-1">52W H: ${(+data.all.H52W/100).toFixed(2)} - L: ${(+data.all.L52W/100).toFixed(2)}</p>
+        </div>
+      `;
+      $('#refresh0').html(htmlRefresh0);
+      var htmlRefresh1 = `
+        <div class="mb-4">
+          <div class="float-left mini-stat-img mr-4">
+            <img src="/images/services-icon/02.png" alt="" />
+          </div>
+          <h5 class="font-size-16 text-uppercase mt-0 text-white-50">
+            ${data.indicator[1].name}
+          </h5>
+          <h5 class="font-weight-medium font-size-20">
+            TSL: ${data.indicator[1].text}
+            <!--i class="mdi mdi-arrow-${data.indicator[1].sig} text-${data.indicator[1].color} ml-2"></i-->
+          </h5>
+          <div class="mini-stat-label bg-${data.indicator[1].color}">
+            <p class="mb-0">@ ${data.indicator[1].sig}</p>
+          </div>
+        </div>
+        <div class="pt-2">
+          <div class="float-right">
+            <a href="/markets/m15" class="text-white-50"
+              ><i class="mdi mdi-arrow-right h5"></i
+            ></a>
+          </div>
+          <p class="text-white-50 mb-0 mt-1">PL: ${data.indicator[1].value} (${(data.indicator[1].value/data.indicator[1].sig*100).toFixed(1)}%) - Since ${(data.sptday/24).toFixed(0)} days ago</p>
+        </div>
+      `;
+      $('#refresh1').html(htmlRefresh1);
+      var htmlRefresh2 = `
+        <div class="mb-4">
+          <div class="float-left mini-stat-img mr-4">
+            <img src="/images/services-icon/03.png" alt="" />
+          </div>
+          <h5 class="font-size-16 text-uppercase mt-0 text-white-50">
+            ${data.indicator[2].name}
+          </h5>
+          <h5 class="font-weight-medium font-size-20">
+            ${data.indicator[2].text} <i class="mdi mdi-arrow-${data.indicator[2].sig} text-${data.indicator[2].color} ml-2"></i>
+          </h5>
+          <div class="mini-stat-label bg-${data.indicator[2].color}">
+            <p class="mb-0">${data.indicator[2].value} %</p>
+          </div>
+        </div>
+        <div class="pt-2">
+          <div class="float-right">
+            <a href="/markets/m30" class="text-white-50"
+              ><i class="mdi mdi-arrow-right h5"></i
+            ></a>
+          </div>
+          <p class="text-white-50 mb-0 mt-1">LP: ${(+data.lsp.L).toFixed(2)}% (${(+data.lspx.L)}) - SP: ${(+data.lsp.S).toFixed(2)}% (${(+data.lspx.S)})</p>
+        </div>
+      `;
+      $('#refresh2').html(htmlRefresh2);
+      var htmlRefresh3 = `
+        <div class="mb-4">
+          <div class="float-left mini-stat-img mr-4">
+            <img src="/images/services-icon/04.png" alt="" />
+          </div>
+          <h5 class="font-size-16 text-uppercase mt-0 text-white-50">
+            ${data.indicator[3].name}
+          </h5>
+          <h5 class="font-weight-medium font-size-20">
+            TSL: ${data.indicator[3].text}
+            <!--i class="mdi mdi-arrow-${data.indicator[1].sig} text-${data.indicator[1].color} ml-2"></i-->
+          </h5>
+          <div class="mini-stat-label bg-${data.indicator[3].color}">
+            <p class="mb-0">@ ${data.indicator[3].sig}</p>
+          </div>
+        </div>
+        <div class="pt-2">
+          <div class="float-right">
+            <a href="/markets/m15" class="text-white-50"
+              ><i class="mdi mdi-arrow-right h5"></i
+            ></a>
+          </div>
+          <p class="text-white-50 mb-0 mt-1">PL: ${data.indicator[3].value} (${(data.indicator[3].value/data.indicator[3].sig*100).toFixed(1)}%) - Since ${(data.vn30sptday/24).toFixed(0)} days ago</p>
+        </div>
+      `;
+      $('#refresh3').html(htmlRefresh3);
+    });
+  }
 </script>
