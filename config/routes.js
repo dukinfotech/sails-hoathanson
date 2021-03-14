@@ -50,7 +50,8 @@ module.exports.routes = {
   'GET /markets/m15-extra/:extra': { action: 'pages/m15-extra'},
   'GET /api/markets/m15-extra/:extra': { action: 'markets/m15-extra'},
   'GET /summary/:ticker': { action: 'pages/summary'},
-  'GET /api/summary/:ticker': { action: 'summary'},
+  'GET /api/summary/:ticker': { action: 'summary/show'},
+  'PUT /api/summary/:ticker/toggle-favorite': { action: 'summary/toggle-favorite'},
   // 'GET /welcome/:unused?':   { action: 'dashboard/view-welcome' },
 
   // 'GET /faq':                { action:   'view-faq' },

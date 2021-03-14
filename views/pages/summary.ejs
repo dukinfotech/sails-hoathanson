@@ -3,17 +3,17 @@
     <h4 class="font-size-18"><%= result.title %> - <%= result.fa.FULLNAME %> </h4>
   </div>
   <div class="col-lg-3 ">
-    <%  if (result.flag=="-1") {  %>
-      <form method="POST" action="/addtowl?fl=1&ticker=<%= result.title %>">
-        <input type="hidden" name="_csrf" value="">
-        <button type="submit" class="btn btn-outline-primary waves-effect waves-light float-right" formmethod="post">Favorite</button>
-      </form>
-      <% } else { %>
-      <form method="POST" action="/addtowl?fl=0&ticker=<%= result.title %>">
-        <input type="hidden" name="_csrf" value="">
-        <button type="submit" class="btn btn-outline-success waves-effect float-right" formmethod="post">Unfavorite</button>
-      </form>
-      <% } %>
+    <form id="favoriteForm">
+      <input type="hidden" name="_csrf" value="<%= _csrf %>">
+      <input type="hidden" name="_method" value="PUT">
+      <div id="btnWrapper">
+        <%  if (result.flag=="-1") {  %>
+          <button type="button" id="favoriteBtn" class="btn btn-outline-primary waves-effect waves-light float-right">Favorite</button>
+        <% } else { %>
+          <button type="button" id="favoriteBtn" class="btn btn-outline-success waves-effect float-right" id="favoriteForm">Unfavorite</button>
+        <% } %>
+      </div>
+    </form>
   </div>
 </div>
 <div class="row">
@@ -573,5 +573,25 @@
   });
   $('.peity-line').each(function() {
     $(this).peity("line", $(this).data());
+  });
+  $('body').on('click', '#favoriteBtn', function () {
+    $('#favoriteBtn').prop('disabled', true);
+    var favoriteFormData = new FormData($('#favoriteForm')[0]);
+    $.ajax({
+      url: '/api/summary/<%= result.title %>/toggle-favorite',
+      method: 'PUT',
+      data: favoriteFormData,
+      processData: false,
+      contentType: false
+    })
+    .done(function (res) {
+      var html;
+      if (res == 'favorite') {
+        html = `<button type="button" id="favoriteBtn" class="btn btn-outline-success waves-effect float-right" id="favoriteForm">Unfavorite</button>`;
+      } else {
+        html = `<button type="button" id="favoriteBtn" class="btn btn-outline-primary waves-effect waves-light float-right">Favorite</button>`;
+      }
+      $('#btnWrapper').html(html);
+    });
   });
 </script>
