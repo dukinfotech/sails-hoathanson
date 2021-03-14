@@ -16,8 +16,8 @@ module.exports = {
     return dataRows;
   },
   async getList(listId) {
-    var sql = ` SELECT list FROM m15_list WHERE id='${listId}'`;
-    var data = await sails.sendNativeQuery(sql);
+    var sql = ` SELECT list FROM m15_list WHERE id= $1`;
+    var data = await sails.sendNativeQuery(sql, [listId]);
     var dataRows = data.rows
     var list = dataRows[0].list;
     var formatedList = list.substring(0, list.length-2)+')';

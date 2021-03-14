@@ -23,7 +23,7 @@ module.exports.policies = {
   'pages/m31': ['is-logged-in', 'set-default-layout'],
   'pages/m51': ['is-logged-in', 'set-default-layout'],
   'pages/m15-extra': ['is-logged-in', 'set-default-layout'],
-  'pages/summary': ['is-logged-in', 'set-default-layout'],
+  'summary/show': ['is-logged-in', 'set-default-layout'],
   // ACL for API not require login
   'markets/m10-1/*': true,
   'markets/m10-2/*': true,

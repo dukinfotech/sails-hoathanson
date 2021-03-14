@@ -121,10 +121,10 @@ module.exports = {
     var sql0 = `SELECT *
                 FROM
                   (SELECT tickerid, EPS, BookValuePerShare, SalesPerShare, ReturnOnEquity, ReturnOnAssets, BETA
-                  FROM fainfo WHERE ticker LIKE '${ticker}' LIMIT 1) mt1
-                LEFT JOIN (SELECT id, FULLNAME FROM ticker WHERE ticker LIKE '${ticker}' ) mt2
+                  FROM fainfo WHERE ticker LIKE $1 LIMIT 1) mt1
+                LEFT JOIN (SELECT id, FULLNAME FROM ticker WHERE ticker LIKE $1 ) mt2
                 ON mt2.id=mt1.tickerid LIMIT 0, 1000`;
-    var data0 = await sails.sendNativeQuery(sql0);
+    var data0 = await sails.sendNativeQuery(sql0, [ticker]);
     var dataRows = data0.rows;
     if (dataRows.length == 0) throw 404;
     return dataRows;
@@ -135,10 +135,10 @@ module.exports = {
                 WHERE id IN
                   (SELECT MAX(id)
                   FROM trend_scoreeod
-                  WHERE ticker LIKE '${ticker}'
+                  WHERE ticker LIKE $1
                   GROUP BY DATE)
                 ORDER BY id DESC LIMIT ${limit}`;
-    var data1 = await sails.sendNativeQuery(sql1);
+    var data1 = await sails.sendNativeQuery(sql1, [ticker]);
     var dataRows = data1.rows;
     if (dataRows.length == 0) throw 404;
     return dataRows;
@@ -169,10 +169,10 @@ module.exports = {
                 WHERE id IN
                   (SELECT MAX(id)
                   FROM trend_scoreweekly
-                  WHERE ticker LIKE '${ticker}'
+                  WHERE ticker LIKE $1
                   GROUP BY DATE)
                 ORDER BY id DESC LIMIT ${limit}`;
-    var data4 = await sails.sendNativeQuery(sql4);
+    var data4 = await sails.sendNativeQuery(sql4, [ticker]);
     var dataRows = data4.rows;
     if (dataRows.length == 0) throw 404;
     return dataRows;
@@ -183,10 +183,10 @@ module.exports = {
                 WHERE id IN
                   (SELECT MAX(id)
                   FROM trend_score15ms
-                  WHERE ticker LIKE '${ticker}'
+                  WHERE ticker LIKE $1
                   GROUP BY A1)
                 ORDER BY id DESC LIMIT ${limit}`;
-    var data5 = await sails.sendNativeQuery(sql5);
+    var data5 = await sails.sendNativeQuery(sql5, [ticker]);
     var dataRows = data5.rows;
     if (dataRows.length == 0) throw 404;
     return dataRows;
@@ -199,19 +199,19 @@ module.exports = {
               WHERE id IN
                 (SELECT MAX(id)
                 FROM trend_scoreeod 
-                WHERE ROUND(c,1) > (SELECT c FROM trend_scoreeod WHERE ticker LIKE '${ticker}' ORDER BY id DESC LIMIT 1)*0.9
-                AND ROUND(c,1) < (SELECT c FROM trend_scoreeod WHERE ticker LIKE '${ticker}' ORDER BY id DESC LIMIT 1)*1.1 GROUP BY a10)) mt1
+                WHERE ROUND(c,1) > (SELECT c FROM trend_scoreeod WHERE ticker LIKE $1 ORDER BY id DESC LIMIT 1)*0.9
+                AND ROUND(c,1) < (SELECT c FROM trend_scoreeod WHERE ticker LIKE $1 ORDER BY id DESC LIMIT 1)*1.1 GROUP BY a10)) mt1
               LEFT JOIN 
                 (SELECT tickerid, EPS, BookValuePerShare, SalesPerShare, ReturnOnEquity, ReturnOnAssets, BETA FROM fainfo) mt2
                 ON mt1.a10=mt2.tickerid LIMIT 0, 1000`;
-    var data6 = await sails.sendNativeQuery(sql6);
+    var data6 = await sails.sendNativeQuery(sql6, [ticker]);
     var dataRows = data6.rows;
     if (dataRows.length == 0) throw 404;
     return dataRows;
   },
   async getData7(ticker) {
-    var sql7 = `SELECT TICKER,SAN,M FROM cafef WHERE ticker LIKE '${ticker}' LIMIT 0, 1000`;
-    var data7 = await sails.sendNativeQuery(sql7);
+    var sql7 = `SELECT TICKER,SAN,M FROM cafef WHERE ticker LIKE $1 LIMIT 0, 1000`;
+    var data7 = await sails.sendNativeQuery(sql7, [ticker]);
     var dataRows = data7.rows;
     if (dataRows.length == 0) throw 404;
     return dataRows;
@@ -249,9 +249,9 @@ module.exports = {
   },
   async getData10(ticker) {
     var sql10 = `SELECT TICKER, DATE, _SHOW, STATUS, ENTRY 
-              FROM trend_score15ms WHERE _SHOW=1 AND ticker LIKE '${ticker}' ORDER BY id DESC LIMIT 0, 1000
+              FROM trend_score15ms WHERE _SHOW=1 AND ticker LIKE $1 ORDER BY id DESC LIMIT 0, 1000
               `;
-    var data10 = await sails.sendNativeQuery(sql10, ['DATE']);
+    var data10 = await sails.sendNativeQuery(sql10, [ticker]);
     var dataRows = data10.rows;
     if (dataRows.length == 0) throw 404;
     return dataRows;
