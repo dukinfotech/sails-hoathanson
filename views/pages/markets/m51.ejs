@@ -47,7 +47,10 @@
         var dateString = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
         return dateString;
       }},
-      { data: 'TICKER', render: function(data) {return '<a href="/summary?ticker='+data+'" target="_blank">'+data+'</a>'; }},
+      { data : "TICKER", render: function (data) {
+        var htmlString = `<a href="/summary/${data}" target="_blank">${data}</a>`
+        return htmlString;
+      }},
       { data: 'CV5', render: function ( data ) { return (data/10).toFixed(2); }},
       { data: 'STATUS',
         render: function(data) {

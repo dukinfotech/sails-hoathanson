@@ -53,11 +53,14 @@
     buttons: ['copy', 'excel', 'csv', 'pdf', 'print'],
     columns: [ 
       { data: 'DATE', width: '100%', render (data) {
-          var date = new Date(data);
-          var dateString = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-          return dateString;
-        }},
-      { data: 'TICKER' },
+        var date = new Date(data);
+        var dateString = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+        return dateString;
+      }},
+      { data : "TICKER", render: function (data) {
+        var htmlString = `<a href="/summary/${data}" target="_blank">${data}</a>`
+        return htmlString;
+      }},
       { data: 'CV5' , render: function ( data ) { return (data/10).toFixed(2); }},
       { data: 'STATUS' ,
           render: function(data) {

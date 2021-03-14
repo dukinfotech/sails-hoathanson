@@ -45,8 +45,11 @@
     scrollCollapse: true,
     dom: 'Bfrtip',
     buttons: ['copy', 'excel', 'csv', 'pdf', 'print'],
-    columns: [ 
-      { data: 'TICKER'},
+    columns: [
+      { data : "TICKER", render: function (data) {
+        var htmlString = `<a href="/summary/${data}" target="_blank">${data}</a>`
+        return htmlString;
+      }},
       { data: 'CV5' , render: function ( data ) { return (data/10).toFixed(2);} },
       { data: 'CVSIG' ,render: function(data) {
         if (data > 0) {

@@ -26,7 +26,10 @@
           var dateString = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
           return dateString;
         }},
-      { data: 'TICKER' },
+      { data : "TICKER", render: function (data) {
+        var htmlString = `<a href="/summary/${data}" target="_blank">${data}</a>`
+        return htmlString;
+      }},
       { data: 'xstatus' },
       { data: 'percentage' , render: function (data){ return (+data).toFixed(2)+'%';}},
     ]

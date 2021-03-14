@@ -41,7 +41,10 @@
     dom: 'Bfrtip',
     buttons: ['copy', 'excel', 'csv', 'pdf', 'print'],
     columns: [ 
-      { data : "ticker" },
+      { data : "ticker", render: function (data) {
+        var htmlString = `<a href="/summary/${data}" target="_blank">${data}</a>`
+        return htmlString;
+      }},
       { 
         data : "_signal", 
         render: function (data, type) {
