@@ -10,6 +10,9 @@
  */
 const expressEjsLayout = require ('express-ejs-layouts');
 const connectFlash = require('connect-flash');
+const passportInit = require('passport').initialize();
+const passportSession = require('passport').session();
+
 module.exports.http = {
 
   /****************************************************************************
@@ -34,6 +37,8 @@ module.exports.http = {
       'expressEjsLayout',
       'cookieParser',
       'session',
+      'passportInit',
+      'passportSession',
       'bodyParser',
       'compress',
       'poweredBy',
@@ -42,6 +47,8 @@ module.exports.http = {
       'favicon',
     ],
     'expressEjsLayout': expressEjsLayout,
+    'passportInit': passportInit,
+    'passportSession': passportSession
     /***************************************************************************
     *                                                                          *
     * The body parser that will handle incoming multipart HTTP requests.       *

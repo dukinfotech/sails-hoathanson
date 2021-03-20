@@ -1,6 +1,8 @@
+const passport = require('passport');
+
 module.exports = {
   inputs: {
-    email: {
+    username: {
       type: 'string',
       required: true
     },
@@ -18,32 +20,30 @@ module.exports = {
     }
   },
   fn: async function (inputs, exits) {
-    var userRecord = await User.findOne({
-      email: inputs.email.toLowerCase(),
-    }).populate('watchlist');
+    try {
+      passport.authenticate('local', (err, user, info) => {
+        if (err || !user) {
+          this.req.addFlash('error', 'Sai tên tài khoản hoặc mật khẩu');
+          return exits.redirect('back');
+        }
+        
+        if (! user.isActive) {
+          this.req.addFlash('error', 'Tài khoản chưa được kích hoạt');
+          return exits.redirect('back');
+        }
 
-    if(! userRecord) {
-      this.req.addFlash('error', 'Email hoặc mật khẩu không đúng');
-      this.req.addFlash('email', inputs.email);
-      return exits.redirect('back');
+        this.req.login(user, err => {
+          if (err) {
+            this.req.addFlash('error', 'Lỗi hệ thống');
+            return exits.redirect('back');
+          }
+          sails.log('Người dùng ' + user.username + ' đã đăng nhập');
+          return inputs.redirect ? exits.redirect(inputs.redirect) : exits.redirect('/');
+        });
+      })(this.req, this.res);
+
+    } catch (error) {
+      console.log(error);
     }
-
-    if(! userRecord.isActive) {
-      this.req.addFlash('error', 'Email hoặc mật khẩu không đúng');
-      this.req.addFlash('email', inputs.email);
-      return exits.redirect('back');
-    }
-
-    await sails.helpers.passwords.checkPassword(inputs.password, userRecord.password)
-    .intercept('incorrect', () => {
-      this.req.addFlash('error', 'Email hoặc mật khẩu không đúng');
-      this.req.addFlash('email', inputs.email);
-      return exits.redirect('back');
-    });
-
-    delete userRecord.password;
-    this.req.session.me = userRecord;
-
-    return inputs.redirect ? exits.redirect(inputs.redirect) : exits.redirect('/');
   }
 };

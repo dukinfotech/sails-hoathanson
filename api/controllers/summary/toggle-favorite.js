@@ -3,7 +3,7 @@ module.exports = {
     try {
       var ticker = this.req.param('ticker');
       ticker = ticker.toUpperCase();
-      var user = this.req.session.me;
+      var user = this.user;
       var watchlist = JSON.parse(user.watchlist[0].list);
       var action;
 
@@ -16,7 +16,7 @@ module.exports = {
         action = 'favorite';
       }
 
-      this.req.session.me.watchlist[0].list = JSON.stringify(watchlist);
+      this.user.watchlist[0].list = JSON.stringify(watchlist);
       this.req.session.save();
       
       await WatchList.update(user.watchlist[0].id, watchlist);

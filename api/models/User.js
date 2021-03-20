@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt-nodejs');
+
 module.exports = {
   tableName: 'users',
   migrate: 'alter',
@@ -7,6 +9,12 @@ module.exports = {
       required: true,
       maxLength: 120,
       minLength: 6,
+    },
+    username: {
+      type:'string',
+      required: true,
+      minLength: 5,
+      maxLength: 16
     },
     email: {
       type: 'string',
@@ -35,4 +43,17 @@ module.exports = {
     createdAt: { type: 'number', autoCreatedAt: true, },
     updatedAt: { type: 'number', autoUpdatedAt: true, },
   },
+  customToJSON: function () {
+    return __dirname.omit(this, ['password']);
+  },
+  beforeCreate: function (user, callback) {
+    bcrypt.genSalt(10, function (err, salt) {
+      if (err) return callback(err);
+      bcrypt.hash(user.password, salt, null, function (err, hash) {
+        if (err) return callback(err);
+        user.password = hash;
+        return callback();
+      });
+    });    
+  }
 };

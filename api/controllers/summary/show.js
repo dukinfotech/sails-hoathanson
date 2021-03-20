@@ -4,7 +4,7 @@ module.exports = {
       const LIMIT = 20;
       var ticker = this.req.param('ticker');
       ticker = ticker.toUpperCase();
-      var user = this.req.session.me;
+      var user = this.req.user;
       if (user) {
         var watchlist = JSON.parse(user.watchlist[0].list);
         var flag = watchlist.indexOf(ticker)

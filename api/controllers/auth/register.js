@@ -1,6 +1,12 @@
 module.exports = {
   // Validate input data
   inputs: {
+    username: {
+      type:'string',
+      required: true,
+      minLength: 5,
+      maxLength: 16,
+    },
     name: {
       type: 'string',
       required: true,
@@ -28,9 +34,10 @@ module.exports = {
   fn: async function (inputs, exits) {
     var newEmail = inputs.email.toLowerCase();
     await User.create(_.extend({
+      username: inputs.username,
       name: inputs.name,
       email: newEmail,
-      password: await sails.helpers.passwords.hashPassword(inputs.password)
+      password: inputs.password
     }))
     .intercept('E_UNIQUE', () => {
       this.req.addFlash('error', 'Email đã có người sử dụng');

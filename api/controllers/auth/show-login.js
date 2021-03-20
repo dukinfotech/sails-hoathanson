@@ -1,5 +1,5 @@
 module.exports = async function (req, res) {
-  if (req.session.me) {
+  if (req.user) {
     res.redirect('/');
   }
   res.locals.layout = 'layouts/auth';

@@ -19,9 +19,9 @@
                 <input type="hidden" name="_csrf" value="<%= _csrf %>">
                 <input type="hidden" name="redirect" value="<%= req.query.redirect %>">
                 <div class="form-group">
-                  <label for="email">Email <span class="text-danger">*</span></label>
-                  <input type="email" class="form-control" id="email" name="email" 
-                    placeholder="Nhập địa chỉ email" value="<%= flash.get('email') %>" required>
+                  <label for="username">Username <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="username" name="username" 
+                    placeholder="Nhập địa chỉ tên tài khoản" value="<%= flash.get('username') %>" required>
                 </div>
 
                 <div class="form-group">

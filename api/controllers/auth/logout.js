@@ -5,7 +5,7 @@ module.exports = {
     }
   },
   fn: async function ({}, exits) {
-    delete this.req.session.me;
+    this.req.logout();
     return exits.redirect('/login');
   }
 };
